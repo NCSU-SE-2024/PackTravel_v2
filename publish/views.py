@@ -26,6 +26,7 @@ mapsService = None
 secrets = Secrets()
 urlConfig = URLConfig()
 
+# TODO : Remove this
 def has_date_passed(date: str) -> bool: 
     given_date = datetime.strptime(date, "%Y-%m-%d").date()
     
@@ -34,6 +35,25 @@ def has_date_passed(date: str) -> bool:
     return given_date < today
 
 def intializeDB():
+    """
+    Initializes the connection to the MongoDB database and sets up global variables for collections.
+    
+    - `client`: The MongoDB client instance.
+    - `db`: The database object, specifically the "SEProject" database.
+    - `userDB`: The collection for storing user data within the "SEProject" database.
+    - `ridesDB`: The collection for storing ride information within the "SEProject" database.
+    - `routesDB`: The collection for storing route information within the "SEProject" database.
+
+    Globals:
+        client (MongoClient): The MongoDB client instance.
+        db (Database): The "SEProject" database object.
+        userDB (Collection): The collection for user data.
+        ridesDB (Collection): The collection for ride data.
+        routesDB (Collection): The collection for route data.
+
+    Returns:
+        None
+    """
     global client, db, userDB, ridesDB, routesDB
     client = get_client()
     db = client.SEProject
@@ -42,10 +62,42 @@ def intializeDB():
     routesDB  = db.routes
 
 def initializeService():
+    """
+    Initializes the MapsService instance and sets it as a global variable.
+
+    This function creates an instance of the `MapsService` class using the 
+    provided `RoutesHostname` from `urlConfig` and the `GoogleMapsAPIKey` from 
+    `secrets`. It then assigns this instance to the global variable `mapsService`.
+
+    Globals:
+        mapsService (MapsService): An instance of the MapsService class that is 
+                                   initialized with routing and API key configurations.
+
+    Dependencies:
+        - `urlConfig.RoutesHostname`: The hostname for route services.
+        - `secrets.GoogleMapsAPIKey`: The API key for accessing Google Maps services.
+
+    Returns:
+        None
+    """
     global mapsService
     mapsService = MapsService(urlConfig.RoutesHostname, secrets.GoogleMapsAPIKey)
 
 def publish_index(request):
+    """
+    Handles the logic for rendering the ride publishing page and ensuring user authentication.
+
+    This function performs the following steps:
+
+    Args:
+        request (HttpRequest): The HTTP request object containing session data and other 
+                               request information.
+
+    Returns:
+        HttpResponse: A redirect to the 'index' page if the user is not logged in, or a rendered 
+                      response of the 'publish/publish.html' template with context data if the 
+                      user is authenticated.
+    """
     intializeDB()
     if not request.session.has_key('username'):
         request.session['alert'] = "Please login to create a ride."
@@ -53,6 +105,18 @@ def publish_index(request):
     return render(request, 'publish/publish.html', {"username": request.session['username'], "alert":True, "gmap_api_key": secrets.GoogleMapsAPIKey})
 
 def display_ride(request, ride_id):
+    """
+    Displays the ride details and associated routes for a given ride ID.
+
+    Args:
+        request (HttpRequest): The HTTP request object containing session data and other 
+                               request information.
+        ride_id (str): The unique identifier of the ride to be displayed.
+
+    Returns:
+        HttpResponse: A rendered response of the 'publish/route.html' template with 
+                      context data including ride details, routes, and selected route.
+    """
     intializeDB()
     print("Ride id", ride_id)
     ride = ridesDB.find_one({'_id': ride_id})
@@ -118,6 +182,16 @@ def get_routes(ride):
     return docs
 
 def create_route(request):
+    """
+    Handles the selection of a route for a specific ride and updates the database accordingly.
+
+    Args:
+        request (HttpRequest): The HTTP request object containing session data and form data.
+
+    Returns:
+        HttpResponse: A redirect to `display_ride()` if a route is selected, or a rendered 
+                      response of 'publish/publish.html' if it's not a POST request.
+    """
     intializeDB()
     initializeService()
     if request.method == 'POST':
@@ -168,50 +242,18 @@ def create_route(request):
         return redirect(display_ride, ride_id=ride_id)
     return render(request, 'publish/publish.html', {"username": request.session['username'], "gmap_api_key": secrets.GoogleMapsAPIKey})
 
-# def add_route(request):
-#     intializeDB()
-#     if request.method == 'POST':
-#
-#         ride = request.POST.get('ride')
-#         ride = ride.replace("\'", "\"")
-#         ride = json.loads(ride)
-#         ride_id = ride['_id']
-#         ride = ridesDB.find_one({'_id': ride['_id']})
-#         route = {
-#                 "_id": str(ride_id)
-#                 +"_"+request.POST.get('type')
-#                 +"_"+request.POST.get('spoint')
-#                 +"_"+request.POST.get("hour")
-#                 +"_"+request.POST.get("minute")
-#                 +"_"+request.POST.get("duration")
-#                 +"_"+request.POST.get("details")
-#                 +"_"+request.POST.get("ampm"),
-#
-#                 "type": request.POST.get('type'),
-#                 "spoint": request.POST.get('spoint'),
-#                 "hour": request.POST.get("hour"),
-#                 "minute":  request.POST.get("minute"),
-#                 "duration": request.POST.get("duration"),
-#                 "details": request.POST.get("details"),
-#                 "ampm": request.POST.get("ampm"),
-#                 "users": [request.session['username']]
-#             }
-#         request.session["route"] = route
-#         request.session["ride"] = ride
-#         attachUserToRoute(request.session['username'], route["_id"], ride_id)
-#         #check if route is unique
-#         if routesDB.find_one({'_id': route["_id"]})== None:
-#             routesDB.insert_one(route)
-#             if 'routes' not in ride:
-#                 ridesDB.update_one({"_id": ride_id}, {"$set": {"routes": [route['_id']]}})
-#             else:
-#                 ride['routes'].append(route['_id'])
-#                 ridesDB.update_one({"_id": ride_id}, {"$set": {"routes": ride['routes']}})
-#         return redirect(display_ride, ride_id=request.session['ride']['_id'] )
-#
-#     return render(request, 'publish/publish.html', {"username": request.session['username']})
-
 def attach_user_to_route(username, route_id):
+    """
+    Attaches a selected route to the user's list of rides in the database.
+
+    Args:
+        username (str): The username of the user who selected a route.
+        route_id (str): The ID of the route to be attached to the user's list of rides.
+
+    Returns:
+        ObjectId: The unique ID (`_id`) of the user if found and updated.
+        HttpResponse: A redirect to 'home/home.html' if the user is not found.
+    """
     intializeDB()
     user = userDB.find_one({"username": username})
     if user == None:
@@ -220,35 +262,3 @@ def attach_user_to_route(username, route_id):
     user['rides'].append(route_id)
     userDB.update_one({"username": username},{"$set": {"rides": user['rides']}})
     return user['_id']
-
-    # rides = user['rides']
-    # #remove other routes for this user and ride
-    # for route in rides.copy():
-    #     if ride_id in route:
-    #         rides.remove(route)
-    #         #remove user from other routes for this ride
-    #         print("foudn ride id in route")
-    #         route_instance = routesDB.find_one({'_id': route})
-    #         print("route inst",route_instance)
-    #         if route_instance:
-    #             print("found, removing user: ",username)
-    #             users = route_instance['users']
-    #             print("prev users: ",users)
-    #             users.remove(username)
-    #             print("now: ",users)
-    #             routesDB.update_one({"_id": route}, {"$set": {"users": users}})
-    #
-    # rides.append(route_id)
-    # userDB.update_one({"username": username}, {"$set": {"rides": rides}})
-    # # print(rides)
-    # route_instance = routesDB.find_one({'_id': route_id})
-    # if route_instance:
-    #     users = route_instance['users']
-    #     users.append(username)
-    #     routesDB.update_one({"_id": route_id}, {"$set": {"users": users}})
-
-# Add Edit functionality
-
-# Add Delete functionality
-
-
