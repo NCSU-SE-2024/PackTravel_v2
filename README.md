@@ -7,16 +7,15 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14020395.svg)](https://doi.org/10.5281/zenodo.14020395)
 [![codecov](https://codecov.io/gh/KoruptTinker/PackTravel/graph/badge.svg?token=VbruFqYa0G)](https://codecov.io/gh/KoruptTinker/PackTravel)
-![Python Style Checker](https://github.com/KoruptTinker/PackTravel/actions/workflows/python_style_checker.yml/badge.svg)
-![Lint Python](https://github.com/KoruptTinker/PackTravel/actions/workflows/pylint.yml/badge.svg)
+[![Python Style Checker](https://github.com/KoruptTinker/PackTravel/actions/workflows/python_style_checker.yml/badge.svg)](https://github.com/KoruptTinker/PackTravel/actions/workflows/python_style_checker.yml)
+[![Lint Python](https://github.com/KoruptTinker/PackTravel/actions/workflows/pylint.yml/badge.svg)](https://github.com/KoruptTinker/PackTravel/actions/workflows/pylint.yml)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/blob/main/LICENSE) 
 [![contributors](https://img.shields.io/github/contributors/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/graphs/contributors)
-[![Total Lines](https://img.shields.io/tokei/lines/github/KoruptTinker/PackTravel?style=for-the-badge)](https://img.shields.io/tokei/lines/github/KoruptTinker/PackTravel)
 [![Issues](https://img.shields.io/github/issues/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/issues)
 [![Closed Issues](https://img.shields.io/github/issues-closed-raw/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/issues?q=is%3Aissue+is%3Aclosed)
 [![Pull Requests](https://img.shields.io/github/issues-pr/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/pulls)
-[![Commit Acitivity](https://img.shields.io/github/commit-activity/w/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/graphs/commit-activity)
+[![Commit Activity](https://img.shields.io/github/commit-activity/w/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/graphs/commit-activity)
 [![Repo Size](https://img.shields.io/github/repo-size/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel)
 
 
