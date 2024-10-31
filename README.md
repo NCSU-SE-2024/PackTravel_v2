@@ -10,7 +10,7 @@
 ![Python Style Checker](https://github.com/KoruptTinker/PackTravel/actions/workflows/python_style_checker.yml/badge.svg)
 ![Lint Python](https://github.com/KoruptTinker/PackTravel/actions/workflows/pylint.yml/badge.svg)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/blob/main/LICENSE) 
 [![contributors](https://img.shields.io/github/contributors/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/graphs/contributors)
 [![Total Lines](https://img.shields.io/tokei/lines/github/KoruptTinker/PackTravel?style=for-the-badge)](https://img.shields.io/tokei/lines/github/KoruptTinker/PackTravel)
 [![Issues](https://img.shields.io/github/issues/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/issues)
