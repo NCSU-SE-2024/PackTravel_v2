@@ -118,7 +118,7 @@ https://user-images.githubusercontent.com/111834635/194171771-962a585e-5dc7-4ea3
 <code><a href="https://join.slack.com/t/packtravelncsu/shared_invite/zt-2tnp9bktu-FImZbEPZL0V8nCWVqncSCA" target="_blank"><img height="50" width="100" src="https://user-images.githubusercontent.com/111834635/194175304-834d5663-b6bb-4e38-981d-98bc1bf028b8.png"></a></code>
 
 ## Support
-[Support](mailto:packtravel.ncsu@gmail.com)
+[Support Email](mailto:packtravel.ncsu@gmail.com)
 
 ## Contributors 
 
