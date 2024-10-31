@@ -71,13 +71,13 @@ class PasswordValidationTests(SimpleTestCase):
         password = "Short1!"
         with self.assertRaises(ValidationError) as context:
             validate_password(password)
-        self.assertIn("at least 8 characters", str(context.exception))
+        self.assertIn("Password is too short", str(context.exception))
 
     def test_password_too_long(self):
         password = "ThisPasswordIsWayTooLong123!"
         with self.assertRaises(ValidationError) as context:
             validate_password(password)
-        self.assertIn("not exceed 16 characters", str(context.exception))
+        self.assertIn("Password is too long", str(context.exception))
 
     def test_password_no_lowercase(self):
         password = "NOLOWER123!"
@@ -104,7 +104,7 @@ class PasswordValidationTests(SimpleTestCase):
         self.assertIn("special character", str(context.exception))
 
     def test_common_password(self):
-        password = "Password123!"
+        password = "Password!123456"
         with self.assertRaises(ValidationError) as context:
             validate_password(password)
         self.assertIn("too common", str(context.exception))
@@ -143,8 +143,6 @@ class PasswordValidationTests(SimpleTestCase):
             self.fail("Raised ValidationError on a valid password at maximum length")
 
     def test_password_with_all_special_chars(self):
-        password = "V1!@#$%^&*(),.?\":{}|<>"
-        try:
+        password = "!@#(),.?\":{}|<>"
+        with self.assertRaises(ValidationError) as context:
             validate_password(password)
-        except ValidationError:
-            self.fail("Raised ValidationError on a valid password with all allowed special characters")

@@ -10,8 +10,8 @@ class TestForms(TransactionTestCase):
                             'first_name' : 'John',
                             'last_name' : 'Dwyer',
                             'email' : 'jdwyer@ncsu.edu',
-                            'password1' : 'jd45678',
-                            'phone_number' : 987657890,
+                            'password1' : 'Jd!456789',
+                            'phone_number' : 9876578901,
                             })
         self.assertTrue(form.is_valid())
     
@@ -23,8 +23,8 @@ class TestForms(TransactionTestCase):
                             'first_name' : 'John',
                             'last_name' : 'Dwyer',
                             'email' : 'jdwyer@ncsu.edu',
-                            'password1' : 'jd45678',
-                            'phone_number' : 987657890,
+                            'password1' : 'Jd!456789',
+                            'phone_number' : 9876578901,
                             })
         self.assertFalse(form.is_valid())
         self.assertIn('unityid', form.errors)
@@ -36,8 +36,8 @@ class TestForms(TransactionTestCase):
             'first_name': 'John',
             'last_name': 'Dwyer',
             'email': 'jdwyer@ncsu.edu',
-            'password1': 'jd45678',
-            'phone_number': 987657890,
+            'password1' : 'Jd!456789',
+            'phone_number' : 9876578901,
         })
         self.assertFalse(form.is_valid())
         self.assertIn('username', form.errors)
@@ -88,8 +88,7 @@ class TestForms(TransactionTestCase):
             'first_name': 'John',
             'last_name': 'Dwyer',
             'email': 'jdwyer@ncsu.edu',
-            'password1': 'jd45678',
-            # Invalid phone number  
+            'password1' : 'Jd!456789',
             'phone_number': 123,
         })
         self.assertFalse(form.is_valid())
@@ -128,4 +127,3 @@ class TestForms(TransactionTestCase):
     #     })
     #     self.assertFalse(form.is_valid())
     #     self.assertIn('password', form.errors)
-        

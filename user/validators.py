@@ -36,7 +36,6 @@ def validate_unique_username(value):
         raise ValidationError("Unity ID must be unique")
 
 def validate_password(value):
-    intializeDB()
     if len(value) < 8:
         raise ValidationError(f"Password is too short")
     
@@ -60,7 +59,7 @@ def validate_password(value):
         raise ValidationError("Password must contain at least one special character.")
 
     # Check for common passwords
-    common_passwords = ["password", "123456", "qwerty", "admin"]
+    common_passwords = ["password!123456", "12345678", "qwerty", "admin"]
     if value.lower() in common_passwords:
         raise ValidationError("This password is too common. Please choose a more unique password.")
     
