@@ -74,7 +74,7 @@ def validate_unique_username(value):
     intializeDB()
     unity_user = userDB.find_one({"username": value})
     if(unity_user):
-        raise ValidationError("Unity ID must be unique")
+        raise ValidationError("Username must be unique")
 
 def validate_password(value):
     if len(value) < 8:
