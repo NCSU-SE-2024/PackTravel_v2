@@ -26,13 +26,7 @@ mapsService = None
 secrets = Secrets()
 urlConfig = URLConfig()
 
-# TODO : Remove this
-def has_date_passed(date: str) -> bool: 
-    given_date = datetime.strptime(date, "%Y-%m-%d").date()
-    
-    today = datetime.today().date()
-    
-    return given_date < today
+
 
 def intializeDB():
     """
