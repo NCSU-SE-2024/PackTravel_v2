@@ -105,12 +105,12 @@ def logout(request):
 def user_profile(request, userid):
     intializeDB()
     if(not userid):
-        return render(request, "user/404.html", {"username": request.session["username"]})
+        return render(request, "user/404.html", {"username": request.session.get("username", None)})
     profile = userDB.find_one({"_id": ObjectId(userid)})
     if(profile):
-        return render(request, 'user/profile.html', {"username": request.session["username"], "user": profile})
+        return render(request, 'user/profile.html', {"username": request.session.get("username", None), "user": profile})
     else:
-        return render(request, "user/404.html", {"username": request.session["username"]})
+        return render(request, "user/404.html", {"username": request.session.get("username", None)})
 
 # @describe: Existing user login
 def login(request):
