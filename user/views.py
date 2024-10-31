@@ -108,11 +108,13 @@ def register(request):
     intializeDB()
     initializeCloud()
     if request.method == "POST":
+        public_url=""
         form = RegisterForm(request.POST, request.FILES)
         if form.is_valid():
             image = form.cleaned_data["profile_picture"]
-            image.name = f"{form.cleaned_data['username']}.png"
-            public_url = googleCloud.upload_file(image, image.name)
+            if image is not None:
+                image.name = f"{form.cleaned_data['username']}.png"
+                public_url = googleCloud.upload_file(image, image.name)
             userObj = {
                 "username": form.cleaned_data["username"],
                 "unityid": form.cleaned_data["unityid"],
