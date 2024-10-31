@@ -5,6 +5,7 @@ from services import GoogleCloud
 from config import Secrets
 from bson.objectid import ObjectId
 from django.forms.utils import ErrorList
+from utilities import DateUtils
 from django.contrib.auth.hashers import make_password, check_password
 
 client = None
@@ -174,8 +175,24 @@ def user_profile(request, userid):
     if(not userid):
         return render(request, "user/404.html", {"username": request.session.get("username", None)})
     profile = userDB.find_one({"_id": ObjectId(userid)})
+    if not profile:
+        return render(request, "user/404.html", {"username": request.session.get("username", None)})
+
+    user_id = str(profile['_id'])
+
+    # Fetch routes created by this user
+    user_routes = routesDB.find({"creator": ObjectId(user_id)})
+
+    past_rides,current_rides  = list(), list()
+    for route in user_routes:
+        if DateUtils.has_date_passed(route['date']):
+            past_rides.append(route)
+        else:
+            current_rides.append(route)
+                
     if(profile):
-        return render(request, 'user/profile.html', {"username": request.session.get("username", None), "user": profile})
+        return render(request, 'user/profile.html', {"username": request.session.get("username", None), "user": profile, "pastrides": past_rides, "currentrides": current_rides})
+
     else:
         return render(request, "user/404.html", {"username": request.session.get("username", None)})
 
