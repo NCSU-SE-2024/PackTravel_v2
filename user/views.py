@@ -5,7 +5,7 @@ from services import GoogleCloud
 from config import Secrets
 from bson.objectid import ObjectId
 from django.forms.utils import ErrorList
-from publish.views import has_date_passed
+from utilities import DateUtils
 from django.contrib.auth.hashers import make_password, check_password
 
 client = None
@@ -185,7 +185,7 @@ def user_profile(request, userid):
 
     past_rides,current_rides  = list(), list()
     for route in user_routes:
-        if has_date_passed(route['date']):
+        if DateUtils.has_date_passed(route['date']):
             past_rides.append(route)
         else:
             current_rides.append(route)
