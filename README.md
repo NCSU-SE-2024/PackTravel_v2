@@ -6,7 +6,7 @@
 
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7178601.svg)](https://doi.org/10.5281/zenodo.7178601)
-[![codecov](https://codecov.io/gh/amisha-w/PackTravel/branch/main/graph/badge.svg?token=HRFN97UEB7)](https://codecov.io/gh/KoruptTinker/PackTravel)
+[![codecov](https://discord.com/channels/@me/1285675024245587998/1301605182727258133)](https://codecov.io/gh/KoruptTinker/PackTravel)
 ![Python Style Checker](https://github.com/KoruptTinker/PackTravel/actions/workflows/python_style_checker.yml/badge.svg)
 ![Lint Python](https://github.com/KoruptTinker/PackTravel/actions/workflows/pylint.yml/badge.svg)
 
