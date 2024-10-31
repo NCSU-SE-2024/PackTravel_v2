@@ -5,7 +5,7 @@ from services import GoogleCloud
 from config import Secrets
 from bson.objectid import ObjectId
 from django.forms.utils import ErrorList
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 
 client = None
 db = None
@@ -195,11 +195,9 @@ def login(request):
         if request.method == "POST":
             form = LoginForm(request.POST)
             if form.is_valid():
-                username = form.cleaned_data["username"]
-                passw = make_password(form.cleaned_data["password"])
+                username = form.cleaned_data["username"]           
                 user = userDB.find_one({"username": username})
-
-                if user and user["password"] == passw:
+                if user and check_password(form.cleaned_data["password"], user["password"]):
                     request.session['userid'] = str(user['_id'])
                     request.session["username"] = username
                     request.session['unityid'] = user["unityid"]
