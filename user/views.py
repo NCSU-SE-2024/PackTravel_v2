@@ -5,6 +5,7 @@ from services import GoogleCloud
 from config import Secrets
 from bson.objectid import ObjectId
 from django.forms.utils import ErrorList
+from publish.views import has_date_passed
 
 client = None
 db = None
@@ -66,8 +67,11 @@ def register(request):
         form = RegisterForm(request.POST, request.FILES)
         if form.is_valid():
             image = form.cleaned_data["profile_picture"]
-            image.name = f"{form.cleaned_data['username']}.png"
-            public_url = googleCloud.upload_file(image, image.name)
+            if image is not None:
+                image.name = f"{form.cleaned_data['username']}.png"
+                public_url = googleCloud.upload_file(image, image.name)
+            else:
+                public_url = None
             userObj = {
                 "username": form.cleaned_data["username"],
                 "unityid": form.cleaned_data["unityid"],
@@ -107,8 +111,23 @@ def user_profile(request, userid):
     if(not userid):
         return render(request, "user/404.html", {"username": request.session["username"]})
     profile = userDB.find_one({"_id": ObjectId(userid)})
+    if not profile:
+        return render(request, "user/404.html", {"username": request.session["username"]})
+
+    user_id = str(profile['_id'])
+
+    # Fetch routes created by this user
+    user_routes = routesDB.find({"creator": ObjectId(user_id)})
+
+    past_rides,current_rides  = list(), list()
+    for route in user_routes:
+        if has_date_passed(route['date']):
+            past_rides.append(route)
+        else:
+            current_rides.append(route)
+                
     if(profile):
-        return render(request, 'user/profile.html', {"username": request.session["username"], "user": profile})
+        return render(request, 'user/profile.html', {"username": request.session["username"], "user": profile, "pastrides": past_rides, "currentrides": current_rides})
     else:
         return render(request, "user/404.html", {"username": request.session["username"]})
 

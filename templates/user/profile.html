@@ -14,7 +14,7 @@
         <div class="col-md-8">
             <div class="card text-white bg-secondary mb-4">
                 <div class="card-body text-center">
-                    <img src="{{ user.pfp|default:'../../images/default_pfp.jpg' }}" alt="Profile Image" class="rounded-circle mb-3" width="150" height="150">
+                    <img src="{{ user.pfp }}" alt="Profile Image" class="rounded-circle mb-3" width="150" height="150">
                     <h2 class="card-title">{{ user.fname}} {{ user.lname }} </h2>
                     <p class="card-text">{{ user.email }}</p>
                     <!-- <p class="card-text">Bio: A passionate developer with a love for coding and exploring new technologies.</p> -->
@@ -24,19 +24,14 @@
         </div>
     </div>
 </div>
-
 <div class="container-fluid justify-content-center" style="background-color: #27292a; color: white; margin-top: 10px;"><br>
     <br>
-<h3 class="text-center apply-font">My Rides</h3>
+<h3 class="text-center apply-font">Current Rides</h3>
 <hr>
-<div class="input-group mb-3">
-<div class="input-group-prepend">
-  <!-- <span class="input-group-text"><img src="{% static 'plus.svg'%}"></span> -->
-</div>
 </div>
 
 <div class="row" id="rideDisplay">
-    {% for ride in rides %}
+    {% for ride in currentrides %}
     <div class="col-sm-6" >
         <div class="card" style="color: black; margin: 10px;">
         <div class="card-body">
@@ -58,7 +53,43 @@
                   </tr>
             </tbody>
           </table>
-          <a href="/delete_ride/{{ ride.id }}" style="background-color: #D22B2B; border-color: #D22B2B;" class="btn btn-dark">Delete</a>
+          <!-- <a href="/delete_ride/{{ ride.id }}" style="background-color: #D22B2B; border-color: #D22B2B;" class="btn btn-dark">Delete</a> -->
+        </div>
+      </div>
+    </div>
+   {% endfor %}
+  </div>
+
+<div class="container-fluid justify-content-center" style="background-color: #27292a; color: white; margin-top: 10px;"><br>
+    <br>
+<h3 class="text-center apply-font">Past Rides</h3>
+<hr>
+</div>
+
+<div class="row" id="rideDisplay">
+    {% for ride in pastrides %}
+    <div class="col-sm-6" >
+        <div class="card" style="color: black; margin: 10px;">
+        <div class="card-body">
+          <h5 class="card-title">{{ ride.s_point }} to {{ ride.destination }}</h5>
+          <p class="card-text">{{ ride.details }}</p>
+          <table class="table table-hover">
+            <tbody>
+                <tr>
+                    <td>Destination</td>
+                    <td class="dest">{{ride.destination}}</td>
+                  </tr>
+                  <tr>
+                    <td>Date</td>
+                    <td>{{ride.date}}</td>
+                  </tr>
+                  <tr>
+                    <td>Reach Time</td>
+                    <td>{{ride.hour}}:{{ride.minute}} {{ride.ampm}}</td>
+                  </tr>
+            </tbody>
+          </table>
+          <!-- <a href="/delete_ride/{{ ride.id }}" style="background-color: #D22B2B; border-color: #D22B2B;" class="btn btn-dark">Delete</a> -->
         </div>
       </div>
     </div>
