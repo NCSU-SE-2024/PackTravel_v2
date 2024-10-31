@@ -80,12 +80,8 @@ https://user-images.githubusercontent.com/111834635/194171771-962a585e-5dc7-4ea3
 
   NC State students can sign up to explore available rides, create their own, or edit existing ones for a personalized experience.
 
-  - ### Prerequisite:
-      - Download [Python3.x](https://www.python.org/downloads/).
-      - Download [Django](https://docs.djangoproject.com/en/4.1/topics/install/).
-
    ## Installation: 
-  - Refer to <a href="https://github.com/KoruptTinker/PackTravel/blob/main/INSTALL" target="_blank">INSTALL.MD</a> for setup instructions.
+  - Refer to <a href="https://github.com/KoruptTinker/PackTravel/blob/main/INSTALL.md" target="_blank">INSTALL.MD</a> for setup instructions.
        
 ## Tools
 - [Preetier Code Formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
