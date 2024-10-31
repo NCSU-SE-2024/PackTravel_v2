@@ -35,11 +35,11 @@ class LoginForm(forms.ModelForm):
         fields = ('username', 'password')
 
 class EditUserForm(forms.ModelForm):
-    unityid = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': 'Unity Id', 'class': 'form-control'}))
-    first_name = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': 'First Name', 'class': 'form-control'}))
+    unityid = forms.CharField(required=True, validators= [validate_unique_username], widget=forms.TextInput(attrs={'placeholder': 'Unity Id', 'class': 'form-control'}))
+    first_name = forms.CharField(required=True, validators=[validate_unique_unity_id], widget=forms.TextInput(attrs={'placeholder': 'First Name', 'class': 'form-control'}))
     last_name = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': 'Last Name', 'class': 'form-control'}))
     email = forms.EmailField(required=True, validators=[validate_email_domain], max_length=60, widget=forms.EmailInput(attrs={'placeholder': 'abc@ncsu.edu', 'class': 'form-control'}))
-    phone_number = forms.CharField(required=True, max_length=11, widget=forms.TextInput(attrs={'placeholder': 'Phone Number', 'class': 'form-control'}))
+    phone_number = forms.CharField(required=True, min_length=10, max_length=11, widget=forms.TextInput(attrs={'placeholder': 'Phone Number', 'class': 'form-control'}))
     profile_picture = forms.ImageField(required=False, widget=forms.FileInput(attrs={'class': 'form-control'}))
 
     class Meta:
