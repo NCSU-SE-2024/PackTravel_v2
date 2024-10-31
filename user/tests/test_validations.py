@@ -24,7 +24,7 @@ class UserUsernameValidationTests(SimpleTestCase):
             self.fail("Raised validation error on a valid username")
 
     def test_invalid_unity_id(self):
-        username = "test"
+        username = "kl"
         with self.assertRaises(ValidationError):
             validate_unique_username(username)
             

@@ -5,54 +5,47 @@
 
 
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7178601.svg)](https://doi.org/10.5281/zenodo.7178601)
-[![codecov](https://codecov.io/gh/amisha-w/PackTravel/branch/main/graph/badge.svg?token=HRFN97UEB7)](https://codecov.io/gh/Prachit99/PackTravel)
-![Python Style Checker](https://github.com/Prachit99/PackTravel/actions/workflows/python_style_checker.yml/badge.svg)
-![Lint Python](https://github.com/Prachit99/PackTravel/actions/workflows/pylint.yml/badge.svg)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14020395.svg)](https://doi.org/10.5281/zenodo.14020395)
+[![codecov](https://codecov.io/gh/KoruptTinker/PackTravel/graph/badge.svg?token=VbruFqYa0G)](https://codecov.io/gh/KoruptTinker/PackTravel)
+[![Python Style Checker](https://github.com/KoruptTinker/PackTravel/actions/workflows/python_style_checker.yml/badge.svg)](https://github.com/KoruptTinker/PackTravel/actions/workflows/python_style_checker.yml)
+[![Lint Python](https://github.com/KoruptTinker/PackTravel/actions/workflows/pylint.yml/badge.svg)](https://github.com/KoruptTinker/PackTravel/actions/workflows/pylint.yml)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT) 
-[![contributors](https://img.shields.io/github/contributors/Prachit99/PackTravel?style=for-the-badge)](https://github.com/Prachit99/PackTravel/graphs/contributors)
-[![Total Lines](https://img.shields.io/tokei/lines/github/Prachit99/PackTravel?style=for-the-badge)](https://img.shields.io/tokei/lines/github/Prachit99/PackTravel)
-[![Issues](https://img.shields.io/github/issues/Prachit99/PackTravel?style=for-the-badge)](https://github.com/Prachit99/PackTravel/issues)
-[![Closed Issues](https://img.shields.io/github/issues-closed-raw/Prachit99/PackTravel?style=for-the-badge)](https://github.com/Prachit99/PackTravel/issues?q=is%3Aissue+is%3Aclosed)
-[![Pull Requests](https://img.shields.io/github/issues-pr/Prachit99/PackTravel?style=for-the-badge)](https://github.com/Prachit99/PackTravel/pulls)
-[![Commit Acitivity](https://img.shields.io/github/commit-activity/w/Prachit99/PackTravel?style=for-the-badge)](https://github.com/Prachit99/PackTravel/graphs/commit-activity)
-[![Repo Size](https://img.shields.io/github/repo-size/Prachit99/PackTravel?style=for-the-badge)](https://github.com/Prachit99/PackTravel)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/blob/main/LICENSE) 
+[![contributors](https://img.shields.io/github/contributors/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/graphs/contributors)
+[![Issues](https://img.shields.io/github/issues/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/issues)
+[![Closed Issues](https://img.shields.io/github/issues-closed-raw/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/issues?q=is%3Aissue+is%3Aclosed)
+[![Pull Requests](https://img.shields.io/github/issues-pr/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/pulls)
+[![Commit Activity](https://img.shields.io/github/commit-activity/w/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/graphs/commit-activity)
+[![Repo Size](https://img.shields.io/github/repo-size/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel)
 
 
 </div>
 
-## Flaws in Phase 1
+### Issues in Previous Phase
 
-- Only basic sign-up/login option which used to break multiple times.
-- One was able to create Rides as well as Routes which would create a lot of data redundancy and multiple rides and routes even for the same source to destination travel ultimately causing more confusion to users.
-- No scope of deleting or cancelling a ride or route.
-- No scope for the user to track his/her rides creating problems for the user track his/her rides and routes and plan accordingly.
-- Application was running only on local servers. Not deployed so very less usability scope as well as very less server support.
+- Anonymous profiles create a lack of transparency among users.
+- Passwords are stored without hashing, posing security risks.
+- Missing route distance and fuel usage data prevents accurate cost estimation.
+- No location autocomplete, leading to potential inaccuracies in location tagging.
+- Search page UI is very basic, affecting user experience.
+- Lack of test cases and code coverage limits reliability and error detection.
 
 
 https://user-images.githubusercontent.com/18501895/205809978-14a5c1c0-65a3-4171-b6f2-f30449325088.mp4
 
 ## Enhancement and Improvements in Phase 2:
--  Restructed the database and object structure to improve efficiency and avoid data redundancy. 
-- Users can create or join routes which would create or map the rides automatically based on the source and destination avoiding duplicate data and data redundancy.
--  Added User based Rides Page which would help the user to track his rides and work on it accordingly. 
-- Added Google SSO Sign in functionality to add options to signing up which also covers security loopholes.
-- Added delete/cancel ride functionality so that if the user has cancelled his plan of going to a particular destination, he/she can cancel/delete the ride so that others are not dependent on the same creating efficient and easy usability for the users.
-- Deployed and Hosted the application on AWS making the application more stable, globally acccessible and not dependent on any local machine.
+- Introduced a user profiles feature, enabling riders to view each other's profiles and fostering a more personalized connection among users.
+- Implemented location autocomplete with Google Maps integration to enhance location accuracy.
+- Integrated the Routes API to provide route distance details and estimated fuel consumption for cost calculations.
+- Upgraded the search page with a new, improved UI.
+- Added password hashing on the backend to enhance the security of user data.
+- Increased test coverage from 50% to 70%, improving reliability and error detection.
 
 <a href="https://github.com/Prachit99/PackTravel/blob/main/images/video1155969440.mp4" target="_blank">Link to Video 2</a>
 
-<h2>Scalability</h2>
-
-How can we scale this project? What are the shortcomings which can be covered if we scale it? Everything answered and explained in the in-detailed document attached below.
-
-<a href="https://github.com/Prachit99/PackTravel/blob/36a6b9848f74c52ebe0ccedfef6c0846d98a230d/scalability.md" target="_blank">Click here to know about Scaling this project to the next level</a>
-
-
 <h2>What is Packtravel?</h2>
 
-Most of the university students do not have a car to travel off-campus and rely mostly on the Wolfline. But what if someone wants to travel outside Wolfline's limit? Well... why not collaborate on PackTravel to travel off-campus by a cab, rental car, etc.
+PackTravel is an innovative platform designed to help university students explore beyond campus boundaries. Recognizing the limitations of on-campus transportation options, PackTravel offers a solution for students without personal vehicles to easily travel off-campus.
 
 **So, let's go for Packtravel**
 
@@ -85,61 +78,14 @@ https://user-images.githubusercontent.com/111834635/194171771-962a585e-5dc7-4ea3
 
 <h2> Who can use our app?</h2>
 
-  1. If you are a user who is visiting our app, you can sign up as a user with view access to rides. You can edit or create your own ride.
-  2. If you are an admin user, you can create, view, update and delete rides and schedule rides.
-  3. To request for admin privileges, please email on help@packtravel.io with the purpose of use. 
+  NC State students can sign up to explore available rides, create their own, or edit existing ones for a personalized experience.
 
   - ### Prerequisite:
       - Download [Python3.x](https://www.python.org/downloads/).
       - Download [Django](https://docs.djangoproject.com/en/4.1/topics/install/).
 
-   ## Run Locally
-
-Create a virtual environment:
-
-```bash
-  python3.x -m venv env
-```
-
-Activate the virtual environment:
-Linux/MacOS:
-```bash
-  source env/bin/activate
-```
-Windows:
-```bash
-  ./env/Scripts/activate
-```
-
-Clone the project
-
-```bash
-  git clone https://github.com/Prachit99/PackTravel.git
-```
-
-Go to the project directory
-
-```bash
-  cd PackTravel
-```
-
-Install dependencies
-
-```bash 
-  pip install -r requirements.txt
-```
-
-Start the server
-
-```bash
-  python manage.py migrate
-  python manage.py runserver
-```
-
-
-
-     - Site gets hosted at:
-       `http://127.0.0.1:8000/`
+   ## Installation: 
+  - Refer to <a href="https://github.com/KoruptTinker/PackTravel/blob/main/INSTALL" target="_blank">INSTALL.MD</a> for setup instructions.
        
 ## Tools
 - [Preetier Code Formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
@@ -180,11 +126,9 @@ Start the server
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/Prachit99"><img src="https://avatars.githubusercontent.com/Prachit99" width="100px;" alt=""/><br /><sub><b>Prachit99</b></sub></a></td>
-    <td align="center"><a href="https://github.com/Darkspur"><img src="https://avatars.githubusercontent.com/Darkspur" width="100px;" alt=""/><br /><sub><b>Sahil Sawant Joshi</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/ashishjoshi2605"><img src="https://avatars.githubusercontent.com/ashishjoshi2605" width="100px;" alt=""/><br /><sub><b>Ashish Joshi</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/sankettangade"><img src="https://avatars.githubusercontent.com/sankettangade" width="100px;" alt=""/><br /><sub><b>Sanket Tangade</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/karan-47"><img src="https://avatars.githubusercontent.com/karan-47" width="100px;" alt=""/><br /><sub><b>Karan Gala</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/KoruptTinker"><img src="./images/Brijesh.png" width="100px;" alt=""/><br /><sub><b>Brijesh Kumar Bhayana</b></sub></a></td>
+    <td align="center"><a href="https://github.com/VidhishaKamat"><img src="https://avatars.githubusercontent.com/VidhishaKamat" width="100px;" alt=""/><br /><sub><b>Vidhisha Kamat</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Abhi0010"><img src="./images/Abhishek.png" width="100px;" alt=""/><br /><sub><b>Abhishek Potdar</b></sub></a><br /></td>
   </tr>
 </table>
 
