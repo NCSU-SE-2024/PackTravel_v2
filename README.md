@@ -22,37 +22,31 @@
 
 </div>
 
-## Flaws in Phase 1
+### Issues in Previous Phase
 
-- Only basic sign-up/login option which used to break multiple times.
-- One was able to create Rides as well as Routes which would create a lot of data redundancy and multiple rides and routes even for the same source to destination travel ultimately causing more confusion to users.
-- No scope of deleting or cancelling a ride or route.
-- No scope for the user to track his/her rides creating problems for the user track his/her rides and routes and plan accordingly.
-- Application was running only on local servers. Not deployed so very less usability scope as well as very less server support.
+- Anonymous profiles create a lack of transparency among users.
+- Passwords are stored without hashing, posing security risks.
+- Missing route distance and fuel usage data prevents accurate cost estimation.
+- No location autocomplete, leading to potential inaccuracies in location tagging.
+- Search page UI is very basic, affecting user experience.
+- Lack of test cases and code coverage limits reliability and error detection.
 
 
 https://user-images.githubusercontent.com/18501895/205809978-14a5c1c0-65a3-4171-b6f2-f30449325088.mp4
 
 ## Enhancement and Improvements in Phase 2:
--  Restructed the database and object structure to improve efficiency and avoid data redundancy. 
-- Users can create or join routes which would create or map the rides automatically based on the source and destination avoiding duplicate data and data redundancy.
--  Added User based Rides Page which would help the user to track his rides and work on it accordingly. 
-- Added Google SSO Sign in functionality to add options to signing up which also covers security loopholes.
-- Added delete/cancel ride functionality so that if the user has cancelled his plan of going to a particular destination, he/she can cancel/delete the ride so that others are not dependent on the same creating efficient and easy usability for the users.
-- Deployed and Hosted the application on AWS making the application more stable, globally acccessible and not dependent on any local machine.
+- Introduced a user profiles feature, enabling riders to view each other's profiles and fostering a more personalized connection among users.
+- Implemented location autocomplete with Google Maps integration to enhance location accuracy.
+- Integrated the Routes API to provide route distance details and estimated fuel consumption for cost calculations.
+- Upgraded the search page with a new, improved UI.
+- Added password hashing on the backend to enhance the security of user data.
+- Increased test coverage from 50% to 70%, improving reliability and error detection.
 
 <a href="https://github.com/Prachit99/PackTravel/blob/main/images/video1155969440.mp4" target="_blank">Link to Video 2</a>
 
-<h2>Scalability</h2>
-
-How can we scale this project? What are the shortcomings which can be covered if we scale it? Everything answered and explained in the in-detailed document attached below.
-
-<a href="https://github.com/Prachit99/PackTravel/blob/36a6b9848f74c52ebe0ccedfef6c0846d98a230d/scalability.md" target="_blank">Click here to know about Scaling this project to the next level</a>
-
-
 <h2>What is Packtravel?</h2>
 
-Most of the university students do not have a car to travel off-campus and rely mostly on the Wolfline. But what if someone wants to travel outside Wolfline's limit? Well... why not collaborate on PackTravel to travel off-campus by a cab, rental car, etc.
+PackTravel is an innovative platform designed to help university students explore beyond campus boundaries. Recognizing the limitations of on-campus transportation options, PackTravel offers a solution for students without personal vehicles to easily travel off-campus.
 
 **So, let's go for Packtravel**
 
@@ -85,9 +79,7 @@ https://user-images.githubusercontent.com/111834635/194171771-962a585e-5dc7-4ea3
 
 <h2> Who can use our app?</h2>
 
-  1. If you are a user who is visiting our app, you can sign up as a user with view access to rides. You can edit or create your own ride.
-  2. If you are an admin user, you can create, view, update and delete rides and schedule rides.
-  3. To request for admin privileges, please email on help@packtravel.io with the purpose of use. 
+  NC State students can sign up to explore available rides, create their own, or edit existing ones for a personalized experience.
 
   - ### Prerequisite:
       - Download [Python3.x](https://www.python.org/downloads/).
@@ -114,7 +106,7 @@ Windows:
 Clone the project
 
 ```bash
-  git clone https://github.com/Prachit99/PackTravel.git
+  git clone https://github.com/KoruptTinker/PackTravel.git
 ```
 
 Go to the project directory
