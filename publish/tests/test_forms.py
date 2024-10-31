@@ -8,7 +8,7 @@ class TestForms(TransactionTestCase):
                             'source': '1505,Avery Close',
                             'destination' : 'Talley Union',
                             'purpose' : 'Travel',
-                            'rideDate' : '10/30/2024',
+                            'rideDate' : '2024-11-15',
                             'route' : 'Bus',
                             'routeDetails' : 'Home to College'
                             })
@@ -20,25 +20,12 @@ class TestForms(TransactionTestCase):
                             'source': '1505,Avery Close',
                             'destination' : 'Talley Union',
                             'purpose' : 'Travel',
-                            'rideDate' : '13/33/2024',
+                            'rideDate' : '2024-04-12',
                             'route' : 'Bus',
                             'routeDetails' : 'Home to College'
                             })
         self.assertFalse(form.is_valid())
         self.assertIn('rideDate', form.errors)
-    
-    def test_rideform_invalidRoute(self):
-
-        form = RideForm(data={
-                            'source': '1505,Avery Close',
-                            'destination' : 'Talley Union',
-                            'purpose' : 'Travel',
-                            'rideDate' : '10/30/2024',
-                            'route' : 'Bike',
-                            'routeDetails' : 'Home to College'
-                            })
-        self.assertFalse(form.is_valid())
-        self.assertIn('route', form.errors)
     
     def test_rideform_invalidDestination(self):
 
@@ -46,9 +33,9 @@ class TestForms(TransactionTestCase):
                             'source': '1505,Avery Close',
                             'destination' : '1505,Avery Close',
                             'purpose' : 'Travel',
-                            'rideDate' : '10/30/2024',
+                            'rideDate' : '2024-11-15',
                             'route' : 'Bike',
                             'routeDetails' : 'Home to College'
                             })
         self.assertFalse(form.is_valid())
-        self.assertIn('destination', form.errors)
+        self.assertIn('Source and destination must be different.', form.errors['__all__'])

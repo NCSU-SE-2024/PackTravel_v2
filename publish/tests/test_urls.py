@@ -18,7 +18,7 @@ class TestUrl(SimpleTestCase):
         self.assertEquals(resolve(url).func, select_route)
     
     def test_display_ride_resolved(self):
-        url = reverse('display_ride')
+        url = reverse('display_ride', args=["Huntsville, AL, USA"])
         self.assertEquals(resolve(url).func, display_ride)
     
         # def test_add_route_resolved(self):
@@ -47,10 +47,9 @@ class TestUrl_Response(TestCase):
         self.assertEqual(response.status_code, 302)
     
     def test_display_ride_non_logged(self):
-        response = self.client.get(reverse('display_ride', args=["Huntsville,%20AL,%20USA"]))
+        response = self.client.get(reverse('display_ride', args=["Huntsville, AL, USA"]))
         self.assertEqual(response.status_code, 200)
     
     def test_display_ride_non_logged_template(self):
-        response = self.client.get(reverse('display_ride', args=["Huntsville,%20AL,%20USA"]))
+        response = self.client.get(reverse('display_ride', args=["Huntsville, AL, USA"]))
         self.assertTemplateUsed(response, 'publish/route.html')
-
