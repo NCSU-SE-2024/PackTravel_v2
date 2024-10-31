@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from utils import get_client
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, EditUserForm
 from services import GoogleCloud
 from config import Secrets
 from bson.objectid import ObjectId
@@ -169,12 +169,12 @@ def user_profile(request, userid):
     """
     intializeDB()
     if(not userid):
-        return render(request, "user/404.html", {"username": request.session["username"]})
+        return render(request, "user/404.html", {"username": request.session.get("username", None)})
     profile = userDB.find_one({"_id": ObjectId(userid)})
     if(profile):
-        return render(request, 'user/profile.html', {"username": request.session["username"], "user": profile})
+        return render(request, 'user/profile.html', {"username": request.session.get("username", None), "user": profile})
     else:
-        return render(request, "user/404.html", {"username": request.session["username"]})
+        return render(request, "user/404.html", {"username": request.session.get("username", None)})
 
 # @describe: Existing user login
 def login(request):
@@ -259,4 +259,57 @@ def delete_ride(request, ride_id):
         pass
     routesDB.delete_one({"_id": ride_id})
     return redirect("/myrides")
+
+
+def edit_user(request):
+    intializeDB() 
+    initializeCloud() 
+    user = userDB.find_one({"username": request.session['username']}) 
+
+    if request.method == 'POST':
+        form = EditUserForm(request.POST, request.FILES)  
+        if form.is_valid():
+            image = form.cleaned_data.get("profile_picture") 
+            if image: 
+                image.name = f"{form.cleaned_data['username']}.png" 
+                public_url = googleCloud.upload_file(image, image.name) 
+                form.cleaned_data["pfp"] = public_url 
+
+            
+            userDB.update_one(
+                {"username": request.session['username']},
+                {
+                    "$set": {
+                        "unityid": form.cleaned_data['unityid'],
+                        "fname": form.cleaned_data['first_name'],
+                        "lname": form.cleaned_data['last_name'],
+                        "email": form.cleaned_data['email'],
+                        "phone": form.cleaned_data['phone_number'],
+                        "pfp": form.cleaned_data.get('pfp', None),  
+                    }
+                }
+            )
+
+            
+            request.session['unityid'] = form.cleaned_data['unityid']
+            request.session['fname'] = form.cleaned_data['first_name']
+            request.session['lname'] = form.cleaned_data['last_name']
+            request.session['email'] = form.cleaned_data['email']
+            request.session['phone'] = form.cleaned_data['phone_number']
+
+            return redirect('user_profile', userid=str(user['_id']))  
+    else:
+        form = EditUserForm(initial={
+            "unityid": user.get("unityid"),
+            "first_name": user.get("fname"),
+            "last_name": user.get("lname"),
+            "email": user.get("email"),
+            "phone_number": user.get("phone"),
+            "profile_picture": user.get("pfp"),
+        })  
+
+    return render(request, 'user/edit_user.html', {'form': form})  
+
+   
+
 

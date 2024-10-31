@@ -117,10 +117,10 @@ def display_ride(request, ride_id):
     # print(f"Ride = {ride}")
     routes = get_routes(ride)
     print(f"Route = {routes}")
-    selected = routeSelect(request.session['username'], routes)
+    selected = routeSelect(request.session.get('username', None), routes)
     # print(f"Routes = {selected}")
     context = {
-            "username": request.session['username'],
+            "username": request.session.get('username', None),
             "ride": ride,
             "routes": routes,
             "selectedRoute": selected
@@ -139,8 +139,7 @@ def select_route(request):
         ride_id = ride['_id']
         attach_user_to_route(username, route_id)
         return redirect(display_ride, ride_id=ride['_id'] )
-    return render(request, 'publish/publish.html', {"username": username, "gmap_api_key": secrets.GoogleMapsAPIKey})
-
+    return render(request, 'publish/publish.html', {"username": None, "gmap_api_key": secrets.GoogleMapsAPIKey})
 
 def routeSelect(username, routes):
     intializeDB()
@@ -234,7 +233,7 @@ def create_route(request):
                 ridesDB.update_one({'_id': ride_id},{"$set": {"route_id": ride['route_id']}})
                 print("Ride Updated")
         return redirect(display_ride, ride_id=ride_id)
-    return render(request, 'publish/publish.html', {"username": request.session['username'], "gmap_api_key": secrets.GoogleMapsAPIKey})
+    return render(request, 'publish/publish.html', {"username": request.session.get('username', None), "gmap_api_key": secrets.GoogleMapsAPIKey})
 
 def attach_user_to_route(username, route_id):
     """
