@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from services import MapsService
 from config import Secrets, URLConfig
-
+from utilities import DateUtils
 
 from publish.forms import RideForm
 from utils import get_client
@@ -170,7 +170,7 @@ def get_routes(ride):
         user = userDB.find_one({"_id": doc['creator'] })
         user['id'] = user['_id']
         doc['creator'] = user
-        if not has_date_passed(route_date):
+        if not DateUtils.has_date_passed(route_date):
             docs.append(doc)   
     return docs
 
