@@ -1,4 +1,4 @@
-from django.test import SimpleTestCase
+from django.test import SimpleTestCase, TestCase
 from django.urls import reverse, resolve
 from user.views import index, register, logout, login, user_profile, my_rides
 
@@ -29,4 +29,37 @@ class TestUrl(SimpleTestCase):
     def test_profile_resolved(self):
         url = reverse('user_profile', args=["123"])
         self.assertEquals(resolve(url).func, user_profile)
+
+class TestUrl_Response(TestCase):
+    def test_index_route_non_logged(self):
+        response = self.client.get(reverse('index'))
+        self.assertEqual(response.status_code, 200)
+    
+    def test_index_route_non_logged_template(self):
+        response = self.client.get(reverse('index'))
+        self.assertTemplateUsed(response, 'home/home.html')
+    
+    def test_register_route_non_logged(self):
+        response = self.client.get(reverse('register'))
+        self.assertEqual(response.status_code, 200)
+    
+    def test_register_route_non_logged_template(self):
+        response = self.client.get(reverse('register'))
+        self.assertTemplateUsed(response, 'user/register.html')
+
+    def test_login_route_non_logged(self):
+        response = self.client.get(reverse('login'))
+        self.assertEqual(response.status_code, 200)
+    
+    def test_login_route_non_logged_template(self):
+        response = self.client.get(reverse('login'))
+        self.assertTemplateUsed(response, 'user/login.html')
+  
+    def test_profile_ride_non_logged(self):
+        response = self.client.get(reverse('user_profile', args=["671982063169b060180187f6"]))
+        self.assertEqual(response.status_code, 200)
+    
+    def test_profile_ride_non_logged_template(self):
+        response = self.client.get(reverse('user_profile', args=["671982063169b060180187f6"]))
+        self.assertTemplateUsed(response, 'user/profile.html')
 
