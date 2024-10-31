@@ -176,7 +176,7 @@ def user_profile(request, userid):
         return render(request, "user/404.html", {"username": request.session.get("username", None)})
     profile = userDB.find_one({"_id": ObjectId(userid)})
     if not profile:
-        return render(request, "user/404.html", {"username": request.session["username"]})
+        return render(request, "user/404.html", {"username": request.session.get("username", None)})
 
     user_id = str(profile['_id'])
 
@@ -191,7 +191,7 @@ def user_profile(request, userid):
             current_rides.append(route)
                 
     if(profile):
-        return render(request, 'user/profile.html', {"username": request.session["username"], "user": profile, "pastrides": past_rides, "currentrides": current_rides})
+        return render(request, 'user/profile.html', {"username": request.session.get("username", None), "user": profile, "pastrides": past_rides, "currentrides": current_rides})
 
     else:
         return render(request, "user/404.html", {"username": request.session.get("username", None)})
