@@ -179,7 +179,7 @@ def edit_user(request):
         if form.is_valid():
             image = form.cleaned_data.get("profile_picture") 
             if image: 
-                image.name = f"{form.cleaned_data['unityid']}.png" 
+                image.name = f"{form.cleaned_data['username']}.png" 
                 public_url = googleCloud.upload_file(image, image.name) 
                 form.cleaned_data["pfp"] = public_url 
 
