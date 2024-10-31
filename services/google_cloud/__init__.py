@@ -13,9 +13,6 @@ class GoogleCloud:
         """
         Initializes the GoogleCloud class with credentials and storage service.
 
-        Args:
-            credentials_path (str): Path to the Google Cloud credentials file (default: 'credentials.json').
-            bucket_path (str): Name of the bucket for storing files (default: 'ptravel-pfp').
         """
         self.credentials = Credentials(credentials_path)
         self.StorageService = CloudStorage(self.credentials, '')
