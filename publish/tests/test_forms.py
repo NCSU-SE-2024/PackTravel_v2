@@ -27,6 +27,32 @@ class TestForms(TransactionTestCase):
         self.assertFalse(form.is_valid())
         self.assertIn('rideDate', form.errors)
     
+    def test_rideform_pastDate(self):
+
+        form = RideForm(data={
+                            'source': '1505,Avery Close',
+                            'destination' : 'Talley Union',
+                            'purpose' : 'Travel',
+                            'rideDate' : '2024-10-11',
+                            'route' : 'Bus',
+                            'routeDetails' : 'Home to College'
+                            })
+        self.assertFalse(form.is_valid())
+        self.assertIn('rideDate', form.errors)
+    
+    def test_rideform_futureDate(self):
+
+        form = RideForm(data={
+                            'source': '1505,Avery Close',
+                            'destination' : 'Talley Union',
+                            'purpose' : 'Travel',
+                            'rideDate' : '2025-10-11',
+                            'route' : 'Bus',
+                            'routeDetails' : 'Home to College'
+                            })
+        self.assertFalse(form.is_valid())
+        self.assertIn('rideDate', form.errors)
+    
     def test_rideform_invalidDestination(self):
 
         form = RideForm(data={
