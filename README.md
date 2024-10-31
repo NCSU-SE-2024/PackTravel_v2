@@ -180,11 +180,9 @@ Start the server
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/Prachit99"><img src="https://avatars.githubusercontent.com/Prachit99" width="100px;" alt=""/><br /><sub><b>Prachit99</b></sub></a></td>
-    <td align="center"><a href="https://github.com/Darkspur"><img src="https://avatars.githubusercontent.com/Darkspur" width="100px;" alt=""/><br /><sub><b>Sahil Sawant Joshi</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/ashishjoshi2605"><img src="https://avatars.githubusercontent.com/ashishjoshi2605" width="100px;" alt=""/><br /><sub><b>Ashish Joshi</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/sankettangade"><img src="https://avatars.githubusercontent.com/sankettangade" width="100px;" alt=""/><br /><sub><b>Sanket Tangade</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/karan-47"><img src="https://avatars.githubusercontent.com/karan-47" width="100px;" alt=""/><br /><sub><b>Karan Gala</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/KoruptTinker"><img src="./images/Brijesh.png" width="100px;" alt=""/><br /><sub><b>Brijesh Kumar Bhayana</b></sub></a></td>
+    <td align="center"><a href="https://github.com/VidhishaKamat"><img src="https://avatars.githubusercontent.com/VidhishaKamat" width="100px;" alt=""/><br /><sub><b>Vidhisha Kamat</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Abhi0010"><img src="./images/Abhishek.png" width="100px;" alt=""/><br /><sub><b>Abhishek Potdar</b></sub></a><br /></td>
   </tr>
 </table>
 
