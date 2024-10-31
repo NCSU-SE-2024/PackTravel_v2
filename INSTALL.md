@@ -38,13 +38,6 @@ Install dependencies
   pip install -r requirements.txt
 ```
 
-Start the server
-
-```bash
-  python manage.py migrate
-  python manage.py runserver
-```
-
 # Google Cloud Setup for Google Maps Integration
 
 ## **1. Create a Google Cloud Account and Get an API Key for Google Maps Integration**
@@ -109,6 +102,20 @@ Start the server
 
 Make sure to keep both your API key and `credentials.json` secure!
 
+
+### Copy `.devenv` to `.env`
+1. Open your terminal or command prompt.
+2. Run the following command to copy the `.devenv` file to `.env`:
+
+   ```bash
+   cp .devenv .env
+3. Add appropriate API keys and MongoDB Connection URL to the env.
+4. Start the server
+
+```bash
+  python manage.py migrate
+  python manage.py runserver
+```
 
      - Site gets hosted at:
        `http://127.0.0.1:8000/`

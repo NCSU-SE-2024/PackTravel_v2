@@ -84,53 +84,8 @@ https://user-images.githubusercontent.com/111834635/194171771-962a585e-5dc7-4ea3
       - Download [Python3.x](https://www.python.org/downloads/).
       - Download [Django](https://docs.djangoproject.com/en/4.1/topics/install/).
 
-   ## Run Locally
-
-Create a virtual environment:
-
-```bash
-  python3.x -m venv env
-```
-
-Activate the virtual environment:
-Linux/MacOS:
-```bash
-  source env/bin/activate
-```
-Windows:
-```bash
-  ./env/Scripts/activate
-```
-
-Clone the project
-
-```bash
-  git clone https://github.com/KoruptTinker/PackTravel.git
-```
-
-Go to the project directory
-
-```bash
-  cd PackTravel
-```
-
-Install dependencies
-
-```bash 
-  pip install -r requirements.txt
-```
-
-Start the server
-
-```bash
-  python manage.py migrate
-  python manage.py runserver
-```
-
-
-
-     - Site gets hosted at:
-       `http://127.0.0.1:8000/`
+   ## Installation: 
+  - Refer to <a href="https://github.com/KoruptTinker/PackTravel/blob/main/INSTALL" target="_blank">INSTALL.MD</a> for setup instructions.
        
 ## Tools
 - [Preetier Code Formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
