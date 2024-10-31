@@ -39,13 +39,9 @@ class TestUrl_Response(TestCase):
         response = self.client.get(reverse('index'))
         self.assertTemplateUsed(response, 'home/home.html')
     
-    def test_register_route_non_logged(self):
-        response = self.client.get(reverse('register'))
-        self.assertEqual(response.status_code, 200)
-    
-    def test_register_route_non_logged_template(self):
-        response = self.client.get(reverse('register'))
-        self.assertTemplateUsed(response, 'user/register.html')
+    def test_logout_route_non_logged(self):
+        response = self.client.get(reverse('logout'))
+        self.assertEqual(response.status_code, 302)
 
     def test_login_route_non_logged(self):
         response = self.client.get(reverse('login'))
