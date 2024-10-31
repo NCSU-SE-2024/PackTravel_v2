@@ -6,18 +6,18 @@
 
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7178601.svg)](https://doi.org/10.5281/zenodo.7178601)
-[![codecov](https://codecov.io/gh/amisha-w/PackTravel/branch/main/graph/badge.svg?token=HRFN97UEB7)](https://codecov.io/gh/Prachit99/PackTravel)
-![Python Style Checker](https://github.com/Prachit99/PackTravel/actions/workflows/python_style_checker.yml/badge.svg)
-![Lint Python](https://github.com/Prachit99/PackTravel/actions/workflows/pylint.yml/badge.svg)
+[![codecov](https://app.codecov.io/gh/KoruptTinker/PackTravel/tree/main)](https://codecov.io/gh/KoruptTinker/PackTravel)
+![Python Style Checker](https://github.com/KoruptTinker/PackTravel/actions/workflows/python_style_checker.yml/badge.svg)
+![Lint Python](https://github.com/KoruptTinker/PackTravel/actions/workflows/pylint.yml/badge.svg)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT) 
-[![contributors](https://img.shields.io/github/contributors/Prachit99/PackTravel?style=for-the-badge)](https://github.com/Prachit99/PackTravel/graphs/contributors)
-[![Total Lines](https://img.shields.io/tokei/lines/github/Prachit99/PackTravel?style=for-the-badge)](https://img.shields.io/tokei/lines/github/Prachit99/PackTravel)
-[![Issues](https://img.shields.io/github/issues/Prachit99/PackTravel?style=for-the-badge)](https://github.com/Prachit99/PackTravel/issues)
-[![Closed Issues](https://img.shields.io/github/issues-closed-raw/Prachit99/PackTravel?style=for-the-badge)](https://github.com/Prachit99/PackTravel/issues?q=is%3Aissue+is%3Aclosed)
-[![Pull Requests](https://img.shields.io/github/issues-pr/Prachit99/PackTravel?style=for-the-badge)](https://github.com/Prachit99/PackTravel/pulls)
-[![Commit Acitivity](https://img.shields.io/github/commit-activity/w/Prachit99/PackTravel?style=for-the-badge)](https://github.com/Prachit99/PackTravel/graphs/commit-activity)
-[![Repo Size](https://img.shields.io/github/repo-size/Prachit99/PackTravel?style=for-the-badge)](https://github.com/Prachit99/PackTravel)
+[![contributors](https://img.shields.io/github/contributors/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/graphs/contributors)
+[![Total Lines](https://img.shields.io/tokei/lines/github/KoruptTinker/PackTravel?style=for-the-badge)](https://img.shields.io/tokei/lines/github/KoruptTinker/PackTravel)
+[![Issues](https://img.shields.io/github/issues/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/issues)
+[![Closed Issues](https://img.shields.io/github/issues-closed-raw/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/issues?q=is%3Aissue+is%3Aclosed)
+[![Pull Requests](https://img.shields.io/github/issues-pr/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/pulls)
+[![Commit Acitivity](https://img.shields.io/github/commit-activity/w/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/graphs/commit-activity)
+[![Repo Size](https://img.shields.io/github/repo-size/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel)
 
 
 </div>
