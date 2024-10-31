@@ -1,21 +1,21 @@
 |Notes|Assessment (Total : 217)|Evidence|
 |-----|---------|----------|
 
-|Workload is spread over the whole team (one team member is often Xtimes more productive than the others... but nevertheless, here is a track record that everyone is contributing a lot)| 3 | Everyone has committed and contributed equally. [Visible in Insights -> Contributors](https://github.com/amisha-w/PackTravel/graphs/contributors)|
-|Number of commits| 3 | There were a lot of commits [Present in Insights -> Contributors](https://github.com/amisha-w/PackTravel/graphs/contributors) |
-|Number of commits: by different people| 3 | Everyone has committed in different areas. [Visible in Insights -> Contributors](https://github.com/amisha-w/PackTravel/graphs/contributors)|
+|Workload is spread over the whole team (one team member is often Xtimes more productive than the others... but nevertheless, here is a track record that everyone is contributing a lot)| 3 | Everyone has committed and contributed equally. [Visible in Insights -> Contributors](https://github.com/KoruptTinker/PackTravel/graphs/contributors)|
+|Number of commits| 3 | There were a lot of commits [Present in Insights -> Contributors](https://github.com/KoruptTinker/PackTravel/graphs/contributors) |
+|Number of commits: by different people| 3 | Everyone has committed in different areas. [Visible in Insights -> Contributors](https://github.com/KoruptTinker/PackTravel/graphs/contributors)|
 |Issues reports: there are **many**| 2 | No issues reported |
 |Issues are being closed| 2 | No issues reported |
-|Docs: doco generated, format not ugly | 3 | Documentation is present with all the blings! [GitHub Repository README.md](https://github.com/amisha-w/PackTravel#readme) |
-|Docs: what: point descriptions of each class/function (in isolation) | 3 | Explained in [GitHub Repository README.md](https://github.com/amisha-w/PackTravel#readme)|
+|Docs: doco generated, format not ugly | 3 | Documentation is present with all the blings! [GitHub Repository README.md](https://github.com/KoruptTinker/PackTravel#readme) |
+|Docs: what: point descriptions of each class/function (in isolation) | 3 | Explained in [GitHub Repository README.md](https://github.com/KoruptTinker/PackTravel#readme)|
 |Docs: how: for common use cases X,Y,Z mini-tutorials showing worked examples on how to do X,Y,Z| 3 |No such examples or tutorials found, README.md has the instructions on how to execute|
 |Docs: why: docs tell a story, motivate the whole thing, deliver a punchline that makes you want to rush out and use the thing| 3 | Documentation includes the story, punchline and would motivate anyone to rush out and use the thing|
-|Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code.|  3| Animation video present in [GitHub Repository README.md](https://github.com/amisha-w/PackTravel#readme)|
+|Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code.|  3| Animation video present in [GitHub Repository README.md](https://github.com/KoruptTinker/PackTravel#readme)|
 |Use of version control tools| 3 | GitHub was used by the team|
-|Test cases exist| 3 |Test cases are present in tests folder. [see here](https://github.com/amisha-w/PackTravel/tree/main/user/tests)|
+|Test cases exist| 3 |Test cases are present in tests folder. [see here](https://github.com/KoruptTinker/PackTravel/tree/main/user/tests)|
 |Test cases are routinely executed| 3 |Test cases are executed|
 |Issues are discussed before they are closed| 0 |No issues found|
-|Chat channel: exists| 3 | Slack channel exists [See here](https://github.com/amisha-w/PackTravel/tree/main/images/slack)|
+|Chat channel: exists| 3 | Slack channel exists [See here](https://github.com/KoruptTinker/PackTravel/tree/main/images/slack)|
 |Test cases: a large proportion of the issues related to handling failing cases.| 0 | No issues found|
 |Evidence that the whole team is using the same tools: everyone can get to all tools and files| 3 | Everyone has contributed to different files|
 |Evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people)| 3 | |
