@@ -2,13 +2,36 @@ import json
 from http import client
 
 class Routes:
+    """
+    A class to handle routing requests to a specified API.
+    """
     hostname = ""
     api_key = ""
-    def __init__(self, hostname: str, api_key = ""): 
+    def __init__(self, hostname: str, api_key = ""):
+        """
+        Initializes the Routes class with the hostname and API key.
+
+        Args:
+            hostname (str): The hostname of the routing API.
+            api_key (str): The API key for authentication (default is an empty string).
+        """ 
         self.hostname = hostname
         self.api_key = api_key
 
     def __get_route_details__(self, slat: str, slong: str, dlat: str, dlong: str):
+        """
+        Retrieves route details including distance and fuel consumption between two geographic locations.
+
+        Args:
+            slat (str): The latitude of the starting location.
+            slong (str): The longitude of the starting location.
+            dlat (str): The latitude of the destination location.
+            dlong (str): The longitude of the destination location.
+
+        Returns:
+            dict: A dictionary containing the distance in kilometers and fuel consumption in liters.
+                  Returns {'distance': 0, 'fuel': 0} in case of an error or if no route is found.
+        """
         try: 
             conn = client.HTTPSConnection(self.hostname, timeout=1)
             payload = json.dumps({
