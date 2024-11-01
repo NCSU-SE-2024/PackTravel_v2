@@ -1,4 +1,4 @@
-|Notes|Assessment (Total : 217)|Evidence|
+|Notes|Assessment (Total : 255)|Evidence|
 |-----|---------|----------|
 |Workload is spread over the whole team (one team member is often Xtimes more productive than the others... but nevertheless, here is a track record that everyone is contributing a lot)| 3 | Everyone has committed and contributed equally. [Visible in Insights -> Contributors](https://github.com/KoruptTinker/PackTravel/commits/main)|
 |Number of commits| 3 | There were a lot of commits [Present in Commit Tree](https://github.com/KoruptTinker/PackTravel/commits/main) |
