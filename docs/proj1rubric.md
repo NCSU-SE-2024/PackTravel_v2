@@ -41,7 +41,7 @@
 |Is your software available as a package that can be deployed without building it?| 0 | No |
 |Is your software available for free?| 3 | Yes |
 |Is your source code publicly available to download, either as a downloadable bundle or via access to a source code repository?| 3 | Yes |
-|Is your software hosted in an established, third-party repository like GitHub (https://github.com), BitBucket (https://bitbucket.org),LaunchPad (https://launchpad.net) orSourceForge (https://sourceforge.net)?| 3 | |
+|Is your software hosted in an established, third-party repository like GitHub (https://github.com), BitBucket (https://bitbucket.org),LaunchPad (https://launchpad.net) orSourceForge (https://sourceforge.net)?| 3 | Yes |
 |Is your documentation clearly available on your website or within your software?| 3 | Yes |
 |Does your documentation include a "quick start" guide, that provides a short overview of how to use your software with some basic examples of use?| 3 | Yes |
 |If you provide more extensive documentation, does this provide clear, step-by-step instructions on how to deploy and use your software?| 3 | Yes |
@@ -69,14 +69,12 @@
 |Is there a branch of the repository that is always stable? (i.e. tests always pass, code always builds successfully)| 3 | Yes |
 |Do you back-up your repository?| 3 | Yes |
 |Do you provide publicly-available instructions for building your software from the source code?| 3 | Yes |
-|Can you build, or package, your software using an automated tool?
-e.g. Make (https://www.gnu.org/software/make/), ANT (http://ant.apache.org/), Maven (https://maven.apache.org/), CMake (https://cmake.org/), Python setuptools (https://pypi.python.org/pypi/setuptools), or R package tools (https://cran.r-project.org/doc/manuals/r-devel/R-exts.html)| 0 | Not Applicable |
+|Can you build, or package, your software using an automated tool? e.g. Make (https://www.gnu.org/software/make/), ANT (http://ant.apache.org/), Maven (https://maven.apache.org/), CMake (https://cmake.org/), Python setuptools (https://pypi.python.org/pypi/setuptools), or R package tools (https://cran.r-project.org/doc/manuals/r-devel/R-exts.html)| 0 | Not Applicable |
 |Do you provide publicly-available instructions for deploying your software?| 3 | Yes |
 |Does your documentation list all third-party dependencies?| 3 | Yes |
 |Does your documentation list the version number for all third-party dependencies?| 3 | Yes |
 |Does your software list the web address, and licences for all third-party dependencies and say whether the dependencies are mandatory or optional?| 0 | No |
-|Can you download dependencies using a dependency management tool or package manager?
-e.g. Ivy (http://ant.apache.org/ivy/), Maven (https://maven.apache.org/), Python pip (https://pypi.python.org/pypi/pip) or setuptools (https://pypi.python.org/pypi/setuptools), PHP Composer (https://getcomposer.org/), Ruby gems (https://rubygems.org), or R PackRat (https://rstudio.github.io/packrat/)| 3 | Yes |
+|Can you download dependencies using a dependency management tool or package manager? e.g. Ivy (http://ant.apache.org/ivy/), Maven (https://maven.apache.org/), Python pip (https://pypi.python.org/pypi/pip) or setuptools (https://pypi.python.org/pypi/setuptools), PHP Composer (https://getcomposer.org/), Ruby gems (https://rubygems.org), or R PackRat (https://rstudio.github.io/packrat/)| 3 | Yes |
 |Do you have tests that can be run after your software has been built or deployed to show whether the build or deployment has been successful?| 3 | Yes |
 |Do you have an automated test suite for your software?| 3 | Yes |
 |Do you have a framework to periodically (e.g. nightly) run your tests on the latest version of the source code?| 0 | No |
