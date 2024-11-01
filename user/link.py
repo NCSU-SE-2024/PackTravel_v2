@@ -5,6 +5,24 @@ import chromedriver_autoinstaller
 
 # f : Cab or Bus (1= Cab, 2=Bus)
 def get_link(source,destination,date_tr,month_tr,time_tr,f):
+    """
+    Generates a Google Maps link with route information for a given source, destination, date, and time, and specifies the transport mode (Cab or Bus).
+
+    This function automates the process of navigating to Google Maps, inputting a source and destination, selecting a date and time for travel, and obtaining a link with route details.
+    
+    Args:
+        source (str): The starting location for the route.
+        destination (str): The destination location for the route.
+        date_tr (str): The target date for the travel as a numeric day (e.g., "15").
+        month_tr (str): The target month abbreviation (e.g., "Feb").
+        time_tr (str): The target time in HH:MM format.
+        f (int): The transportation mode (1 = Cab, 2 = Bus).
+
+    Returns:
+        tuple: A tuple containing:
+            - route (str): A description of the route (if Bus) or "Cab" (if Cab).
+            - link (str): The generated Google Maps link for the route.
+    """
 
     chromedriver_autoinstaller.install()
     chrome_options = webdriver.ChromeOptions()

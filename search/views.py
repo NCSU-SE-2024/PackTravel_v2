@@ -18,6 +18,25 @@ routesDB  = None
 secrets = Secrets()
 
 def intializeDB():
+    """
+    Initializes the connection to the MongoDB database and sets up global variables for collections.
+    
+    - `client`: The MongoDB client instance.
+    - `db`: The database object, specifically the "SEProject" database.
+    - `userDB`: The collection for storing user data within the "SEProject" database.
+    - `ridesDB`: The collection for storing ride information within the "SEProject" database.
+    - `routesDB`: The collection for storing route information within the "SEProject" database.
+
+    Globals:
+        client (MongoClient): The MongoDB client instance.
+        db (Database): The "SEProject" database object.
+        userDB (Collection): The collection for user data.
+        ridesDB (Collection): The collection for ride data.
+        routesDB (Collection): The collection for route data.
+
+    Returns:
+        None
+    """
     global client, db, userDB, ridesDB, routesDB
     client = get_client()
     db = client.SEProject

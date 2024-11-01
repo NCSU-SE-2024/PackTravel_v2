@@ -5,6 +5,8 @@ from services import GoogleCloud
 from config import Secrets
 from bson.objectid import ObjectId
 from django.forms.utils import ErrorList
+from utilities import DateUtils
+from django.contrib.auth.hashers import make_password, check_password
 
 client = None
 db = None
@@ -15,6 +17,13 @@ googleCloud = None
 secrets = None
 
 def initializeCloud():
+    """
+    Initializes the Google Cloud service with credentials and storage bucket.
+    
+    Globals:
+        googleCloud (GoogleCloud): Google Cloud service instance for file upload.
+        secrets (Secrets): Object holding sensitive credentials.
+    """
     global googleCloud, secrets
     if not secrets:
         secrets = Secrets()
@@ -23,6 +32,25 @@ def initializeCloud():
         googleCloud = GoogleCloud(secrets.CloudCredentials, secrets.CloudStorageBucket)
 
 def intializeDB():
+    """
+    Initializes the connection to the MongoDB database and sets up global variables for collections.
+    
+    - `client`: The MongoDB client instance.
+    - `db`: The database object, specifically the "SEProject" database.
+    - `userDB`: The collection for storing user data within the "SEProject" database.
+    - `ridesDB`: The collection for storing ride information within the "SEProject" database.
+    - `routesDB`: The collection for storing route information within the "SEProject" database.
+
+    Globals:
+        client (MongoClient): The MongoDB client instance.
+        db (Database): The "SEProject" database object.
+        userDB (Collection): The collection for user data.
+        ridesDB (Collection): The collection for ride data.
+        routesDB (Collection): The collection for route data.
+
+    Returns:
+        None
+    """
     global client, db, userDB, ridesDB, routesDB
     client = get_client()
     db = client.SEProject
@@ -33,6 +61,16 @@ def intializeDB():
 
 # Home page for PackTravel
 def index(request, username=None):
+    """
+    Renders the home page and adds authenticated user data to the session if logged in.
+
+    Args:
+        request (HttpRequest): The request object.
+        username (str, optional): Username to display on the page.
+
+    Returns:
+        HttpResponse: The home page with user session data.
+    """
     intializeDB()
     if request.user.is_authenticated:
         request.session["username"] = request.user.username
@@ -60,21 +98,32 @@ def index(request, username=None):
 
 
 def register(request):
+    """
+    Handles user registration, storing user data in the database and uploading profile picture.
+
+    Args:
+        request (HttpRequest): The request object containing form data.
+
+    Returns:
+        HttpResponse: Redirects to home page on success, or renders registration form on failure.
+    """
     intializeDB()
     initializeCloud()
     if request.method == "POST":
+        public_url=""
         form = RegisterForm(request.POST, request.FILES)
         if form.is_valid():
             image = form.cleaned_data["profile_picture"]
-            image.name = f"{form.cleaned_data['username']}.png"
-            public_url = googleCloud.upload_file(image, image.name)
+            if image is not None:
+                image.name = f"{form.cleaned_data['username']}.png"
+                public_url = googleCloud.upload_file(image, image.name)
             userObj = {
                 "username": form.cleaned_data["username"],
                 "unityid": form.cleaned_data["unityid"],
                 "fname": form.cleaned_data["first_name"],
                 "lname": form.cleaned_data["last_name"],
                 "email": form.cleaned_data["email"],
-                "password": form.cleaned_data["password1"],
+                "password": make_password(form.cleaned_data["password1"]),
                 "phone": form.cleaned_data["phone_number"],
                 "rides": [],
                 "pfp": public_url
@@ -96,6 +145,15 @@ def register(request):
 
 
 def logout(request):
+    """
+    Logs out the user by clearing session data.
+
+    Args:
+        request (HttpRequest): The request object.
+
+    Returns:
+        HttpResponse: Redirects to the home page.
+    """
     try:
         request.session.clear()
     except:
@@ -103,17 +161,52 @@ def logout(request):
     return redirect(index)
 
 def user_profile(request, userid):
+    """
+    Renders the user's profile page or a 404 page if the user ID is not found.
+
+    Args:
+        request (HttpRequest): The request object.
+        userid (str): The ID of the user profile to display.
+
+    Returns:
+        HttpResponse: Profile page or 404 page if user not found.
+    """
     intializeDB()
     if(not userid):
         return render(request, "user/404.html", {"username": request.session.get("username", None)})
     profile = userDB.find_one({"_id": ObjectId(userid)})
+    if not profile:
+        return render(request, "user/404.html", {"username": request.session.get("username", None)})
+
+    user_id = str(profile['_id'])
+
+    # Fetch routes created by this user
+    user_routes = routesDB.find({"creator": ObjectId(user_id)})
+
+    past_rides,current_rides  = list(), list()
+    for route in user_routes:
+        if DateUtils.has_date_passed(route['date']):
+            past_rides.append(route)
+        else:
+            current_rides.append(route)
+                
     if(profile):
-        return render(request, 'user/profile.html', {"username": request.session.get("username", None), "user": profile})
+        return render(request, 'user/profile.html', {"username": request.session.get("username", None), "user": profile, "pastrides": past_rides, "currentrides": current_rides})
+
     else:
         return render(request, "user/404.html", {"username": request.session.get("username", None)})
 
 # @describe: Existing user login
 def login(request):
+    """
+    Logs in an existing user by validating the form data and saving session details.
+
+    Args:
+        request (HttpRequest): The request object containing form data.
+
+    Returns:
+        HttpResponse: Redirects to home page on success, or renders login form on failure.
+    """
     intializeDB()
     if request.session.has_key('username'):
         return redirect(index, {"username": request.session['username']})
@@ -121,11 +214,9 @@ def login(request):
         if request.method == "POST":
             form = LoginForm(request.POST)
             if form.is_valid():
-                username = form.cleaned_data["username"]
-                passw = form.cleaned_data["password"]
+                username = form.cleaned_data["username"]           
                 user = userDB.find_one({"username": username})
-
-                if user and user["password"] == form.cleaned_data["password"]:
+                if user and check_password(form.cleaned_data["password"], user["password"]):
                     request.session['userid'] = str(user['_id'])
                     request.session["username"] = username
                     request.session['unityid'] = user["unityid"]
@@ -140,6 +231,15 @@ def login(request):
 
 
 def my_rides(request):
+    """
+    Renders the user's rides if logged in, otherwise redirects to home.
+
+    Args:
+        request (HttpRequest): The request object.
+
+    Returns:
+        HttpResponse: The user's ride page or redirect to home if not authenticated.
+    """
     intializeDB()
     if not request.session.has_key('username'):
         request.session['alert'] = "Please login to create a ride."
@@ -161,6 +261,16 @@ def my_rides(request):
 
 
 def delete_ride(request, ride_id):
+    """
+    Deletes a specified ride from the routes collection.
+
+    Args:
+        request (HttpRequest): The request object.
+        ride_id (str): The ID of the ride to delete.
+
+    Returns:
+        HttpResponse: Redirects to the user's rides page.
+    """
     intializeDB()
     user = userDB.find_one({"username": request.session['username']})
     if user is None:

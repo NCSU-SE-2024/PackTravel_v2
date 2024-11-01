@@ -52,10 +52,10 @@ class TestUrl_Response(TestCase):
         self.assertTemplateUsed(response, 'user/login.html')
   
     def test_profile_ride_non_logged(self):
-        response = self.client.get(reverse('user_profile', args=["671982063169b060180187f6"]))
+        response = self.client.get(reverse('user_profile', args=["67240ab0b84ec3a5aa1e5cc8"]))
         self.assertEqual(response.status_code, 200)
     
     def test_profile_ride_non_logged_template(self):
-        response = self.client.get(reverse('user_profile', args=["671982063169b060180187f6"]))
+        response = self.client.get(reverse('user_profile', args=["67240ab0b84ec3a5aa1e5cc8"]))
         self.assertTemplateUsed(response, 'user/profile.html')
 
