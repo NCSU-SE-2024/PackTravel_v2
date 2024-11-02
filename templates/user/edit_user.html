@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<!doctype html> {% load static %}
+{% load socialaccount %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,9 +7,10 @@
     <title>Edit User Profile</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"> 
 </head>
-<body>
-    <div class="container">
-        <h1>Edit Profile</h1>
+<body style="background-color: #3A3B3C;">
+    {% include 'nav.html' %}
+    <div class="card mx-auto shadow-2-strong bg-white rounded" style="width: 60%; margin: 50px; padding: 50px;">
+        <h1 >Edit Profile</h1>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.non_field_errors }}
