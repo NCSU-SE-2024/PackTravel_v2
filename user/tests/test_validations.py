@@ -17,7 +17,7 @@ class UserUnityIDValidationTests(SimpleTestCase):
 
 class UserUsernameValidationTests(SimpleTestCase):
     def test_valid_username(self):
-        username = "abhishek"
+        username = "rahul"
         try:
             validate_unique_username(username)
         except ValidationError:
