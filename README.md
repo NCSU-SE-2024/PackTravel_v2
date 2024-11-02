@@ -31,8 +31,6 @@
 - Lack of test cases and code coverage limits reliability and error detection.
 
 
-https://user-images.githubusercontent.com/18501895/205809978-14a5c1c0-65a3-4171-b6f2-f30449325088.mp4
-
 ## Enhancement and Improvements in Phase 2:
 - Introduced a user profiles feature, enabling riders to view each other's profiles and fostering a more personalized connection among users.
 - Implemented location autocomplete with Google Maps integration to enhance location accuracy.
@@ -41,7 +39,7 @@ https://user-images.githubusercontent.com/18501895/205809978-14a5c1c0-65a3-4171-
 - Added password hashing on the backend to enhance the security of user data.
 - Increased test coverage from 50% to 70%, improving reliability and error detection.
 
-<a href="https://github.com/Prachit99/PackTravel/blob/main/images/video1155969440.mp4" target="_blank">Link to Video 2</a>
+<a href="https://github.com/KoruptTinker/PackTravel/blob/rubrics/images/Video.mkv" target="_blank">Link to Video</a>
 
 <h2>What is Packtravel?</h2>
 
