@@ -14,7 +14,7 @@
 |Test cases exist| 3 |Test cases are present in tests folder for each module [see here](https://github.com/KoruptTinker/PackTravel/tree/main/user/tests)|
 |Test cases are routinely executed| 3 |Test cases are executed using Github Actions at every push, pull request, merge etc.|
 |Issues are discussed before they are closed| 3 |[Issue](https://github.com/KoruptTinker/PackTravel/issues/5)|
-|Chat channel: exists| 3 | Slack channel exists [See here](https://github.com/KoruptTinker/PackTravel/tree/main/images/slack)|
+|Chat channel: exists| 3 | Discord channel exists [See here](https://github.com/KoruptTinker/PackTravel/tree/main/images/discord)|
 |Test cases: a large proportion of the issues related to handling failing cases.| 3 | [Issue](https://github.com/KoruptTinker/PackTravel/issues/14)|
 |Evidence that the whole team is using the same tools: everyone can get to all tools and files| 3 | Everyone has contributed to different files|
 |Evidence that the whole team is using the same tools | 3 | |
