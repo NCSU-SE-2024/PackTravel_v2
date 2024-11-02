@@ -61,6 +61,7 @@ function selectRoute(id) {
                 <th scope="col">Duration</th>
                 <th scope="col">Number of users</th>
                 <th scope="col">Details</th>
+                <th scope="col">Distance (km)</th>
                 <th scope="col">Rider</th>
               </tr>
             </thead>
@@ -97,6 +98,7 @@ function selectRoute(id) {
               <td>{{ route.duration }} minutes</td>
               <td>{{ route.users|length }}</td>
               <td>{{ route.details }}</td>
+              <td>{{ route.distance }}</td>
               <td> <a href="/u/{{ route.creator.id }}" > {{ route.creator.username }} </a></td>
             </tr>
             <div class="modal" id="myModal">

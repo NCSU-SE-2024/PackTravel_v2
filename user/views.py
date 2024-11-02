@@ -288,31 +288,27 @@ def edit_user(request):
         form = EditUserForm(request.POST, request.FILES)  
         if form.is_valid():
             image = form.cleaned_data.get("profile_picture") 
+            public_url = user.get('pfp')
             if image: 
-                image.name = f"{form.cleaned_data['username']}.png" 
+                image.name = f"{request.session['username']}.png" 
                 public_url = googleCloud.upload_file(image, image.name) 
-                form.cleaned_data["pfp"] = public_url 
 
             
             userDB.update_one(
                 {"username": request.session['username']},
                 {
                     "$set": {
-                        "unityid": form.cleaned_data['unityid'],
                         "fname": form.cleaned_data['first_name'],
                         "lname": form.cleaned_data['last_name'],
-                        "email": form.cleaned_data['email'],
                         "phone": form.cleaned_data['phone_number'],
-                        "pfp": form.cleaned_data.get('pfp', None),  
+                        "pfp": public_url,  
                     }
                 }
             )
 
             
-            request.session['unityid'] = form.cleaned_data['unityid']
             request.session['fname'] = form.cleaned_data['first_name']
             request.session['lname'] = form.cleaned_data['last_name']
-            request.session['email'] = form.cleaned_data['email']
             request.session['phone'] = form.cleaned_data['phone_number']
 
             return redirect('user_profile', userid=str(user['_id']))  
@@ -326,7 +322,7 @@ def edit_user(request):
             "profile_picture": user.get("pfp"),
         })  
 
-    return render(request, 'user/edit_user.html', {'form': form})  
+    return render(request, 'user/edit_user.html', {"username": request.session['username'], 'form': form})  
 
    
 
