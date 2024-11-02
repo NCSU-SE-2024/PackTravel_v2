@@ -17,7 +17,9 @@
                     <img src="{{ user.pfp }}" alt="Profile Image" class="rounded-circle mb-3" width="150" height="150">
                     <h2 class="card-title">{{ user.fname}} {{ user.lname }} </h2>
                     <p class="card-text">{{ user.email }}</p>
-                    <a href="/edit-profile" class="btn btn-danger mt-3">Edit Profile</a>
+                    {% if username == user.username %}
+                      <a href="/edit-profile" class="btn btn-danger mt-3">Edit Profile</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
