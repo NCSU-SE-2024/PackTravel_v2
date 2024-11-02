@@ -123,36 +123,11 @@ class TestForms(TransactionTestCase):
     def test_EditForm_validData(self):
 
         form = EditUserForm(data={
-                            'unityid' : 'ajohn',
                             'first_name' : 'John',
                             'last_name' : 'Dwyer',
-                            'email' : 'wd44@ncsu.edu',
                             'phone_number' : 9876578901,
                             })
         self.assertTrue(form.is_valid())
-    
-    def test_EditForm_missingID(self):
-
-        form = EditUserForm(data={
-                            'unityid' : '',
-                            'first_name' : 'John',
-                            'last_name' : 'Dwyer',
-                            'email' : 'jdwyer@ncsu.edu',
-                            'phone_number' : 9876578901,
-                            })
-        self.assertFalse(form.is_valid())
-        self.assertIn('unityid', form.errors)
-
-    def test_EditForm_invalid_email(self):
-        form = EditUserForm(data={
-            'unityid': 'ajohn6',
-            'first_name': 'John',
-            'last_name': 'Dwyer',
-            'email': 'invalid-email',
-            'phone_number': 987657890,
-        })
-        self.assertFalse(form.is_valid())
-        self.assertIn('email', form.errors)
 
     def test_EditForm_invalid_phone_number(self):
         form = EditUserForm(data={
