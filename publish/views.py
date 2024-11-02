@@ -201,6 +201,7 @@ def create_route(request):
                 "minute":  request.POST.get("minute"),
                 "ampm": request.POST.get("ampm"),
                 "details": request.POST.get("details"),
+                "users": [],
             }
         ride_id = request.POST.get('destination')
         route['creator'] = attach_user_to_route(request.session['username'], route['_id'])
@@ -251,14 +252,17 @@ def attach_user_to_route(username, route_id):
     intializeDB()
     remove = False
     user = userDB.find_one({"username": username})
-    route = routesDB.find_one({"_id": route_id})
     if user == None:
         return redirect('home/home.html', {"username": None})
-    if route == None:
-        return redirect('home/home.html', {"username": username})
-    user['rides'].append(route_id)
-    users = route.get('users', [])
 
+    user['rides'].append(route_id)
+
+    userDB.update_one({"username": username},{"$set": {"rides": user['rides']}})
+
+    route = routesDB.find_one({"_id": route_id})
+    if route == None:
+        return user['_id']
+    users = route.get('users', [])
 
     for i in range(len(users)):
         if(users[i] == user["_id"]):
@@ -268,7 +272,5 @@ def attach_user_to_route(username, route_id):
     if not remove:
         users.append(user['_id'])
 
-    
-    userDB.update_one({"username": username},{"$set": {"rides": user['rides']}})
     routesDB.update_one({"_id": route_id}, {"$set": {"users": users}})
     return user['_id']
