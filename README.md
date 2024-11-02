@@ -100,7 +100,6 @@ https://user-images.githubusercontent.com/111834635/194171771-962a585e-5dc7-4ea3
 
 - **Adding New Route**
 <img src="/images/AddRoute11.gif" width="800" height="400"/>
-<img src="/images/AddRoute12.gif" width= "800" height="400"/>
 
 - **Search for a Ride**
 <img src="/images/Search.gif" width="800" height="400"/>
