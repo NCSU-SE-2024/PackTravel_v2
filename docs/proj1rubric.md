@@ -26,7 +26,7 @@
 |The file LICENSE.md lists rules of usage for this repo| 3 | |
 |The file CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up; e.g. see example| 3 | |
 |The file README.md contains all the following| 3 | |
-|Video| 3 | |
+|Video| 3 | [Video Link](https://github.com/KoruptTinker/PackTravel/blob/rubrics/images/Video.mkv)|
 |DOI badge: exists. To get a Digitial Object Indentifier, regiser the project at Zenodo.| 3 | |
 |Badges showing your style checkers| 3 | |
 |Badges showing your code formatters.| 3 | |
