@@ -322,7 +322,7 @@ def edit_user(request):
             "profile_picture": user.get("pfp"),
         })  
 
-    return render(request, 'user/edit_user.html', {'form': form})  
+    return render(request, 'user/edit_user.html', {"username": request.session['username'], 'form': form})  
 
    
 
