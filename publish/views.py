@@ -170,6 +170,7 @@ def get_routes(ride):
         user = userDB.find_one({"_id": doc['creator'] })
         user['id'] = user['_id']
         doc['creator'] = user
+        doc['distance'] = round(doc["distance"], 1)
         if not DateUtils.has_date_passed(route_date):
             docs.append(doc)   
     return docs
