@@ -8,7 +8,7 @@ PackTravel/__pycache__/
 # C extensions
 *.so
 .idea/
-
+credentials.json
 # Distribution / packaging
 .Python
 build/

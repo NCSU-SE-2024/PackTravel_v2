@@ -95,6 +95,7 @@ def publish_index(request):
     intializeDB()
     if not request.session.has_key('username'):
         request.session['alert'] = "Please login to create a ride."
+        messages.info(request, "Please login to create a ride!")
         return redirect('index')
     return render(request, 'publish/publish.html', {"username": request.session['username'], "alert":True, "gmap_api_key": secrets.GoogleMapsAPIKey})
 

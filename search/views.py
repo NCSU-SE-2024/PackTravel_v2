@@ -48,6 +48,7 @@ def search_index(request):
     intializeDB()
     if not request.session.has_key('username'):
         request.session['alert'] = "Please login to create a ride."
+        messages.info(request, "Please login to search a ride!")
         return redirect('index')
     all_rides = list(ridesDB.find())
     processed, routes = list(), list()
