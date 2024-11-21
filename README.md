@@ -43,7 +43,7 @@
 
 <h2>What is Packtravel?</h2>
 
-PackTravel is an innovative platform designed to help university students explore beyond campus boundaries. Recognizing the limitations of on-campus transportation options, PackTravel offers a solution for students without personal vehicles to easily travel off-campus.
+PackTravel is an innovative platform designed to help university students explore beyond campus boundaries. Recognizing the limitations of on-campus transportation options, PackTravel offers a solution for students without personal vehicles to travel off-campus easily.
 
 **So, let's go for Packtravel**
 
@@ -64,7 +64,7 @@ https://user-images.githubusercontent.com/111834635/194171771-962a585e-5dc7-4ea3
 
 <ul>
   <li>Create a PackTravel Ride</li>
-  <li>Create mmultiple routes to reach a ride's destination:  Bus, Cab or Personal</li>
+  <li>Create multiple routes to reach a ride's destination:  Bus, Cab, or Personal</li>
   <li>Search and view other's rides</li>
   <li>Join a PackTravel Ride's route</li>
   <li>Check all your rides</li>
