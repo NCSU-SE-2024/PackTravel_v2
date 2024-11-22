@@ -1,6 +1,5 @@
-
-
-<!doctype html> {% load static %}
+<!doctype html>
+{% load static %}
 {% load socialaccount %}
 
 <html lang="en">
@@ -49,17 +48,19 @@
                 {{form.phone_number}}
             </div>
             <br>
-
-            <br>
             <div class="form-group">
                 <label for="id_username">Profile Picture</label>
                 {{form.profile_picture}}
             </div>
             <br>
-            
             <div class="form-group">
                 <label for="id_password">Password</label>
                 {{form.password1}}
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="id_password2">Confirm Password</label>
+                {{form.password2}}
             </div>
             <br>
             {% if form.errors %}
@@ -74,15 +75,15 @@
                 </div>
             {% endif %}
             <br>
-            <button type="submit" style="color: white; background-color: #D22B2B; border-color: #D22B2B;" class="btn btn-dark" >Register on PackTravel</button>
+            <button type="submit" style="color: white; background-color: #D22B2B; border-color: #D22B2B;" class="btn btn-dark">Register on PackTravel</button>
             <br>
             OR
             <br>
             <div class="form-group">
                 <i class="fab fa-google"></i>
                 <a role="button" class="btn btn-primary" href="{% provider_login_url 'google' %}">Sign Up with Google</a>
-              </div>
+            </div>
         </form>
-</div>
+    </div>
   </body>
 </html>
