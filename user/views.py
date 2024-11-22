@@ -107,16 +107,18 @@ def register(request):
     Returns:
         HttpResponse: Redirects to home page on success, or renders registration form on failure.
     """
+
     intializeDB()
     initializeCloud()
     if request.method == "POST":
-        public_url=""
+        public_url = ""
         form = RegisterForm(request.POST, request.FILES)
         if form.is_valid():
             image = form.cleaned_data["profile_picture"]
             if image is not None:
                 image.name = f"{form.cleaned_data['username']}.png"
                 public_url = googleCloud.upload_file(image, image.name)
+            
             userObj = {
                 "username": form.cleaned_data["username"],
                 "unityid": form.cleaned_data["unityid"],
@@ -128,6 +130,7 @@ def register(request):
                 "rides": [],
                 "pfp": public_url
             }
+            
             savedUser = userDB.insert_one(userObj)
             request.session['username'] = userObj["username"]
             request.session['unityid'] = userObj["unityid"]
@@ -137,11 +140,13 @@ def register(request):
             request.session['phone'] = userObj["phone"]
             request.session['userid'] = str(savedUser.inserted_id)
             return redirect(index, username=request.session["username"])
+        else:
+            return render(request, 'user/register.html', {"form": form})
     else:
         if request.session.has_key('username'):
             return index(request, request.session['username'])
         form = RegisterForm()
-    return render(request, 'user/register.html', {"form": form})
+        return render(request, 'user/register.html', {"form": form})
 
 
 def logout(request):
