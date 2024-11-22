@@ -212,6 +212,7 @@ def login(request):
     Returns:
         HttpResponse: Redirects to home page on success, or renders login form on failure.
     """
+
     intializeDB()
     if request.session.has_key('username'):
         return redirect(index, {"username": request.session['username']})
@@ -219,7 +220,7 @@ def login(request):
         if request.method == "POST":
             form = LoginForm(request.POST)
             if form.is_valid():
-                username = form.cleaned_data["username"]           
+                username = form.cleaned_data["username"]
                 user = userDB.find_one({"username": username})
                 if user and check_password(form.cleaned_data["password"], user["password"]):
                     request.session['userid'] = str(user['_id'])
@@ -230,7 +231,9 @@ def login(request):
                     request.session['email'] = user["email"]
                     request.session["phone"] = user["phone"]
                     return redirect(index, request.session['username'])
-
+                else:
+                    form.add_error('password', "Invalid username or password")
+            return render(request, 'user/login.html', {"form": form})
         form = LoginForm()
         return render(request, 'user/login.html', {"form": form})
 

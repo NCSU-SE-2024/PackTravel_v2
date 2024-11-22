@@ -1,6 +1,5 @@
-
-
-<!doctype html> {% load static %}
+<!doctype html>
+{% load static %}
 {% load socialaccount %}
 <html lang="en">
   <head>
@@ -21,22 +20,32 @@
             <div class="form-group">
                 <label for="id_username">Username</label>
                 {{form.username}}
+                {% if form.username.errors %}
+                    <div class="alert alert-danger">
+                        {{ form.username.errors }}
+                    </div>
+                {% endif %}
             </div>
             <br>
             <div class="form-group">
                 <label for="id_password">Password</label>
                 {{form.password}}
+                {% if form.password.errors %}
+                    <div class="alert alert-danger">
+                        {{ form.password.errors }}
+                    </div>
+                {% endif %}
             </div>
             <br>
-            <button type="submit"  style="color: white; background-color: #D22B2B; border-color: #D22B2B;" class="btn btn-dark" >Login</button>
+            <button type="submit" style="color: white; background-color: #D22B2B; border-color: #D22B2B;" class="btn btn-dark">Login</button>
             <br>
             OR
             <br>
             <div class="form-group">
-              <i class="fab fa-google"></i>
-              <a role="button" class="btn btn-primary" href="{% provider_login_url 'google' %}">Sign In with Google</a>
+                <i class="fab fa-google"></i>
+                <a role="button" class="btn btn-primary" href="{% provider_login_url 'google' %}">Sign In with Google</a>
             </div>
-          </form>
-</div>
+        </form>
+    </div>
   </body>
 </html>
