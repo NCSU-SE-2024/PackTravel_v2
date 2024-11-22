@@ -10,7 +10,7 @@ NEW BADGES
 [![Lint Python](https://github.com/KoruptTinker/PackTravel/actions/workflows/pylint.yml/badge.svg)](https://github.com/KoruptTinker/PackTravel/actions/workflows/pylint.yml)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/blob/main/LICENSE) 
-[![contributors](https://img.shields.io/github/contributors/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/graphs/contributors)
+<a href="https://github.com/NCSU-SE-2024/PackTravel_v2/graphs/contributors" alt="Contributors"><img src = "https://img.shields.io/github/contributors/NCSU-SE-2024/PackTravel_v2"/></a>
 [![Issues](https://img.shields.io/github/issues/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/issues)
 <a href="https://github.com/NCSU-SE-2024/PackTravel_v2/blob/main/LICENSE" alt="License"><img src="https://img.shields.io/github/license/NCSU-SE-2024/PackTravel_v2" /></a>
 <a href="https://github.com/NCSU-SE-2024/PackTravel_v2/issues" alt="Open Issues"><img src="https://img.shields.io/github/issues-raw/NCSU-SE-2024/PackTravel_v2" /></a>
