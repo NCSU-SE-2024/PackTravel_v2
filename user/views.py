@@ -139,7 +139,7 @@ def register(request):
             request.session['email'] = userObj["email"]
             request.session['phone'] = userObj["phone"]
             request.session['userid'] = str(savedUser.inserted_id)
-            return redirect(index, username=request.session["username"])
+            return redirect('index')
         else:
             return render(request, 'user/register.html', {"form": form})
     else:
@@ -215,7 +215,7 @@ def login(request):
 
     intializeDB()
     if request.session.has_key('username'):
-        return redirect(index, {"username": request.session['username']})
+        return redirect('index')
     else:
         if request.method == "POST":
             form = LoginForm(request.POST)
@@ -230,7 +230,7 @@ def login(request):
                     request.session['lname'] = user["lname"]
                     request.session['email'] = user["email"]
                     request.session["phone"] = user["phone"]
-                    return redirect(index, request.session['username'])
+                    return redirect('index')
                 else:
                     form.add_error('password', "Invalid username or password")
             return render(request, 'user/login.html', {"form": form})
