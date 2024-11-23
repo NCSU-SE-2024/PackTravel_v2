@@ -125,8 +125,8 @@ def display_ride(request, ride_id):
     ride = ridesDB.find_one({'_id': ride_id})
     # print(f"Ride = {ride}")
     routes = get_routes(ride)
-    print(f"Route = {routes}")
     selected = routeSelect(request.session.get('username', None), routes)
+    
     # print(f"Routes = {selected}")
     context = {
             "username": request.session.get('username', None),
@@ -136,7 +136,7 @@ def display_ride(request, ride_id):
         }
     return render(request, 'publish/route.html', context)
 
-def send_route_email(username, ride):
+def send_route_email(request, username, ride):
     """
     Sends an email notification to the user confirming their route selection for a ride.
 
@@ -151,16 +151,15 @@ def send_route_email(username, ride):
         None
     """
     try:
-        # Prepare the email subject and message
-        print(f'\n\n{EMAIL_HOST_USER}{EMAIL_HOST_PASSWORD}\n\nride details : {ride}\n\n')
-        subject = f"Route Selected for Ride: {ride.get('name')}"
-        message = f"Hello {username},\n\nYou have successfully joined the route for the ride '{ride.get('name')}' to {ride.get('destination')}.\n\nDetails:\nStart Point: {ride.get('start_point')}\nStart Time: {ride.get('start_time')}\nDuration: {ride.get('duration')} minutes.\n\nThanks for using our service!"
+        subject = f"Route Selected for today's Ride"
+        message = f"Hello {username},\n\nYou have successfully joined the route for the ride to {ride.get('destination')}.\n\nThanks for using our service!\n\nbest wishes,\npacktravel team"
 
-        # Set the recipient (could be the user's email or a general notification address)
-        recipient_email = f"sohamgundewar@gmail.com"  # Replace this with actual logic to fetch the user's email
+        recipient_email = request.session.get('email', None) 
+        
+        if recipient_email is None:
+            raise ValueError(f'No email id attached to the user account {request.session.get("username", "")}')
 
-        # Send the email
-        send_mail(subject, message, EMAIL_HOST_USER, [recipient_email])
+        send_mail(subject, message, EMAIL_HOST_USER, [recipient_email], auth_password = EMAIL_HOST_PASSWORD)
     except Exception as e:
         print(f'got error: {traceback.format_exc()}')
         raise e
@@ -178,33 +177,27 @@ def select_route(request):
     Returns:
         HttpResponse: A redirect to the ride details page, or a render of the 'publish' page if the request is not POST.
     """
-    # Initialize database
+
     intializeDB()
 
     if request.method == 'POST':
         try:
-            # Retrieve data from the POST request
             route_id = request.POST.get("hiddenInput")
             username = request.POST.get('hiddenUser')
             ride_data = request.POST.get('hiddenRide')
             
-            # Parse the ride data
             if ride_data:
                 ride = json.loads(ride_data.replace("'", "\""))
                 ride_id = ride.get('_id')
 
-                # Attach user to the selected route
                 if username and route_id:
                     attach_user_to_route(username, route_id)
 
-                    # Send email notification
-                    print(f'\n\n sending email confirmation to user in progerss\n\n')
-                    send_route_email(username, ride)
+                    send_route_email(request, username, ride)
                     print(f'\n\n email confirmation sent sucessfully!!\n\n')
                     # Redirect back to display the ride
                     return redirect(display_ride, ride_id=ride_id)
 
-            # Handle missing or invalid ride data
             return JsonResponse({'error': 'Invalid ride data'}, status=400)
 
         except Exception as e:
