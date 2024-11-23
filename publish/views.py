@@ -10,9 +10,14 @@ from django.contrib.auth.forms import UserCreationForm
 from services import MapsService
 from config import Secrets, URLConfig
 from utilities import DateUtils
+from django.http import JsonResponse
+from django.core.mail import send_mail
 
+from django.conf import settings
+import os
 from publish.forms import RideForm
 from utils import get_client
+import traceback
 # from django.http import HttpResponse
 
 # Create your views here.
@@ -22,6 +27,9 @@ userDB = None
 ridesDB  = None
 routesDB  = None
 mapsService = None
+
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 secrets = Secrets()
 urlConfig = URLConfig()
@@ -117,8 +125,8 @@ def display_ride(request, ride_id):
     ride = ridesDB.find_one({'_id': ride_id})
     # print(f"Ride = {ride}")
     routes = get_routes(ride)
-    print(f"Route = {routes}")
     selected = routeSelect(request.session.get('username', None), routes)
+    
     # print(f"Routes = {selected}")
     context = {
             "username": request.session.get('username', None),
@@ -128,19 +136,78 @@ def display_ride(request, ride_id):
         }
     return render(request, 'publish/route.html', context)
 
+def send_route_email(request, username, ride):
+    """
+    Sends an email notification to the user confirming their route selection for a ride.
+
+    This function constructs an email with details about the ride and the selected route,
+    then sends the email to the user using Django's email system.
+
+    Args:
+        username (str): The username of the user who selected the route.
+        ride (dict): The ride object containing details of the ride.
+    
+    Returns:
+        None
+    """
+    try:
+        subject = f"Route Selected for today's Ride"
+        message = f"Hello {username},\n\nYou have successfully joined the route for the ride to {ride.get('destination')}.\n\nThanks for using our service!\n\nbest wishes,\npacktravel team"
+
+        recipient_email = request.session.get('email', None) 
+        
+        if recipient_email is None:
+            raise ValueError(f'No email id attached to the user account {request.session.get("username", "")}')
+
+        send_mail(subject, message, EMAIL_HOST_USER, [recipient_email], auth_password = EMAIL_HOST_PASSWORD)
+    except Exception as e:
+        print(f'got error: {traceback.format_exc()}')
+        raise e
+    
 def select_route(request):
+    """
+    Handles the route selection by a user for a specific ride.
+
+    This function processes the POST request where the user selects a route for a ride.
+    It attaches the user to the selected route and sends a confirmation email to the user.
+
+    Args:
+        request (HttpRequest): The HTTP request object containing the form data.
+
+    Returns:
+        HttpResponse: A redirect to the ride details page, or a render of the 'publish' page if the request is not POST.
+    """
+
     intializeDB()
+
     if request.method == 'POST':
-        route_id = request.POST.get("hiddenInput")
-        username = request.POST.get('hiddenUser')
-        ride = request.POST.get('hiddenRide')
-        print("route from form: ",route_id)
-        ride = ride.replace("\'", "\"")
-        ride = json.loads(ride)
-        ride_id = ride['_id']
-        attach_user_to_route(username, route_id)
-        return redirect(display_ride, ride_id=ride['_id'] )
+        try:
+            route_id = request.POST.get("hiddenInput")
+            username = request.POST.get('hiddenUser')
+            ride_data = request.POST.get('hiddenRide')
+            
+            if ride_data:
+                ride = json.loads(ride_data.replace("'", "\""))
+                ride_id = ride.get('_id')
+
+                if username and route_id:
+                    attach_user_to_route(username, route_id)
+
+                    send_route_email(request, username, ride)
+                    print(f'\n\n email confirmation sent sucessfully!!\n\n')
+                    # Redirect back to display the ride
+                    return redirect(display_ride, ride_id=ride_id)
+
+            return JsonResponse({'error': 'Invalid ride data'}, status=400)
+
+        except Exception as e:
+            # Log the error (optional)
+            print(f"Error in select_route: {e}")
+            return JsonResponse({'error': 'An error occurred'}, status=500)
+
+    # Render fallback page if not a POST request
     return render(request, 'publish/publish.html', {"username": None, "gmap_api_key": secrets.GoogleMapsAPIKey})
+
 
 def routeSelect(username, routes):
     intializeDB()
@@ -176,6 +243,7 @@ def get_routes(ride):
             docs.append(doc)   
     return docs
 
+    
 def create_route(request):
     """
     Handles the selection of a route for a specific ride and updates the database accordingly.

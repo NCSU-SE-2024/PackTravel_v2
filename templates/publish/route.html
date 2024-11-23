@@ -1,145 +1,151 @@
-<!DOCTYPE html>{% load static %}
+<!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
-<head><meta charset="utf-8">
+<head>
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>New PackTravel</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 </head>
+
 <style>
-    button:hover {
-    border: none;
-    /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
-    /* background: #D3D3D3; */
-}
-
+	button:hover {
+		border: none;
+	}
 </style>
+
 <script>
-  window.onload = function(e){ 
-    document.getElementById("{{ selectedRoute }}").checked = true;
-}
+	window.onload = function(e) {
+		document.getElementById("{{ selectedRoute }}").checked = true;
+	}
 
-function selectRoute(id) {
-  alert("You've joined a new route for this ride!")
-  document.getElementById(id).submit();
-}
+	function confirmAndSelectRoute(formId) {
+		if (confirm("Are you sure you want to join this route?")) {
+			alert("You've joined a new route for this ride!");
+			document.getElementById(formId).submit();
+		}
+	}
 </script>
+
 <body style="background-color: #3A3B3C;">
-
-    {% include 'nav.html' %}
-    <div class="card mx-auto shadow-2-strong bg-white rounded" style="width: 60%; margin: 50px; padding: 50px;">
-        <h3>{{ride.name}} </h3>
-        <hr>
-        <h5>Ride Information: </h5>
-        <table class="table table-hover">
-            <tbody>
-              <tr>
-                <td>Destination</td>
-                <td>{{ride.destination}}</td>
-              </tr>
-            </tbody>
-          </table>
-          <br>
-        <h5>Available Routes:</h5>
-          {% if routes %}
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">Select</th>
-                <th scope="col">Type</th>
-                <th scope="col">Start Point</th>
-                <th scope="col">Start Time</th>
-                <th scope="col">Duration</th>
-                <th scope="col">Number of users</th>
-                <th scope="col">Details</th>
-                <th scope="col">Distance (km)</th>
-                <th scope="col">Rider</th>
-              </tr>
-            </thead>
-            <tbody>
-          {% for route in routes %}
-            <tr>
-              <th scope="row"><div class="input-group">
-                <form method="POST" action="/select_route/" id="myForm{{route.id}}">
-                  {% csrf_token %}
-                  <input value="{{ route.id }}" type="hidden" name="hiddenInput">
-                  <input type="hidden" value="{{ ride }}" name="hiddenRide">
-                  <input type="hidden" value="{{ request.session.username }}" name="hiddenUser">
-                </form>
-                <div class="input-group-prepend">
-                  <div class="input-group-text">
-                    {% if selectedRoute == route.id %}
-                    <input type="radio" onclick='selectRoute("myForm{{route.id}}")' name="routeselect" aria-label="Radio button for following text input" value="{{ route.id }}" id="{{ route.id }}" checked aria-checked="true">
-                    {% else %}
-                  <input type="radio" onclick='selectRoute("myForm{{route.id}}")' name="routeselect" aria-label="Radio button for following text input" value="{{ route.id }}" id="{{ route.id }}" >
-                  {% endif %} </div>
-                </div>
+	{% include 'nav.html' %}
+	<div class="card mx-auto shadow-2-strong bg-white rounded" style="width: 60%; margin: 50px; padding: 50px;">
+		<h3>{{ ride.name }}</h3>
+		<hr>
+		<h5>Ride Information:</h5>
+		<table class="table table-hover">
+			<tbody>
+				<tr>
+					<td>Destination</td>
+					<td>{{ ride.destination }}</td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<h5>Available Routes:</h5>
+		{% if routes %}
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">Select</th>
+					<th scope="col">Type</th>
+					<th scope="col">Start Point</th>
+					<th scope="col">Start Time</th>
+					<th scope="col">Duration</th>
+					<th scope="col">Number of users</th>
+					<th scope="col">Details</th>
+					<th scope="col">Distance (km)</th>
+					<th scope="col">Rider</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for route in routes %}
+				<tr>
+					<th scope="row">
+						<div class="input-group">
+							<form method="POST" action="/select_route/" id="myForm{{ route.id }}">
+								{% csrf_token %}
+								<input value="{{ route.id }}" type="hidden" name="hiddenInput">
+								<input type="hidden" value="{{ ride }}" name="hiddenRide">
+								<input type="hidden" value="{{ request.session.username }}" name="hiddenUser">
+								<input type="hidden" name="email" value="{{ user.email }}">
+							</form>
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+									{% if selectedRoute == route.id %}
+									<input type="radio" onclick='confirmAndSelectRoute("myForm{{ route.id }}")' name="routeselect" aria-label="Radio button for following text input" value="{{ route.id }}" id="{{ route.id }}" checked aria-checked="true">
+									{% else %}
+									<input type="radio" onclick='confirmAndSelectRoute("myForm{{ route.id }}")' name="routeselect" aria-label="Radio button for following text input" value="{{ route.id }}" id="{{ route.id }}">
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</th>
+					<td>
+						{% if route.type == "Bus" %}
+						<img height="15px" width="15px" src="{% static 'bus.svg' %}">
+						{% elif route.type == "Cab" %}
+						<img height="15px" width="15px" src="{% static 'car.svg' %}">
+						{% endif %}
+						{{ route.type }}
+					</td>
+					<td>{{ route.s_point }}</td>
+					<td>{{ route.hour }}:{{ route.minute }} {{ route.ampm }}</td>
+					<td>{{ route.duration }} minutes</td>
+					<td>{{ route.users|length }}</td>
+					<td>{{ route.details }}</td>
+					<td>{{ route.distance }}</td>
+					<td><a href="/u/{{ route.creator.id }}">{{ route.creator.username }}</a></td>
+				</tr>
+        <div class="modal" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+            
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">View Your Route</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
-            </th>
-              <td>
-                {% if route.type == "Bus" %}
-                <img height="15px" width="15px" src="{% static 'bus.svg'%}">
-                {% elif route.type == "Cab" %}
-                <img  height="15px" width="15px" src="{% static 'car.svg'%}">
-                {% endif %}
-                {{ route.type }}
-              </td>
-              <td>{{ route.s_point }}</td>
-              <td>{{ route.hour }}:{{ route.minute }} {{ route.ampm }}</td>
-              <td>{{ route.duration }} minutes</td>
-              <td>{{ route.users|length }}</td>
-              <td>{{ route.details }}</td>
-              <td>{{ route.distance }}</td>
-              <td> <a href="/u/{{ route.creator.id }}" > {{ route.creator.username }} </a></td>
-            </tr>
-            <div class="modal" id="myModal">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                
-                  <!-- Modal Header -->
-                  <div class="modal-header">
-                    <h4 class="modal-title">View Your Route</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  </div>
-                  
-                  <!-- Modal body -->
-                  <div class="modal-body" action="http://maps.google.com/maps">
-                    <form action="http://maps.google.com/maps" method="get" target="_blank">
-                      <input type="hidden" name="saddr"  value="{{route.s_point}}" />
-                      <input type="hidden" name="daddr" value= "{{ride.destination}}"/>
-                      <input type="submit" class="btn text-center" style="background-color: #D22B2B; border-color: #D22B2B; color: white;" value="Get directions" />
-                   </form>
-                  </div>
-
-                </div>
+              
+              <!-- Modal body -->
+              <div class="modal-body" action="http://maps.google.com/maps">
+                <form action="http://maps.google.com/maps" method="get" target="_blank">
+                  <input type="hidden" name="saddr"  value="{{route.s_point}}" />
+                  <input type="hidden" name="daddr" value= "{{ride.destination}}"/>
+                  <input type="submit" class="btn text-center" style="background-color: #D22B2B; border-color: #D22B2B; color: white;" value="Get directions" />
+               </form>
               </div>
+
             </div>
-          
-          {% endfor %}
-            </tbody>
-            </table>
-          {% endif %}
+          </div>
+        </div>
+        
+				{% endfor %}
+			</tbody>
+		</table>
+		{% endif %}
+		<button class="btn" onclick="window.location.href='/publish/'">
+			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" width="50px" height="50px">
+				<g id="surface369321732">
+					<path style="stroke:none;fill-rule:nonzero;fill:#D22B2B;fill-opacity:1;" d="M 25 2 C 12.316406 2 2 12.316406 2 25 C 2 37.683594 12.316406 48 25 48 C 37.683594 48 48 37.683594 48 25 C 48 12.316406 37.683594 2 25 2 Z M 37 26 L 26 26 L 26 37 L 24 37 L 24 26 L 13 26 L 13 24 L 24 24 L 24 13 L 26 13 L 26 24 L 37 24 Z M 37 26 "/>
+				</g>
+			</svg>&nbsp;
+			<h5>Add a Route</h5>
+		</button>
+	</div>
+</body>
 
-   <button class="btn" onclick="window.location.href='/publish/'">
-     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" width="50px" height="50px">
-      <g id="surface369321732">
-      <path style=" stroke:none;fill-rule:nonzero;fill:#D22B2B;fill-opacity:1;" d="M 25 2 C 12.316406 2 2 12.316406 2 25 C 2 37.683594 12.316406 48 25 48 C 37.683594 48 48 37.683594 48 25 C 48 12.316406 37.683594 2 25 2 Z M 37 26 L 26 26 L 26 37 L 24 37 L 24 26 L 13 26 L 13 24 L 24 24 L 24 13 L 26 13 L 26 24 L 37 24 Z M 37 26 "/>
-      </g>
-     </svg>&nbsp;
-     <h5>
-       Add a Route
-     </h5>
-   </button>
-    </div>
+</html>
+
 <!-- Modal -->
 <!--<div class="modal fade" id="routeModal" tabindex="-1" aria-labelledby="modallabel" aria-hidden="true">-->
 <!--    <div class="modal-dialog">-->
