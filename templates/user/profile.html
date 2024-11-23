@@ -14,7 +14,7 @@
         <div class="col-md-8">
             <div class="card text-white bg-secondary mb-4">
                 <div class="card-body text-center">
-                    <img src="{{ user.pfp }}" alt="Profile Image" class="rounded-circle mb-3" width="150" height="150">
+                    <img src="{{ user.pfp }}" alt="Profile Image" onerror="this.style.display='none'" class="rounded-circle mb-3" width="150" height="150">
                     <h2 class="card-title">{{ user.fname}} {{ user.lname }} </h2>
                     <p class="card-text">{{ user.email }}</p>
                     {% if username == user.username %}
