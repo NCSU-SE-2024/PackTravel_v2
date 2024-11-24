@@ -7,6 +7,7 @@ from bson.objectid import ObjectId
 from django.forms.utils import ErrorList
 from utilities import DateUtils
 from django.contrib.auth.hashers import make_password, check_password
+from django.contrib import messages
 
 client = None
 db = None
@@ -250,7 +251,8 @@ def my_rides(request):
     """
     intializeDB()
     if not request.session.has_key('username'):
-        request.session['alert'] = "Please login to create a ride."
+        request.session['alert'] = "Please login to view your rides."
+        messages.info(request, "Please login to view your rides!")
         return redirect('index')
     all_routes = list(routesDB.find())
     user_list = list(userDB.find())
