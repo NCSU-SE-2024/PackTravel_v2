@@ -57,18 +57,20 @@
         h1 {
           margin-top:20px;
         }
+        .apply-font { 
+          font-family: Montserrat; 
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+        svg {
+          height: 40px;
+          width: 40px;
+          fill: #D22B2B;
+        }
       </style>
    </head>
-   <style>
-    svg {
-      height: 40px;
-      width: 40px;
-      fill: #D22B2B;
-    }
-    .apply-font { 
-	    font-family: Montserrat; 
-    }
-   </style>
 <body>
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/index/">
@@ -91,6 +93,9 @@
         <li class="nav-item">
           <a class="nav-link apply-font" href="/publish/">Create a Ride</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link apply-font" href="/forum/rides-with-topics">Forum</a>
+        </li>
         {% if  not request.session.username  %}
         <li class="nav-item">
           <a class="nav-link apply-font" href="/login/">Login</a>
@@ -101,22 +106,19 @@
         {% endif %}
         {% if  request.session.username  %}
 						<li class="nav-item">
-
 							<a class="nav-link apply-font" href="/logout/">
 								<span class="nav-text">Logout</span>
 							</a>
 						</li>
-                        <li class="nav-item">
-
+            <li class="nav-item">
 							<a class="nav-link apply-font" href="/u/{{ request.session.userid }}">
-								<span class="nav-text">Hi, {{ username }}</span>
+								<span class="nav-text">Hi, {{ request.session.username }}</span>
 							</a>
 						</li>
-						{% endif %}
+				{% endif %}
       </ul>
     </div>
   </nav>
 <br>
-  
-   </body>
+</body>
 </html>

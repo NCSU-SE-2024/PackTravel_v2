@@ -18,6 +18,7 @@ from django.urls import path, include
 from user import views as userView
 from search import views as searchViews
 from publish import views as publishViews
+from forum import views as forumViews
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -39,5 +40,10 @@ urlpatterns = [
     path('myrides/', userView.my_rides, name = 'search'),
     path('delete_ride/<ride_id>', userView.delete_ride, name = 'delete_ride'),
     path('u/<userid>', userView.user_profile, name = 'user_profile'),
-    path('edit-profile/', userView.edit_user, name = 'user_user')
+    path('edit-profile/', userView.edit_user, name = 'user_user'),
+    path('forum/create_topic/', forumViews.create_topic, name='create_topic'),
+    path('forum/rides-with-topics/', forumViews.rides_with_topics, name='rides_with_topics'),
+    path('forum/topics/<ride_id>/', forumViews.forum_topics, name='forum_topics'),
+    path('forum/topic/<topic_id>/', forumViews.forum_topic_details, name='forum_topic_details'),
+    path('forum/add_comment/<topic_id>/', forumViews.add_comment, name='add_comment'),
 ]

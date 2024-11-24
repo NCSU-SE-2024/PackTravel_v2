@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PackTravel - Topic Details</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <style>
+        body {
+            background-color: #3A3B3C;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .btn-custom {
+            background-color: #D22B2B;
+            color: #fff;
+            border: none;
+        }
+        .btn-custom:hover {
+            background-color: #B22222;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    {% include 'nav.html' %}
+    
+    <div class="container mt-5">
+        <div class="card p-4">
+            <h1 class="mb-3">{{ topic.title }}</h1>
+            <p class="lead">{{ topic.content }}</p>
+            <p class="text-muted">Created by: {{ topic.creator }} on {{ topic.created_at }}</p>
+            <hr>
+            <h2 class="mt-4 mb-3">Comments</h2>
+            <ul class="list-unstyled">
+                {% for comment in comments %}
+                    <li class="mb-3">
+                        <div class="card p-3">
+                            <p>{{ comment.content }}</p>
+                            <small class="text-muted">By {{ comment.creator }} on {{ comment.created_at }}</small>
+                        </div>
+                    </li>
+                {% empty %}
+                    <li>No comments yet.</li>
+                {% endfor %}
+            </ul>
+            <h3 class="mt-4 mb-3">Add a Comment</h3>
+            <form method="post" action="{% url 'add_comment' topic.id %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <textarea name="content" class="form-control" rows="3" required placeholder="Write your comment here..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-custom">Post Comment</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>
