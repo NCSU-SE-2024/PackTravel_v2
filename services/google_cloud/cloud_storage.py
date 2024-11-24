@@ -31,7 +31,7 @@ class CloudStorage:
             str: The public URL of the uploaded file.
         """
         client = storage.Client(credentials=self.credentials.credentials)
-        bucket = client.bucket('ptravel-pfp')
+        bucket = client.bucket('ptravelv2-pfp')
         blob = bucket.blob(destination_blob_name)
         blob.upload_from_file(file)
         return blob.public_url  

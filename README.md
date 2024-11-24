@@ -4,24 +4,26 @@
 # `PackTravel`
 
 NEW BADGES
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14020395.svg)](https://doi.org/10.5281/zenodo.14020395)
+
+[![DOI](https://zenodo.org/badge/887482019.svg)](https://doi.org/10.5281/zenodo.14211208)
 [![codecov](https://codecov.io/gh/KoruptTinker/PackTravel/graph/badge.svg?token=VbruFqYa0G)](https://codecov.io/gh/KoruptTinker/PackTravel)
 [![Python Style Checker](https://github.com/KoruptTinker/PackTravel/actions/workflows/python_style_checker.yml/badge.svg)](https://github.com/KoruptTinker/PackTravel/actions/workflows/python_style_checker.yml)
 [![Lint Python](https://github.com/KoruptTinker/PackTravel/actions/workflows/pylint.yml/badge.svg)](https://github.com/KoruptTinker/PackTravel/actions/workflows/pylint.yml)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/blob/main/LICENSE) 
+
 <a href="https://github.com/NCSU-SE-2024/PackTravel_v2/graphs/contributors" alt="Contributors"><img src = "https://img.shields.io/github/contributors/NCSU-SE-2024/PackTravel_v2"/></a>
-[![Issues](https://img.shields.io/github/issues/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/issues)
 <a href="https://github.com/NCSU-SE-2024/PackTravel_v2/blob/main/LICENSE" alt="License"><img src="https://img.shields.io/github/license/NCSU-SE-2024/PackTravel_v2" /></a>
 <a href="https://github.com/NCSU-SE-2024/PackTravel_v2/issues" alt="Open Issues"><img src="https://img.shields.io/github/issues-raw/NCSU-SE-2024/PackTravel_v2" /></a>
 ![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/NCSU-SE-2024/PackTravel_v2?style=plastic)
 <a href="https://github.com/NCSU-SE-2024/PackTravel_v2/actions" alt="Build Status"><img src="https://img.shields.io/github/workflow/status/NCSU-SE-2024/PackTravel_v2/Build%20main" /></a>
-[![Pull Requests](https://img.shields.io/github/issues-pr/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/pulls)
-[![Commit Activity](https://img.shields.io/github/commit-activity/w/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/graphs/commit-activity)
+[![Pull Requests](https://img.shields.io/github/issues-pr/NCSU-SE-2024/PackTravel_v2?style=for-the-badge)](https://github.com/NCSU-SE-2024/PackTravel_v2/pulls)
+[![Commit Activity](https://img.shields.io/github/commit-activity/w/NCSU-SE-2024/PackTravel_v2?style=for-the-badge)](https://github.com/NCSU-SE-2024/PackTravel_v2/graphs/commit-activity)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/NCSU-SE-2024/PackTravel_v2)
 <a href="https://github.com/NCSU-SE-2024/PackTravel_v2" alt="Repo Size"><img src="https://img.shields.io/github/repo-size/NCSU-SE-2024/PackTravel_v2"/></a>
 
+
 OLD BADGES
+
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14020395.svg)](https://doi.org/10.5281/zenodo.14020395)
 [![codecov](https://codecov.io/gh/KoruptTinker/PackTravel/graph/badge.svg?token=VbruFqYa0G)](https://codecov.io/gh/KoruptTinker/PackTravel)
 [![Python Style Checker](https://github.com/KoruptTinker/PackTravel/actions/workflows/python_style_checker.yml/badge.svg)](https://github.com/KoruptTinker/PackTravel/actions/workflows/python_style_checker.yml)
