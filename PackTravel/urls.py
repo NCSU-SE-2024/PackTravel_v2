@@ -39,5 +39,6 @@ urlpatterns = [
     path('myrides/', userView.my_rides, name = 'search'),
     path('delete_ride/<ride_id>', userView.delete_ride, name = 'delete_ride'),
     path('u/<userid>', userView.user_profile, name = 'user_profile'),
-    path('edit-profile/', userView.edit_user, name = 'user_user')
+    path('edit-profile/', userView.edit_user, name = 'user_user'),
+    path('packs-favorite/', publishViews.packs_favorite, name='packs_favorite'),
 ]

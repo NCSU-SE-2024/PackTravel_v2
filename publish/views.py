@@ -13,11 +13,14 @@ from utilities import DateUtils
 from django.http import JsonResponse
 from django.core.mail import send_mail
 
+from .models import Ride
+
 from django.conf import settings
 import os
 from publish.forms import RideForm
 from utils import get_client
 import traceback
+import urllib.parse
 # from django.http import HttpResponse
 
 # Create your views here.
@@ -343,3 +346,45 @@ def attach_user_to_route(username, route_id):
 
     routesDB.update_one({"_id": route_id}, {"$set": {"users": users}})
     return user['_id']
+
+def packs_favorite(request):
+    """
+    View function to display the 'Pack's Favorite' page.
+    """
+    # Replace this list with data fetched from your database
+    try:
+        intializeDB()
+        
+        rides = routesDB.find({"users": {"$ne": []}})  
+        reco_obj = {}
+        obj = {}
+        for ride in rides:
+        # Print ride and the count of users
+            print(f'\n\n ride : users: {len(ride["users"])} {ride}\n\n')
+            
+            # Add ride _id, user count, and destination to reco_obj
+            destination = ride["destination"]
+            destination_slug = urllib.parse.quote(destination)  # URL-encode the destination
+            user_count = len(ride["users"])
+
+            # Check if this destination already exists in reco_obj
+            if destination_slug in reco_obj:
+                # If the destination exists, add to the user count
+                reco_obj[destination_slug]["user_count"] += user_count
+            else:
+                # If the destination doesn't exist, add a new entry
+                reco_obj[destination_slug] = {
+                    "user_count": user_count,
+                    "destination": destination,
+                    "destination_slug": destination_slug
+                }
+
+        # Sort reco_obj by user count in descending order
+        sorted_reco = sorted(reco_obj.items(), key=lambda x: x[1]["user_count"], reverse=True)
+
+        # show only top 20 picks at most
+        top_picks = sorted_reco[:20]
+        
+        return render(request, 'publish/packs_favorite.html', {"top_picks": top_picks})
+    except Exception as e:
+        print(f'error in fav : {traceback.format_exc()}')
