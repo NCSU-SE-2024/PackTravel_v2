@@ -16,8 +16,8 @@ NEW BADGES
 <a href="https://github.com/NCSU-SE-2024/PackTravel_v2/issues" alt="Open Issues"><img src="https://img.shields.io/github/issues-raw/NCSU-SE-2024/PackTravel_v2" /></a>
 ![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/NCSU-SE-2024/PackTravel_v2?style=plastic)
 <a href="https://github.com/NCSU-SE-2024/PackTravel_v2/actions" alt="Build Status"><img src="https://img.shields.io/github/workflow/status/NCSU-SE-2024/PackTravel_v2/Build%20main" /></a>
-[![Pull Requests](https://img.shields.io/github/issues-pr/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/pulls)
-[![Commit Activity](https://img.shields.io/github/commit-activity/w/KoruptTinker/PackTravel?style=for-the-badge)](https://github.com/KoruptTinker/PackTravel/graphs/commit-activity)
+[![Pull Requests](https://img.shields.io/github/issues-pr/NCSU-SE-2024/PackTravel_v2?style=for-the-badge)](https://github.com/NCSU-SE-2024/PackTravel_v2/pulls)
+[![Commit Activity](https://img.shields.io/github/commit-activity/w/NCSU-SE-2024/PackTravel_v2?style=for-the-badge)](https://github.com/NCSU-SE-2024/PackTravel_v2/graphs/commit-activity)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/NCSU-SE-2024/PackTravel_v2)
 <a href="https://github.com/NCSU-SE-2024/PackTravel_v2" alt="Repo Size"><img src="https://img.shields.io/github/repo-size/NCSU-SE-2024/PackTravel_v2"/></a>
 
