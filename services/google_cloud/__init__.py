@@ -9,7 +9,7 @@ class GoogleCloud:
     credentials: Credentials = None
     StorageService: CloudStorage = None
     
-    def __init__(self, credentials_path: str = "credentials.json", bucket_path: str = 'ptravel-pfp'):
+    def __init__(self, credentials_path: str = "credentials.json", bucket_path: str = 'ptravelv2-pfp'):
         """
         Initializes the GoogleCloud class with credentials and storage service.
 
