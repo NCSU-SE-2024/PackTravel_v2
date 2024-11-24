@@ -80,8 +80,13 @@ def create_topic(request):
     """
     intializeDB()
     rides = list(routesDB.find())  # Fetch all rides for selection
+    final_rides = []
+    visitedDest = set()
     for ride in rides:
         ride['id'] = ride.pop('_id')
+        if ride['destination'] not in visitedDest:
+            final_rides.append(ride)
+            visitedDest.add(ride['destination'])
     if request.method == "POST":
         ride_id = request.POST.get("ride_id")
         title = request.POST.get("title")
@@ -101,7 +106,7 @@ def create_topic(request):
         topicsDB.insert_one(topic)
         return redirect("rides_with_topics")
 
-    return render(request, "forum/create_topic.html", {"rides": rides})
+    return render(request, "forum/create_topic.html", {"rides": final_rides})
 
 def add_comment(request, topic_id):
     """
