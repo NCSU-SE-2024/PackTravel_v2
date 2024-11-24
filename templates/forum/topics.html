@@ -1,0 +1,9 @@
+<h1>Discussion Topics for Ride</h1>
+<ul>
+    {% for topic in topics %}
+        <li>
+            <a href="{% url 'forum_topic_details' topic.id %}">{{ topic.title }}</a>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'create_topic' %}">Create New Topic</a>
