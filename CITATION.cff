@@ -1,17 +1,13 @@
-cff-version: 1.2.0
+cff-version: 2.0
 message: "Hello!! If you use this software, please cite it using the metadata from this file"
 title: "PackTravel"
 authors:
-  - family-names: Chavan
-    given-names: Ameya
-  - family-names: Waghela
-    given-names: Amisha
-  - family-names: Das
-    given-names: Aoishi
-  - family-names: Shah
-    given-names: Kunal
-  - family-names: Mohan
-    given-names: Swarnamalya
-version: "1.2"
-date-released: "10/09/2022"
+  - family-names: Sheth
+    given-names: Gaurav
+  - family-names: Dhage
+    given-names: Anish
+  - family-names: Gundewar
+    given-names: Soham
+version: "2.0"
+date-released: "11/24/2024"
 doi: 10.5281/zenodo.7178601
