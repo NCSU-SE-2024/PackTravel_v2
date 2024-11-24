@@ -36,7 +36,7 @@ urlpatterns = [
     path('display_ride/<ride_id>', publishViews.display_ride, name='display_ride'),
     path('accounts/', include('allauth.urls')),
     path('logout/', LogoutView.as_view()),
-    path('myrides/', userView.my_rides, name = 'search'),
+    path('myrides/', userView.my_rides, name = 'myrides'),
     path('delete_ride/<ride_id>', userView.delete_ride, name = 'delete_ride'),
     path('u/<userid>', userView.user_profile, name = 'user_profile'),
     path('edit-profile/', userView.edit_user, name = 'user_user'),
