@@ -47,9 +47,9 @@ class TestUrl_Response(TestCase):
         self.assertEqual(response.status_code, 302)
     
     def test_display_ride_non_logged(self):
-        response = self.client.get(reverse('display_ride', args=["Huntsville, AL, USA"]))
+        response = self.client.get(reverse('display_ride', args=["Raleigh, NC, USA"]))
         self.assertEqual(response.status_code, 200)
     
     def test_display_ride_non_logged_template(self):
-        response = self.client.get(reverse('display_ride', args=["Huntsville, AL, USA"]))
+        response = self.client.get(reverse('display_ride', args=["Raleigh, NC, USA"]))
         self.assertTemplateUsed(response, 'publish/route.html')

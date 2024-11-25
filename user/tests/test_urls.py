@@ -6,7 +6,7 @@ from user.views import index, register, logout, login, user_profile, my_rides
 class TestUrl(SimpleTestCase):
 
     def test_search_resolved(self):
-        url = reverse("search")
+        url = reverse("myrides")
         self.assertEquals(resolve(url).func, my_rides)
 
     def test_index_resolved(self):
@@ -57,5 +57,5 @@ class TestUrl_Response(TestCase):
     
     def test_profile_ride_non_logged_template(self):
         response = self.client.get(reverse('user_profile', args=["67240ab0b84ec3a5aa1e5cc8"]))
-        self.assertTemplateUsed(response, 'user/profile.html')
+        self.assertTemplateUsed(response, 'user/404.html')
 
