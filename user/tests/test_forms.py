@@ -11,6 +11,7 @@ class TestForms(TransactionTestCase):
                             'last_name' : 'Dwyer',
                             'email' : 'jdwyer@ncsu.edu',
                             'password1' : 'Jd!456789',
+                            'password2' : 'Jd!456789',
                             'phone_number' : 9876578901,
                             })
         self.assertTrue(form.is_valid())

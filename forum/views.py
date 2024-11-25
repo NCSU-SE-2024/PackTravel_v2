@@ -116,9 +116,6 @@ def add_comment(request, topic_id):
     if request.method == "POST":
         content = request.POST.get("content")
         user = request.session.get("username")
-        
-        if not (content and user):
-            return render(request, "forum/add_comment.html", {"error": "Content is required!"})
 
         comment = {
             "topic_id": ObjectId(topic_id),
@@ -128,8 +125,7 @@ def add_comment(request, topic_id):
         }
         commentsDB.insert_one(comment)
         return redirect("forum_topic_details", topic_id=topic_id)
-
-    return render(request, "forum/add_comment.html", {"topic_id": topic_id})
+    return redirect("forum_topic_details", topic_id=topic_id)
 
 def forum_topics(request, ride_id):
     """

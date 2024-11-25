@@ -94,14 +94,8 @@
           <a class="nav-link apply-font" href="/publish/">Create a Ride</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link apply-font" href="/forum/rides-with-topics">Forum</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link apply-font" href="/packs-favorite/">Packs Favorite</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link apply-font" href="/myrides/">My Rides</a>
-        <li>
         {% if  not request.session.username  %}
         <li class="nav-item">
           <a class="nav-link apply-font" href="/login/">Login</a>
@@ -111,6 +105,12 @@
         </li>
         {% endif %}
         {% if  request.session.username  %}
+            <li class="nav-item">
+              <a class="nav-link apply-font" href="/forum/rides-with-topics">Forum</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link apply-font" href="/myrides/">My Rides</a>
+            <li>
 						<li class="nav-item">
 							<a class="nav-link apply-font" href="/logout/">
 								<span class="nav-text">Logout</span>
