@@ -1,7 +1,7 @@
 <div align="center">
 
 <img style="width: 120px; height: 120px;" src="./images/wolf2.svg"></img>
-# `PackTravel`
+# `NC State PackTravel`
 
 NEW BADGES
 
