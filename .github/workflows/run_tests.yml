@@ -15,7 +15,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: MongoSecret
+    env:
+      MONGO_CONNECTION_URL: ${{secrets.MONGO_CONNECTION_URL}}
     services:
       mongodb:
         image: mongo:latest
