@@ -4,6 +4,7 @@ import re
 
 userDB = None
 
+
 def intializeDB():
     """
     Initializes the MongoDB client and sets up the `userDB` collection for user data storage.
@@ -20,10 +21,11 @@ def intializeDB():
         None
     """
     global userDB
-    if(userDB == None):
+    if (userDB == None):
         client = get_client()
         db = client.SEProject
         userDB = db.userData
+
 
 def validate_email_domain(value):
     """
@@ -33,7 +35,7 @@ def validate_email_domain(value):
     - Contains only alphanumeric characters in the local part (before the "@" symbol).
     - Belongs to the allowed domain, "ncsu.edu".
     - Contains exactly one "@" symbol, separating the local part and domain.
-    
+
     Args:
         value (str): The email address to validate.
 
@@ -49,8 +51,10 @@ def validate_email_domain(value):
     if not pattern.match(email_parts[0]):
         raise ValidationError(f"Invalid email")
     if domain != allowed_domain:
-        raise ValidationError(f"Email must be from the {allowed_domain} domain.")
-    
+        raise ValidationError(
+            f"Email must be from the {allowed_domain} domain.")
+
+
 def validate_unique_unity_id(value):
     """
     Ensures the provided Unity ID is unique within the `userDB` collection.
@@ -67,29 +71,33 @@ def validate_unique_unity_id(value):
     """
     intializeDB()
     unity_user = userDB.find_one({"unityid": value})
-    if(unity_user):
+    if (unity_user):
         raise ValidationError("Unity ID must be unique")
+
 
 def validate_unique_username(value):
     intializeDB()
     unity_user = userDB.find_one({"username": value})
-    if(unity_user):
+    if (unity_user):
         raise ValidationError("Username must be unique")
+
 
 def validate_password(value):
     if len(value) < 8:
         raise ValidationError(f"Password is too short")
-    
+
     elif len(value) > 16:
         raise ValidationError(f"Password is too long")
-    
+
     # Check for at least one lowercase letter
     if not re.search(r"[a-z]", value):
-        raise ValidationError("Password must contain at least one lowercase letter.")
+        raise ValidationError(
+            "Password must contain at least one lowercase letter.")
 
     # Check for at least one uppercase letter
     if not re.search(r"[A-Z]", value):
-        raise ValidationError("Password must contain at least one uppercase letter.")
+        raise ValidationError(
+            "Password must contain at least one uppercase letter.")
 
     # Check for at least one digit
     if not re.search(r"\d", value):
@@ -97,13 +105,16 @@ def validate_password(value):
 
     # Check for at least one special character
     if not re.search(r"[!@#$%^&*(),.?\":{}|<>]", value):
-        raise ValidationError("Password must contain at least one special character.")
+        raise ValidationError(
+            "Password must contain at least one special character.")
 
     # Check for common passwords
     common_passwords = ["password!123456", "12345678", "qwerty", "admin"]
     if value.lower() in common_passwords:
-        raise ValidationError("This password is too common. Please choose a more unique password.")
-    
+        raise ValidationError(
+            "This password is too common. Please choose a more unique password.")
+
     # Check for repeated characters
     if re.search(r"(.)\1{2,}", value):
-        raise ValidationError("Password contains repeated characters. Please avoid easily guessable patterns.")
+        raise ValidationError(
+            "Password contains repeated characters. Please avoid easily guessable patterns.")

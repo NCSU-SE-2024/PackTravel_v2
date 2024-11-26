@@ -1,6 +1,7 @@
 from .credentials import Credentials
 from google.cloud import storage
 
+
 class CloudStorage:
     """
     A class to handle file uploads to a Google Cloud Storage bucket.
@@ -34,4 +35,4 @@ class CloudStorage:
         bucket = client.bucket('ptravelv2-pfp')
         blob = bucket.blob(destination_blob_name)
         blob.upload_from_file(file)
-        return blob.public_url  
+        return blob.public_url

@@ -1,5 +1,6 @@
 from .routes import Routes
 
+
 class MapsService:
     """
     A service class for interacting with routing services.
@@ -8,6 +9,7 @@ class MapsService:
         routes_service (Routes): An instance of the Routes class to handle route requests.
     """
     routes_service: Routes = None
+
     def __init__(self, routes_hostname: str, api_key: str):
         """
         Initializes the MapsService class with the specified routing service hostname and API key.

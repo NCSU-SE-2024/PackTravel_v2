@@ -10,6 +10,7 @@ from django.contrib.auth.hashers import check_password
 # Import your views module
 from user import views
 
+
 class userViewsTestCase(TestCase):
     def setUp(self):
         self.client = Client()
@@ -19,12 +20,16 @@ class userViewsTestCase(TestCase):
     def mock_db_setup(self):
         # Helper method to set up mock database
         self.mock_db.userData.insert_many([
-            {'_id': ObjectId(), 'username': 'testuser1', 'password': 'Password@123', 'fname': 'Test', 'lname': 'User1', 'email': 'test1@ncsu.edu', 'rides': []},
-            {'_id': ObjectId(), 'username': 'testuser2', 'password': 'Password@123', 'fname': 'Test', 'lname': 'User2', 'email': 'test2@ncsu.edu', 'rides': []}
+            {'_id': ObjectId(), 'username': 'testuser1', 'password': 'Password@123',
+             'fname': 'Test', 'lname': 'User1', 'email': 'test1@ncsu.edu', 'rides': []},
+            {'_id': ObjectId(), 'username': 'testuser2', 'password': 'Password@123',
+             'fname': 'Test', 'lname': 'User2', 'email': 'test2@ncsu.edu', 'rides': []}
         ])
         self.mock_db.routes.insert_many([
-            {'_id': ObjectId(), 'creator': ObjectId(), 'destination': 'New York', 'date': '2023-12-01'},
-            {'_id': ObjectId(), 'creator': ObjectId(), 'destination': 'Los Angeles', 'date': '2024-01-01'}
+            {'_id': ObjectId(), 'creator': ObjectId(),
+             'destination': 'New York', 'date': '2023-12-01'},
+            {'_id': ObjectId(), 'creator': ObjectId(),
+             'destination': 'Los Angeles', 'date': '2024-01-01'}
         ])
 
     @patch('user.views.get_client')
@@ -150,7 +155,8 @@ class userViewsTestCase(TestCase):
         mock_get_client.return_value = self.mock_client
 
         invalid_user_id = str(ObjectId())
-        response = self.client.get(reverse('user_profile', args=[invalid_user_id]))
+        response = self.client.get(
+            reverse('user_profile', args=[invalid_user_id]))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'user/404.html')
 
@@ -181,7 +187,8 @@ class userViewsTestCase(TestCase):
         response = self.client.post(reverse('register'), data=post_data)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'user/register.html')
-        self.assertEqual(mock_userDB.count_documents({}), 2)  # No new user added
+        self.assertEqual(mock_userDB.count_documents({}),
+                         2)  # No new user added
 
     @patch('user.views.get_client')
     @patch('user.views.client')
@@ -200,15 +207,18 @@ class userViewsTestCase(TestCase):
 
         # Add some routes for this user
         mock_routesDB.insert_many([
-            {'_id': ObjectId(), 'creator': ObjectId(user_id), 'destination': 'Chicago', 'date': '2023-11-01'},
-            {'_id': ObjectId(), 'creator': ObjectId(user_id), 'destination': 'Miami', 'date': '2024-02-01'}
+            {'_id': ObjectId(), 'creator': ObjectId(user_id),
+             'destination': 'Chicago', 'date': '2023-11-01'},
+            {'_id': ObjectId(), 'creator': ObjectId(user_id),
+             'destination': 'Miami', 'date': '2024-02-01'}
         ])
 
         response = self.client.get(reverse('user_profile', args=[user_id]))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'user/profile.html')
-        self.assertTrue(len(response.context['pastrides']) > 0 or len(response.context['currentrides']) > 0)
-    
+        self.assertTrue(len(response.context['pastrides']) > 0 or len(
+            response.context['currentrides']) > 0)
+
     @patch('user.views.get_client')
     @patch('user.views.client')
     @patch('user.views.db')
@@ -256,7 +266,8 @@ class userViewsTestCase(TestCase):
         mock_get_client.return_value = self.mock_client
 
         invalid_user_id = str(ObjectId())
-        response = self.client.get(reverse('user_profile', args=[invalid_user_id]))
+        response = self.client.get(
+            reverse('user_profile', args=[invalid_user_id]))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'user/404.html')
 
@@ -274,9 +285,9 @@ class userViewsTestCase(TestCase):
             "username": "testuser1",
             "password": "Password@123"
         }
-        
+
         response = self.client.post(reverse("login"), data=post_data)
-        
+
         self.assertEqual(response.status_code, 200)
 
     @patch('user.views.get_client')
@@ -286,21 +297,21 @@ class userViewsTestCase(TestCase):
     @patch('user.views.ridesDB')
     @patch('user.views.routesDB')
     def test_login_invalid(self, mock_routesDB, mock_ridesDB, mock_userDB, mock_db, mock_client, mock_get_client):
-        # Set up mocks and call the view 
+        # Set up mocks and call the view
         self.mock_db_setup()
         mock_get_client.return_value = self.mock_client
-        post_data={
-            "username":"invalid",
-            "password":"wrongpassword"
+        post_data = {
+            "username": "invalid",
+            "password": "wrongpassword"
         }
-        
-        response=self.client.post(reverse("login"),data=post_data)
-        
-        # Assertions 
-        assert response.status_code==200 
+
+        response = self.client.post(reverse("login"), data=post_data)
+
+        # Assertions
+        assert response.status_code == 200
         assert "Invalid username or password" in str(response.content)
 
-   # Test for rendering my rides view when user is not authenticated 
+   # Test for rendering my rides view when user is not authenticated
     @patch('user.views.get_client')
     @patch('user.views.client')
     @patch('user.views.db')
@@ -308,15 +319,15 @@ class userViewsTestCase(TestCase):
     @patch('user.views.ridesDB')
     @patch('user.views.routesDB')
     def test_my_rides_not_authenticated(self, mock_routesDB, mock_ridesDB, mock_userDB, mock_db, mock_client, mock_get_client):
-        # Set up mocks and call the view 
+        # Set up mocks and call the view
         self.mock_db_setup()
         mock_get_client.return_value = self.mock_client
-        response=self.client.get(reverse("myrides"))
-        
-        # Assertions 
-        assert response.status_code==302
+        response = self.client.get(reverse("myrides"))
 
-    # Test for rendering my rides view when user is authenticated 
+        # Assertions
+        assert response.status_code == 302
+
+    # Test for rendering my rides view when user is authenticated
     @patch('user.views.get_client')
     @patch('user.views.client')
     @patch('user.views.db')
@@ -324,20 +335,20 @@ class userViewsTestCase(TestCase):
     @patch('user.views.ridesDB')
     @patch('user.views.routesDB')
     def test_my_rides_authenticated(self, mock_routesDB, mock_ridesDB, mock_userDB, mock_db, mock_client, mock_get_client):
-        # Set up mocks and call the view 
+        # Set up mocks and call the view
         self.mock_db_setup()
         mock_get_client.return_value = self.mock_client
-        session=self.client.session 
-        session['username']="testuser1"
+        session = self.client.session
+        session['username'] = "testuser1"
         session.save()
-        
-        response=self.client.get(reverse("myrides"))
-        
-        # Assertions 
-        assert response.status_code==200 
+
+        response = self.client.get(reverse("myrides"))
+
+        # Assertions
+        assert response.status_code == 200
         assert "My Rides" in str(response.content)
 
-    # Test for deleting a ride with valid ride ID 
+    # Test for deleting a ride with valid ride ID
     @patch('user.views.get_client')
     @patch('user.views.client')
     @patch('user.views.db')
@@ -345,21 +356,21 @@ class userViewsTestCase(TestCase):
     @patch('user.views.ridesDB')
     @patch('user.views.routesDB')
     def test_delete_ride_valid_id(self, mock_routesDB, mock_ridesDB, mock_userDB, mock_db, mock_client, mock_get_client):
-        # Set up mocks and call the view 
+        # Set up mocks and call the view
         self.mock_db_setup()
         mock_get_client.return_value = self.mock_client
-        ride_id=str(self.mock_db.routes.find_one({})['_id'])
-        
-        session=self.client.session 
-        session['username']="testuser1"
-        session.save()
-        
-        response=self.client.post(reverse("delete_ride",args=[ride_id]))
-        
-        # Assertions 
-        assert response.status_code==302  # Should redirect to my rides page 
+        ride_id = str(self.mock_db.routes.find_one({})['_id'])
 
-    # Test for editing user information with valid data 
+        session = self.client.session
+        session['username'] = "testuser1"
+        session.save()
+
+        response = self.client.post(reverse("delete_ride", args=[ride_id]))
+
+        # Assertions
+        assert response.status_code == 302  # Should redirect to my rides page
+
+    # Test for editing user information with valid data
     @patch('user.views.get_client')
     @patch('user.views.client')
     @patch('user.views.db')
@@ -367,23 +378,23 @@ class userViewsTestCase(TestCase):
     @patch('user.views.ridesDB')
     @patch('user.views.routesDB')
     def test_edit_user_valid_data(self, mock_routesDB, mock_ridesDB, mock_userDB, mock_db, mock_client, mock_get_client):
-        # Set up mocks and call the view 
+        # Set up mocks and call the view
         self.mock_db_setup()
         mock_get_client.return_value = self.mock_client
-        session=self.client.session 
-        session['username']="testuser1"
+        session = self.client.session
+        session['username'] = "testuser1"
         session.save()
-        
-        post_data={
-            "first_name":"Updated",
-            "last_name":"User",
-            "phone_number":"9876543210"
+
+        post_data = {
+            "first_name": "Updated",
+            "last_name": "User",
+            "phone_number": "9876543210"
         }
-        
-        response=self.client.post(reverse("user_user"),data=post_data)
-        
-        # Assertions 
-        assert response.status_code==302
+
+        response = self.client.post(reverse("user_user"), data=post_data)
+
+        # Assertions
+        assert response.status_code == 302
 
 
 if __name__ == '__main__':

@@ -1,5 +1,5 @@
 from http.client import HTTPResponse
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from numpy import True_, dtype
 import requests
 import json
@@ -27,8 +27,8 @@ import urllib.parse
 client = None
 db = None
 userDB = None
-ridesDB  = None
-routesDB  = None
+ridesDB = None
+routesDB = None
 mapsService = None
 
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
@@ -38,11 +38,10 @@ secrets = Secrets()
 urlConfig = URLConfig()
 
 
-
 def intializeDB():
     """
     Initializes the connection to the MongoDB database and sets up global variables for collections.
-    
+
     - `client`: The MongoDB client instance.
     - `db`: The database object, specifically the "SEProject" database.
     - `userDB`: The collection for storing user data within the "SEProject" database.
@@ -63,8 +62,9 @@ def intializeDB():
     client = get_client()
     db = client.SEProject
     userDB = db.userData
-    ridesDB  = db.rides
-    routesDB  = db.routes
+    ridesDB = db.rides
+    routesDB = db.routes
+
 
 def initializeService():
     """
@@ -86,7 +86,9 @@ def initializeService():
         None
     """
     global mapsService
-    mapsService = MapsService(urlConfig.RoutesHostname, secrets.GoogleMapsAPIKey)
+    mapsService = MapsService(urlConfig.RoutesHostname,
+                              secrets.GoogleMapsAPIKey)
+
 
 def publish_index(request):
     """
@@ -108,7 +110,8 @@ def publish_index(request):
         request.session['alert'] = "Please login to create a ride."
         messages.info(request, "Please login to create a ride!")
         return redirect('index')
-    return render(request, 'publish/publish.html', {"username": request.session['username'], "alert":True, "gmap_api_key": secrets.GoogleMapsAPIKey})
+    return render(request, 'publish/publish.html', {"username": request.session['username'], "alert": True, "gmap_api_key": secrets.GoogleMapsAPIKey})
+
 
 def display_ride(request, ride_id):
     """
@@ -129,15 +132,16 @@ def display_ride(request, ride_id):
     # print(f"Ride = {ride}")
     routes = get_routes(ride)
     selected = routeSelect(request.session.get('username', None), routes)
-    
+
     # print(f"Routes = {selected}")
     context = {
-            "username": request.session.get('username', None),
-            "ride": ride,
-            "routes": routes,
-            "selectedRoute": selected
-        }
+        "username": request.session.get('username', None),
+        "ride": ride,
+        "routes": routes,
+        "selectedRoute": selected
+    }
     return render(request, 'publish/route.html', context)
+
 
 def send_route_email(request, username, ride):
     """
@@ -149,7 +153,7 @@ def send_route_email(request, username, ride):
     Args:
         username (str): The username of the user who selected the route.
         ride (dict): The ride object containing details of the ride.
-    
+
     Returns:
         None
     """
@@ -157,16 +161,19 @@ def send_route_email(request, username, ride):
         subject = f"Route Selected for today's Ride"
         message = f"Hello {username},\n\nYou have successfully joined the route for the ride to {ride.get('destination')}.\n\nThanks for using our service!\n\nbest wishes,\npacktravel team"
 
-        recipient_email = request.session.get('email', None) 
-        
-        if recipient_email is None:
-            raise ValueError(f'No email id attached to the user account {request.session.get("username", "")}')
+        recipient_email = request.session.get('email', None)
 
-        send_mail(subject, message, EMAIL_HOST_USER, [recipient_email], auth_password = EMAIL_HOST_PASSWORD)
+        if recipient_email is None:
+            raise ValueError(
+                f'No email id attached to the user account {request.session.get("username", "")}')
+
+        send_mail(subject, message, EMAIL_HOST_USER, [
+                  recipient_email], auth_password=EMAIL_HOST_PASSWORD)
     except Exception as e:
         print(f'got error: {traceback.format_exc()}')
         raise e
-    
+
+
 def select_route(request):
     """
     Handles the route selection by a user for a specific ride.
@@ -188,7 +195,7 @@ def select_route(request):
             route_id = request.POST.get("hiddenInput")
             username = request.POST.get('hiddenUser')
             ride_data = request.POST.get('hiddenRide')
-            
+
             if ride_data:
                 ride = json.loads(ride_data.replace("'", "\""))
                 ride_id = ride.get('_id')
@@ -219,14 +226,14 @@ def routeSelect(username, routes):
         print("returning NONE")
         return None
 
-
     user_routes = user['rides']
-    print("User routes: ",user_routes)
+    print("User routes: ", user_routes)
     for route in routes:
         if route['_id'] in user_routes:
             print("FOUND")
             return route['_id']
     return None
+
 
 def get_routes(ride):
     routes = []
@@ -238,15 +245,15 @@ def get_routes(ride):
     for doc in documents:
         doc['id'] = doc["_id"]
         route_date = doc['id'].split("_")[3]
-        user = userDB.find_one({"_id": doc['creator'] })
+        user = userDB.find_one({"_id": doc['creator']})
         user['id'] = user['_id']
         doc['creator'] = user
         doc['distance'] = round(doc["distance"], 1)
         if not DateUtils.has_date_passed(route_date):
-            docs.append(doc)   
+            docs.append(doc)
     return docs
 
-    
+
 def create_route(request):
     """
     Handles the selection of a route for a specific ride and updates the database accordingly.
@@ -274,18 +281,20 @@ def create_route(request):
                 "ampm": request.POST.get("ampm"),
                 "details": request.POST.get("details"),
                 "users": [],
-            }
+        }
         ride_id = request.POST.get('destination')
-        route['creator'] = attach_user_to_route(request.session['username'], route['_id'])
-        if(request.POST.get("slat")):
+        route['creator'] = attach_user_to_route(
+            request.session['username'], route['_id'])
+        if (request.POST.get("slat")):
             route["s_lat"] = request.POST.get("slat")
             route["s_long"] = request.POST.get("slong")
-        if(request.POST.get("dlat")):
+        if (request.POST.get("dlat")):
             route["d_lat"] = request.POST.get("dlat")
             route["d_long"] = request.POST.get("dlong")
 
-        if(request.POST.get("dlat") and request.POST.get("slat")):
-            res = mapsService.get_route_details(route["s_lat"], route["s_long"], route["d_lat"], route["d_long"])
+        if (request.POST.get("dlat") and request.POST.get("slat")):
+            res = mapsService.get_route_details(
+                route["s_lat"], route["s_long"], route["d_lat"], route["d_long"])
             route['fuel'] = res.get("fuel", 0)
             route["distance"] = res.get("distance", 0)
 
@@ -304,10 +313,12 @@ def create_route(request):
             else:
                 ride = ridesDB.find_one({'_id': ride_id})
                 ride['route_id'].append(route['_id'])
-                ridesDB.update_one({'_id': ride_id},{"$set": {"route_id": ride['route_id']}})
+                ridesDB.update_one({'_id': ride_id}, {
+                                   "$set": {"route_id": ride['route_id']}})
                 print("Ride Updated")
         return redirect(display_ride, ride_id=ride_id)
     return render(request, 'publish/publish.html', {"username": request.session.get('username', None), "gmap_api_key": secrets.GoogleMapsAPIKey})
+
 
 def attach_user_to_route(username, route_id):
     """
@@ -329,7 +340,8 @@ def attach_user_to_route(username, route_id):
 
     user['rides'].append(route_id)
 
-    userDB.update_one({"username": username},{"$set": {"rides": user['rides']}})
+    userDB.update_one({"username": username}, {
+                      "$set": {"rides": user['rides']}})
 
     route = routesDB.find_one({"_id": route_id})
     if route == None:
@@ -337,7 +349,7 @@ def attach_user_to_route(username, route_id):
     users = route.get('users', [])
 
     for i in range(len(users)):
-        if(users[i] == user["_id"]):
+        if (users[i] == user["_id"]):
             remove = True
             del users[i]
 
@@ -347,6 +359,7 @@ def attach_user_to_route(username, route_id):
     routesDB.update_one({"_id": route_id}, {"$set": {"users": users}})
     return user['_id']
 
+
 def packs_favorite(request):
     """
     View function to display the 'Pack's Favorite' page.
@@ -354,17 +367,18 @@ def packs_favorite(request):
     # Replace this list with data fetched from your database
     try:
         intializeDB()
-        
-        rides = routesDB.find({"users": {"$ne": []}})  
+
+        rides = routesDB.find({"users": {"$ne": []}})
         reco_obj = {}
         obj = {}
         for ride in rides:
-        # Print ride and the count of users
+            # Print ride and the count of users
             print(f'\n\n ride : users: {len(ride["users"])} {ride}\n\n')
-            
+
             # Add ride _id, user count, and destination to reco_obj
             destination = ride["destination"]
-            destination_slug = urllib.parse.quote(destination)  # URL-encode the destination
+            destination_slug = urllib.parse.quote(
+                destination)  # URL-encode the destination
             user_count = len(ride["users"])
 
             # Check if this destination already exists in reco_obj
@@ -380,11 +394,12 @@ def packs_favorite(request):
                 }
 
         # Sort reco_obj by user count in descending order
-        sorted_reco = sorted(reco_obj.items(), key=lambda x: x[1]["user_count"], reverse=True)
+        sorted_reco = sorted(
+            reco_obj.items(), key=lambda x: x[1]["user_count"], reverse=True)
 
         # show only top 20 picks at most
         top_picks = sorted_reco[:20]
-        
+
         return render(request, 'publish/packs_favorite.html', {"top_picks": top_picks})
     except Exception as e:
         print(f'error in fav : {traceback.format_exc()}')

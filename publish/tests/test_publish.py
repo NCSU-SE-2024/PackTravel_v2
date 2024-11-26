@@ -6,6 +6,7 @@ from bson import ObjectId
 import mongomock
 import json
 
+
 class PublishViewsTestCase(TestCase):
     def setUp(self):
         self.client = Client()
@@ -88,7 +89,8 @@ class PublishViewsTestCase(TestCase):
         }
 
         response = self.client.post(reverse('select_route'), data=post_data)
-        self.assertRedirects(response, reverse('display_ride', args=['ride_1']))
+        self.assertRedirects(response, reverse(
+            'display_ride', args=['ride_1']))
 
     @patch('publish.views.get_client')
     def test_select_route_post_invalid(self, mock_get_client):
@@ -98,7 +100,8 @@ class PublishViewsTestCase(TestCase):
         post_data = {'hiddenInput': '', 'hiddenUser': '', 'hiddenRide': ''}
 
         response = self.client.post(reverse('select_route'), data=post_data)
-        self.assertEqual(response.status_code, 400)  # Assuming 400 for invalid data
+        # Assuming 400 for invalid data
+        self.assertEqual(response.status_code, 400)
 
     @patch('publish.views.get_client')
     def test_create_route_post(self, mock_get_client):
@@ -124,7 +127,8 @@ class PublishViewsTestCase(TestCase):
         }
 
         response = self.client.post(reverse('create_route'), data=post_data)
-        self.assertRedirects(response, reverse('display_ride', args=['New York']))
+        self.assertRedirects(response, reverse(
+            'display_ride', args=['New York']))
 
     @patch('publish.views.get_client')
     def test_packs_favorite(self, mock_get_client):

@@ -6,6 +6,7 @@ from bson import ObjectId
 import mongomock
 from datetime import datetime
 
+
 class SearchViewsTestCase(TestCase):
     def setUp(self):
         self.client = Client()
@@ -80,7 +81,8 @@ class SearchViewsTestCase(TestCase):
         """
         self.mock_db_setup()
         mock_get_client.return_value = self.mock_client
-        mock_date_utils.has_date_passed.side_effect = lambda date: datetime.strptime(date, '%Y-%m-%d') < datetime.now()
+        mock_date_utils.has_date_passed.side_effect = lambda date: datetime.strptime(
+            date, '%Y-%m-%d') < datetime.now()
 
         session = self.client.session
         session['username'] = 'testuser'

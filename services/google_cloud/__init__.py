@@ -1,14 +1,15 @@
 from .cloud_storage import CloudStorage
 from .credentials import Credentials
 
+
 class GoogleCloud:
     """
     A class to manage interactions with Google Cloud services, specifically for file storage.
-    
+
     """
     credentials: Credentials = None
     StorageService: CloudStorage = None
-    
+
     def __init__(self, credentials_path: str = "credentials.json", bucket_path: str = 'ptravelv2-pfp'):
         """
         Initializes the GoogleCloud class with credentials and storage service.
