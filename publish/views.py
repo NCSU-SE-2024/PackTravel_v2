@@ -1,3 +1,28 @@
+"""
+This module contains view functions for managing ride routes, user interactions, and email notifications within the ride-sharing platform. 
+
+It interacts with the MongoDB database to manage users, rides, and routes, and uses Google Maps API for route details. The module includes the following key functionalities:
+
+- Ride and route creation and selection
+- User authentication and route association
+- Sending email notifications to users upon successful route selection
+- MongoDB database initialization and management
+
+Dependencies:
+- `django.shortcuts`: For rendering views and redirecting users.
+- `requests`: For making HTTP requests.
+- `json`: For parsing JSON data.
+- `datetime`: For working with date and time.
+- `django.contrib`: For user authentication and messaging.
+- `services`: For external services like MapsService.
+- `config`: For accessing secrets and URL configurations.
+- `utilities`: For utility functions, such as date checks.
+- `django.core.mail`: For sending email notifications.
+- `models`: For handling the database models related to rides.
+
+The module provides an interface for the front-end to interact with the backend systems to manage rides and routes for users.
+"""
+
 from http.client import HTTPResponse
 from django.shortcuts import render, redirect
 from numpy import True_, dtype
@@ -220,6 +245,19 @@ def select_route(request):
 
 
 def routeSelect(username, routes):
+    """
+    Selects a route for a user from a list of available routes.
+
+    This function checks the user's selected routes and returns the route that the user has previously selected, if any.
+
+    Args:
+        username (str): The username of the user selecting the route.
+        routes (list): The list of available routes for the ride.
+
+    Returns:
+        str: The route ID of the selected route if found, else `None`.
+    """
+
     intializeDB()
     user = userDB.find_one({"username": username})
     if user == None or routes == None:
@@ -236,6 +274,18 @@ def routeSelect(username, routes):
 
 
 def get_routes(ride):
+    """
+    Fetches all available routes for a given ride from the database.
+
+    This function retrieves all routes associated with a specific ride, filters out expired routes, and prepares them for display.
+
+    Args:
+        ride (dict): The ride object containing route information.
+
+    Returns:
+        list: A list of available and non-expired routes associated with the ride.
+    """
+
     routes = []
     if 'route_id' not in ride:
         return None

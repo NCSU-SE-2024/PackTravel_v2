@@ -1,3 +1,16 @@
+"""
+Routes class for handling routing API requests to compute route details.
+
+This class provides functionality to interact with a routing API, fetching route information, including distance and fuel consumption, between two geographic locations.
+
+Attributes:
+    hostname (str): The hostname of the routing API.
+    api_key (str): The API key for authentication with the routing API.
+
+Methods:
+    __init__(hostname: str, api_key: str): Initializes the Routes class with the specified API hostname and authentication key.
+    __get_route_details__(slat: str, slong: str, dlat: str, dlong: str): Fetches route details (distance and fuel consumption) between two locations.
+"""
 import json
 from http import client
 

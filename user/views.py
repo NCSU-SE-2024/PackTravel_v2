@@ -1,3 +1,21 @@
+"""
+This module contains the views for the PackTravel application, including user authentication, profile management, and ride management features.
+
+The following functionalities are provided:
+- User registration and login.
+- Viewing and editing user profiles.
+- Displaying and managing user rides.
+- Handling user session data and interaction with Google Cloud and MongoDB for storing and retrieving user and ride-related information.
+
+External dependencies:
+- `GoogleCloud`: Provides file upload services to Google Cloud Storage.
+- `Secrets`: Stores sensitive credentials for cloud and database access.
+- `utils.get_client`: Establishes a connection to MongoDB.
+- `DateUtils`: Provides utilities for date manipulation.
+- `bson.objectid.ObjectId`: Used for handling MongoDB's ObjectId format.
+- `django.contrib.auth.hashers`: Used for password hashing and verification.
+- `django.contrib.messages`: Displays messages to the user.
+"""
 from django.shortcuts import render, redirect
 from utils import get_client
 from .forms import RegisterForm, LoginForm, EditUserForm
@@ -296,6 +314,15 @@ def delete_ride(request, ride_id):
 
 
 def edit_user(request):
+    """
+    Allows users to edit their profile details, including profile picture, name, and phone number.
+
+    Args:
+        request (HttpRequest): The request object containing form data.
+
+    Returns:
+        HttpResponse: Redirects to the user profile page on success, or renders the edit form on failure.
+    """
     intializeDB()
     user = userDB.find_one({"username": request.session['username']})
 

@@ -1,3 +1,13 @@
+"""
+Validation Module
+
+This module contains various utility functions for validating user input, 
+specifically for email, Unity ID, username, and password. It also includes 
+a function for initializing the connection to the MongoDB database, where 
+user data is stored. The module helps ensure that user-provided data follows 
+specific rules, such as uniqueness and format, and provides appropriate 
+error messages when data validation fails.
+"""
 from django.core.exceptions import ValidationError
 from utils import get_client
 import re
@@ -76,6 +86,19 @@ def validate_unique_unity_id(value):
 
 
 def validate_unique_username(value):
+    """
+    Ensures the provided username is unique within the `userDB` collection.
+
+    This function initializes the database connection, if not already initialized, 
+    and checks the `userDB` collection to determine if a record with the same 
+    username already exists.
+
+    Args:
+        value (str): The username to validate.
+
+    Raises:
+        ValidationError: If a user with the same username already exists in the database.
+    """
     intializeDB()
     unity_user = userDB.find_one({"username": value})
     if (unity_user):
@@ -83,6 +106,24 @@ def validate_unique_username(value):
 
 
 def validate_password(value):
+    """
+    Validates the provided password against several security criteria.
+
+    This function checks that the password meets the following criteria:
+    - Minimum length of 8 characters and maximum length of 16 characters.
+    - At least one lowercase letter.
+    - At least one uppercase letter.
+    - At least one digit.
+    - At least one special character (e.g., `!@#$%^&*()`).
+    - It is not a common password.
+    - It does not contain repeated characters (e.g., "aaa").
+
+    Args:
+        value (str): The password to validate.
+
+    Raises:
+        ValidationError: If the password does not meet the required criteria.
+    """
     if len(value) < 8:
         raise ValidationError(f"Password is too short")
 

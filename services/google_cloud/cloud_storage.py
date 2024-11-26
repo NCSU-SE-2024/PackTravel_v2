@@ -1,3 +1,16 @@
+"""
+CloudStorage class for handling file uploads to a Google Cloud Storage bucket.
+
+This class provides functionality for uploading files to Google Cloud Storage using the specified credentials and bucket name. It uses Google Cloud's storage client to manage interactions with the cloud service.
+
+Attributes:
+    credentials (Credentials): Google Cloud credentials used for authenticating and interacting with Google Cloud services.
+    PfpBucket (str): The name of the Google Cloud Storage bucket where files will be uploaded.
+
+Methods:
+    __init__(credentials: Credentials, pfp_bucket: str): Initializes the CloudStorage class with provided credentials and bucket name.
+    __upload_file__(file, destination_blob_name: str): Uploads the specified file to Google Cloud Storage and returns the public URL of the uploaded file.
+"""
 from .credentials import Credentials
 from google.cloud import storage
 

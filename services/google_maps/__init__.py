@@ -1,3 +1,15 @@
+"""
+MapsService class for interacting with routing services to get route details.
+
+This class provides functionality to interact with a routing service API to fetch details about routes, including distance and fuel consumption between two geographic locations.
+
+Attributes:
+    routes_service (Routes): An instance of the Routes class used to handle route-related API requests.
+
+Methods:
+    __init__(routes_hostname: str, api_key: str): Initializes the MapsService class with the routing service hostname and API key for authentication.
+    get_route_details(slat: str, slong: str, dlat: str, dlong: str): Retrieves route details between two locations, including distance and fuel consumption.
+"""
 from .routes import Routes
 
 
