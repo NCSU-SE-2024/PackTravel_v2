@@ -1,7 +1,15 @@
 <div align="center">
+  <img style="width: 120px; height: 120px;" src="./images/wolf2.svg" />
+  <h1>NC State PackTravel</h1>
+</div>
 
-<img style="width: 120px; height: 120px;" src="./images/wolf2.svg"></img>
-# `NC State PackTravel`
+Welcome to PackTravel, your ultimate solution for escaping the confines of campus life and exploring the world beyond! 🚗💨 Tired of relying on the same old campus shuttle or waiting for a ride that never comes? Well, we've got your back!
+
+PackTravel is here to revolutionize your off-campus travel experience, offering students without personal vehicles a hassle-free way to get where they need to go—whether it's a weekend getaway or just a quick trip to the nearest coffee shop (because let’s face it, sometimes the campus brew just doesn’t cut it). ☕🚀
+
+Join our vibrant community, where convenience meets collaboration, and safety is always the top priority. With PackTravel, it’s not just about the ride—it’s about sharing the journey with fellow students, creating connections, and making your travel experience smarter and more fun!
+
+So, pack your bags (or just your backpack), hop on board, and let’s make those off-campus adventures easier, cheaper, and a lot more exciting. Let’s get you where you need to go with PackTravel—your ride to freedom! 🌍🛣️
 
 NEW BADGES
 
