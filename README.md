@@ -11,6 +11,9 @@ Join our vibrant community, where convenience meets collaboration, and safety is
 
 So, pack your bags (or just your backpack), hop on board, and let’s make those off-campus adventures easier, cheaper, and a lot more exciting. Let’s get you where you need to go with PackTravel—your ride to freedom! 🌍🛣️
 
+
+![alt text](https://github.com/NCSU-SE-2024/PackTravel_v2/blob/main/docs/HomePage.png)
+
 NEW BADGES
 
 [![DOI](https://zenodo.org/badge/887482019.svg)](https://doi.org/10.5281/zenodo.14211208)
