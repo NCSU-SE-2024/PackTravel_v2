@@ -57,11 +57,47 @@ missing badges:
 - Added password hashing on the backend to enhance the security of user data.
 - Increased test coverage from 50% to 70%, improving reliability and error detection.
 
-<a href="https://github.com/KoruptTinker/PackTravel/blob/rubrics/images/Video.mkv" target="_blank">Link to Video</a>
 
-<h2>What is Packtravel?</h2>
+## Pre-requisites
+To run these scripts, you will require Python installed on your PC. Please visit [Python Installers](https://www.python.org/downloads/) to download the lastest python version. Apart from that, other requirements can be installed with the help of requirements.txt.
 
-PackTravel is an innovative platform designed to help university students explore beyond campus boundaries. Recognizing the limitations of on-campus transportation options, PackTravel offers a solution for students without personal vehicles to travel off-campus easily.
+## Installation
+Initially, you can check whether your system has Python pre-installed or not, usually nowadays in most of systems, be it Windows or MacOS, python is pre-installed. 
+
+To check whether you have python installed or not, you can open CMD or a Terminal and run the command "python --version". If the CMD shows the version such as Python 3.10 then your system already has python installed and you just need to clone the repository and run the python scripts. 
+
+If this is not the case, then you need to download python installer package from [Python Installers](https://www.python.org/downloads/) based on your system's operating system and install it and you can further clone this repository to execute the scripts.
+
+You can refer [INSTALL.md](https://github.com/NCSU-SE-2024/PackTravel_v2/blob/main/INSTALL.md) for the complete installation steps based on your OS.
+
+## Poster
+![alt text](https://github.com/NCSU-SE-2024/PackTravel_v2/blob/main/docs/Poster.jpg)
+
+## Contribution Code of Conduct
+
+The rules listed below are to be followed by the ones who will be contributing to the code in the repository:
+
+  - At least one review/approval is required from any other contributors of the project to merge a commit to the main branch.
+  - It is recommended to delete the branch as soon as it is merged to the main branch to avoid stale branches in the repository.
+  - It is encouraged to add name tags such as "feature-", "upd-" or "patch-" in the branches if it is used to add code patches or features in the project.
+
+### Test Run Screenshot
+
+![alt text](https://github.com/NCSU-SE-2024/PackTravel_v2/blob/main/docs/TestCasesRun.png)
+
+### Code Coverage Screenshot
+
+![alt text](https://github.com/NCSU-SE-2024/PackTravel_v2/blob/main/docs/CoverageRun.png)
+
+### Discord Channel Screenshot
+![alt_text](https://github.com/NCSU-SE-2024/PackTravel_v2/blob/main/docs/DiscordScreenshot.png)
+
+### Video demonstrating the old functionalities
+
+
+### Video demonstrating the new functionalities
+
+
 
 **So, let's go for Packtravel**
 
