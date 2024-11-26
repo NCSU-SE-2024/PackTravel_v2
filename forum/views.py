@@ -1,4 +1,39 @@
-from django.shortcuts import render
+"""
+Forum Views Module
+
+This module contains the view functions for a discussion forum application, allowing users to interact with rides, topics, and comments.
+
+The module provides functionalities for:
+1. Displaying rides and their associated topics.
+2. Creating new discussion topics for specific rides.
+3. Adding comments to topics.
+4. Viewing topics for a ride and detailed topic discussions.
+5. Interacting with a MongoDB database.
+
+Dependencies:
+- Django modules: render, redirect
+- Utilities: `get_client` for MongoDB connection, `make_password` and `check_password` for authentication
+- MongoDB collections: `userDB`, `ridesDB`, `routesDB`, `topicsDB`, and `commentsDB`
+- BSON: `ObjectId` for MongoDB object handling
+- `datetime`: For timestamping topics and comments
+
+Global Variables:
+- `client`: MongoDB client instance
+- `db`: The MongoDB database object
+- `userDB`, `ridesDB`, `routesDB`, `topicsDB`, `commentsDB`: MongoDB collections
+
+Functions:
+- `intializeDB()`: Initializes the MongoDB client and collections.
+- `rides_with_topics(request)`: Displays rides with their associated discussion topics.
+- `create_topic(request)`: Handles the creation of a new topic for a ride.
+- `add_comment(request, topic_id)`: Adds a comment to a specific topic.
+- `forum_topics(request, ride_id)`: Displays all topics related to a specific ride.
+- `forum_topic_details(request, topic_id)`: Displays details of a topic and its associated comments.
+
+This module is designed to be used within a Django project, providing dynamic content management for the forum.
+
+"""
+
 from django.shortcuts import render, redirect
 from utils import get_client
 from config import Secrets

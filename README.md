@@ -7,8 +7,8 @@ NEW BADGES
 
 [![DOI](https://zenodo.org/badge/887482019.svg)](https://doi.org/10.5281/zenodo.14211208)
 [![codecov](https://codecov.io/gh/KoruptTinker/PackTravel/graph/badge.svg?token=VbruFqYa0G)](https://codecov.io/gh/KoruptTinker/PackTravel)
-[![Python Style Checker](https://github.com/KoruptTinker/PackTravel/actions/workflows/python_style_checker.yml/badge.svg)](https://github.com/KoruptTinker/PackTravel/actions/workflows/python_style_checker.yml)
-[![Lint Python](https://github.com/KoruptTinker/PackTravel/actions/workflows/pylint.yml/badge.svg)](https://github.com/KoruptTinker/PackTravel/actions/workflows/pylint.yml)
+[![Python Style Checker](https://github.com/NCSU-SE-2024/PackTravel_v2/actions/workflows/python_style_checker.yml/badge.svg)](https://github.com/NCSU-SE-2024/PackTravel_v2/actions/workflows/python_style_checker.yml)
+[![Lint Python](https://github.com/NCSU-SE-2024/PackTravel_v2/actions/workflows/pylint.yml/badge.svg)](https://github.com/NCSU-SE-2024/PackTravel_v2/actions/workflows/pylint.yml)
 
 
 <a href="https://github.com/NCSU-SE-2024/PackTravel_v2/graphs/contributors" alt="Contributors"><img src = "https://img.shields.io/github/contributors/NCSU-SE-2024/PackTravel_v2"/></a>

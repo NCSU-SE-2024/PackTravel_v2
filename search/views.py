@@ -1,3 +1,21 @@
+"""
+Views for the 'search' application.
+
+This module contains the views that handle the search-related functionality for the 'search' app in the application.
+
+Functions:
+    - `intializeDB`: Initializes the connection to the MongoDB database and sets up global variables for collections.
+    - `search_index`: Handles the logic for searching available rides, checking if routes are still available, and rendering the search results page.
+
+Dependencies:
+    - `get_client`: Utility function for establishing a MongoDB client connection.
+    - `DateUtils.has_date_passed`: Utility function to check if a route's date has passed.
+    - `Secrets`: Configuration class that stores secret keys like the Google Maps API key.
+    - `RideForm`: Form used for creating a ride (though not directly used in this snippet).
+    - `UserCreationForm`: Django form for user registration (though not directly used here).
+    - `messages`: Django's messaging framework for providing feedback to users.
+"""
+
 from http.client import HTTPResponse
 from django.shortcuts import render, redirect
 from numpy import True_, dtype
@@ -47,6 +65,19 @@ def intializeDB():
 
 
 def search_index(request):
+    """
+    Handles the search functionality for available rides.
+
+    This view retrieves all available rides from the database, processes them to count the number of active routes
+    (routes with dates that have not passed), and displays the search results on the 'search.html' template.
+    If the user is not logged in, they will be redirected to the login page with a message.
+
+    Args:
+        request (HttpRequest): The request object containing session and user data.
+
+    Returns:
+        HttpResponse: The rendered response for the search page, including a list of rides and relevant data.
+    """
     intializeDB()
     if not request.session.has_key('username'):
         request.session['alert'] = "Please login to create a ride."
