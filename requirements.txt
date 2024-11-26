@@ -27,6 +27,7 @@ idna==3.4
 iniconfig==1.1.1
 kiwisolver==1.4.4
 matplotlib==3.5.3
+mongomock==4.1.2
 numpy==1.23.2
 oauthlib==3.2.2
 outcome==1.2.0

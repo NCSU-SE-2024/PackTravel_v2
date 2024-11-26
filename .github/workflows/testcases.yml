@@ -34,6 +34,7 @@ jobs:
       - run: python3 manage.py test
       - run: pip3 install coverage
       - run: coverage run ./manage.py test
+      - run: coverage report
 
       - name: Upload results to Codecov
         uses: codecov/codecov-action@v4
