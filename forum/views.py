@@ -21,10 +21,11 @@ commentsDB = None
 
 # Create your views here.
 
+
 def intializeDB():
     """
     Initializes the connection to the MongoDB database and sets up global variables for collections.
-    
+
     - `client`: The MongoDB client instance.
     - `db`: The database object, specifically the "SEProject" database.
     - `userDB`: The collection for storing user data within the "SEProject" database.
@@ -47,8 +48,9 @@ def intializeDB():
     userDB = db.userData
     ridesDB = db.rides
     routesDB = db.routes
-    topicsDB = db.topics  
+    topicsDB = db.topics
     commentsDB = db.comments
+
 
 def rides_with_topics(request):
     """
@@ -67,12 +69,14 @@ def rides_with_topics(request):
     for ride in rides:
         if ride['destination'] not in visitedDest:
             visitedDest.add(ride['destination'])
-            topics =  list(topicsDB.find({"ride_id": ride['destination']}))  # Fetch topics related to the ride
+            # Fetch topics related to the ride
+            topics = list(topicsDB.find({"ride_id": ride['destination']}))
             for topic in topics:
                 topic['id'] = topic.pop('_id')
             rides_with_topics.append({'ride': ride, 'topics': topics})
 
     return render(request, 'forum/rides_with_topics.html', {'rides_with_topics': rides_with_topics})
+
 
 def create_topic(request):
     """
@@ -92,7 +96,7 @@ def create_topic(request):
         title = request.POST.get("title")
         content = request.POST.get("content")
         user = request.session.get("username")
-        
+
         if not (ride_id and title and content and user):
             return render(request, "forum/create_topic.html", {"error": "All fields are required!"})
 
@@ -107,6 +111,7 @@ def create_topic(request):
         return redirect("rides_with_topics")
 
     return render(request, "forum/create_topic.html", {"rides": final_rides})
+
 
 def add_comment(request, topic_id):
     """
@@ -127,6 +132,7 @@ def add_comment(request, topic_id):
         return redirect("forum_topic_details", topic_id=topic_id)
     return redirect("forum_topic_details", topic_id=topic_id)
 
+
 def forum_topics(request, ride_id):
     """
     Displays all topics related to a specific ride.
@@ -136,6 +142,7 @@ def forum_topics(request, ride_id):
     for topic in topics:
         topic['id'] = topic.pop('_id')
     return render(request, "forum/topics.html", {"topics": topics, "ride_id": ride_id})
+
 
 def forum_topic_details(request, topic_id):
     """

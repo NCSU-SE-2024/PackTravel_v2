@@ -1,20 +1,22 @@
 import json
 from http import client
 
+
 class Routes:
     """
     A class to handle routing requests to a specified API.
     """
     hostname = ""
     api_key = ""
-    def __init__(self, hostname: str, api_key = ""):
+
+    def __init__(self, hostname: str, api_key=""):
         """
         Initializes the Routes class with the hostname and API key.
 
         Args:
             hostname (str): The hostname of the routing API.
             api_key (str): The API key for authentication (default is an empty string).
-        """ 
+        """
         self.hostname = hostname
         self.api_key = api_key
 
@@ -32,28 +34,28 @@ class Routes:
             dict: A dictionary containing the distance in kilometers and fuel consumption in liters.
                   Returns {'distance': 0, 'fuel': 0} in case of an error or if no route is found.
         """
-        try: 
+        try:
             conn = client.HTTPSConnection(self.hostname, timeout=1)
             payload = json.dumps({
                 "origin": {
                     "location": {
-                    "latLng": {
-                        "latitude": slat,
-                        "longitude": slong
-                    }
+                        "latLng": {
+                            "latitude": slat,
+                            "longitude": slong
+                        }
                     }
                 },
                 "destination": {
                     "location": {
-                    "latLng": {
-                        "latitude": dlat,
-                        "longitude": dlong
-                    }
+                        "latLng": {
+                            "latitude": dlat,
+                            "longitude": dlong
+                        }
                     }
                 },
                 "routeModifiers": {
                     "vehicleInfo": {
-                    "emissionType": "GASOLINE"
+                        "emissionType": "GASOLINE"
                     }
                 },
                 "travelMode": "DRIVE",
@@ -69,7 +71,8 @@ class Routes:
                 'X-Goog-Api-Key': self.api_key,
                 'X-Goog-FieldMask': 'routes.distanceMeters,routes.duration,routes.routeLabels,routes.routeToken,routes.travelAdvisory.fuelConsumptionMicroliters'
             }
-            conn.request("POST", "/directions/v2:computeRoutes", payload, headers)
+            conn.request("POST", "/directions/v2:computeRoutes",
+                         payload, headers)
             res = conn.getresponse()
             data = res.read()
             data = json.loads(data)
@@ -82,4 +85,3 @@ class Routes:
                 "distance": 0,
                 "fuel": 0,
             }
-

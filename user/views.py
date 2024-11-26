@@ -17,10 +17,11 @@ routesDB = None
 googleCloud = None
 secrets = None
 
+
 def initializeCloud():
     """
     Initializes the Google Cloud service with credentials and storage bucket.
-    
+
     Globals:
         googleCloud (GoogleCloud): Google Cloud service instance for file upload.
         secrets (Secrets): Object holding sensitive credentials.
@@ -28,14 +29,16 @@ def initializeCloud():
     global googleCloud, secrets
     if not secrets:
         secrets = Secrets()
-    
+
     if not googleCloud:
-        googleCloud = GoogleCloud(secrets.CloudCredentials, secrets.CloudStorageBucket)
+        googleCloud = GoogleCloud(
+            secrets.CloudCredentials, secrets.CloudStorageBucket)
+
 
 def intializeDB():
     """
     Initializes the connection to the MongoDB database and sets up global variables for collections.
-    
+
     - `client`: The MongoDB client instance.
     - `db`: The database object, specifically the "SEProject" database.
     - `userDB`: The collection for storing user data within the "SEProject" database.
@@ -119,7 +122,7 @@ def register(request):
             if image is not None:
                 image.name = f"{form.cleaned_data['username']}.png"
                 public_url = googleCloud.upload_file(image, image.name)
-            
+
             userObj = {
                 "username": form.cleaned_data["username"],
                 "unityid": form.cleaned_data["unityid"],
@@ -131,7 +134,7 @@ def register(request):
                 "rides": [],
                 "pfp": public_url
             }
-            
+
             savedUser = userDB.insert_one(userObj)
             request.session['username'] = userObj["username"]
             request.session['unityid'] = userObj["unityid"]
@@ -166,6 +169,7 @@ def logout(request):
         pass
     return redirect(index)
 
+
 def user_profile(request, userid):
     """
     Renders the user's profile page or a 404 page if the user ID is not found.
@@ -178,7 +182,7 @@ def user_profile(request, userid):
         HttpResponse: Profile page or 404 page if user not found.
     """
     intializeDB()
-    if(not userid):
+    if (not userid):
         return render(request, "user/404.html", {"username": request.session.get("username", None)})
     profile = userDB.find_one({"_id": ObjectId(userid)})
     if not profile:
@@ -189,20 +193,22 @@ def user_profile(request, userid):
     # Fetch routes created by this user
     user_routes = routesDB.find({"creator": ObjectId(user_id)})
 
-    past_rides,current_rides  = list(), list()
+    past_rides, current_rides = list(), list()
     for route in user_routes:
         if DateUtils.has_date_passed(route['date']):
             past_rides.append(route)
         else:
             current_rides.append(route)
-                
-    if(profile):
+
+    if (profile):
         return render(request, 'user/profile.html', {"username": request.session.get("username", None), "user": profile, "pastrides": past_rides, "currentrides": current_rides})
 
     else:
         return render(request, "user/404.html", {"username": request.session.get("username", None)})
 
 # @describe: Existing user login
+
+
 def login(request):
     """
     Logs in an existing user by validating the form data and saving session details.
@@ -290,20 +296,19 @@ def delete_ride(request, ride_id):
 
 
 def edit_user(request):
-    intializeDB() 
-    user = userDB.find_one({"username": request.session['username']}) 
+    intializeDB()
+    user = userDB.find_one({"username": request.session['username']})
 
     if request.method == 'POST':
-        form = EditUserForm(request.POST, request.FILES)  
+        form = EditUserForm(request.POST, request.FILES)
         if form.is_valid():
-            image = form.cleaned_data.get("profile_picture") 
+            image = form.cleaned_data.get("profile_picture")
             public_url = user.get('pfp')
-            if image: 
-                initializeCloud() 
-                image.name = f"{request.session['username']}.png" 
-                public_url = googleCloud.upload_file(image, image.name) 
+            if image:
+                initializeCloud()
+                image.name = f"{request.session['username']}.png"
+                public_url = googleCloud.upload_file(image, image.name)
 
-            
             userDB.update_one(
                 {"username": request.session['username']},
                 {
@@ -311,17 +316,16 @@ def edit_user(request):
                         "fname": form.cleaned_data['first_name'],
                         "lname": form.cleaned_data['last_name'],
                         "phone": form.cleaned_data['phone_number'],
-                        "pfp": public_url,  
+                        "pfp": public_url,
                     }
                 }
             )
 
-            
             request.session['fname'] = form.cleaned_data['first_name']
             request.session['lname'] = form.cleaned_data['last_name']
             request.session['phone'] = form.cleaned_data['phone_number']
 
-            return redirect('user_profile', userid=str(user['_id']))  
+            return redirect('user_profile', userid=str(user['_id']))
     else:
         form = EditUserForm(initial={
             "unityid": user.get("unityid"),
@@ -330,10 +334,6 @@ def edit_user(request):
             "email": user.get("email"),
             "phone_number": user.get("phone"),
             "profile_picture": user.get("pfp"),
-        })  
+        })
 
-    return render(request, 'user/edit_user.html', {"username": request.session['username'], 'form': form})  
-
-   
-
-
+    return render(request, 'user/edit_user.html', {"username": request.session['username'], 'form': form})

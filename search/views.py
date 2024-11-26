@@ -1,5 +1,5 @@
 from http.client import HTTPResponse
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from numpy import True_, dtype
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
@@ -13,14 +13,15 @@ from config import Secrets
 client = None
 db = None
 userDB = None
-ridesDB  = None
-routesDB  = None
+ridesDB = None
+routesDB = None
 secrets = Secrets()
+
 
 def intializeDB():
     """
     Initializes the connection to the MongoDB database and sets up global variables for collections.
-    
+
     - `client`: The MongoDB client instance.
     - `db`: The database object, specifically the "SEProject" database.
     - `userDB`: The collection for storing user data within the "SEProject" database.
@@ -41,8 +42,9 @@ def intializeDB():
     client = get_client()
     db = client.SEProject
     userDB = db.userData
-    ridesDB  = db.rides
-    routesDB  = db.routes
+    ridesDB = db.rides
+    routesDB = db.routes
+
 
 def search_index(request):
     intializeDB()

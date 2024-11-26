@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google', # for Google OAuth 2.0
+    'allauth.socialaccount.providers.google',  # for Google OAuth 2.0
 ]
 
 MIDDLEWARE = [
@@ -125,9 +125,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'user/static'),
-    os.path.join(BASE_DIR,'publish/static'),
-    os.path.join(BASE_DIR,'search/static')
+    os.path.join(BASE_DIR, 'user/static'),
+    os.path.join(BASE_DIR, 'publish/static'),
+    os.path.join(BASE_DIR, 'search/static')
 ]
 
 LOGIN_REDIRECT_URL = '/'
@@ -162,6 +162,6 @@ SOCIALACCOUNT_PROVIDERS = {
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER='ncsupacktravel@gmail.com'
-EMAIL_HOST_PASSWORD='sarm utsw ouhv wthm'
+EMAIL_HOST_USER = 'ncsupacktravel@gmail.com'
+EMAIL_HOST_PASSWORD = 'sarm utsw ouhv wthm'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

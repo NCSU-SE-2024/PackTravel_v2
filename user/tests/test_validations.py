@@ -2,6 +2,7 @@ from ..validators import validate_email_domain, validate_unique_unity_id, valida
 from django.test import SimpleTestCase
 from django.core.exceptions import ValidationError
 
+
 class UserUnityIDValidationTests(SimpleTestCase):
     def test_valid_unity_id(self):
         unityid = "testunityid"
@@ -15,6 +16,7 @@ class UserUnityIDValidationTests(SimpleTestCase):
         with self.assertRaises(ValidationError):
             validate_unique_unity_id(unityid)
 
+
 class UserUsernameValidationTests(SimpleTestCase):
     def test_valid_username(self):
         username = "rahul"
@@ -27,7 +29,7 @@ class UserUsernameValidationTests(SimpleTestCase):
         username = "test1234"
         with self.assertRaises(ValidationError):
             validate_unique_username(username)
-            
+
 
 class UserEmailValidationTests(SimpleTestCase):
     def test_valid_email(self):
@@ -56,7 +58,7 @@ class UserEmailValidationTests(SimpleTestCase):
         email = "bkbhayan@"
         with self.assertRaises(ValidationError):
             validate_email_domain(email)
-    
+
 
 class PasswordValidationTests(SimpleTestCase):
 
@@ -127,20 +129,23 @@ class PasswordValidationTests(SimpleTestCase):
         try:
             validate_password(password)
         except ValidationError:
-            self.fail("Raised ValidationError on a valid password with Unicode characters")
+            self.fail(
+                "Raised ValidationError on a valid password with Unicode characters")
 
     def test_password_edge_case_length(self):
-        password = "Valid1P!" 
+        password = "Valid1P!"
         try:
             validate_password(password)
         except ValidationError:
-            self.fail("Raised ValidationError on a valid password at minimum length")
+            self.fail(
+                "Raised ValidationError on a valid password at minimum length")
 
         password = "Valid1Pass1234!"
         try:
             validate_password(password)
         except ValidationError:
-            self.fail("Raised ValidationError on a valid password at maximum length")
+            self.fail(
+                "Raised ValidationError on a valid password at maximum length")
 
     def test_password_with_all_special_chars(self):
         password = "!@#(),.?\":{}|<>"

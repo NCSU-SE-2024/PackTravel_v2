@@ -23,22 +23,23 @@ class TestUrl(SimpleTestCase):
 
     def test_logout_resolved(self):
         url = reverse('logout')
-        
+
         self.assertEquals(resolve(url).func, logout)
 
     def test_profile_resolved(self):
         url = reverse('user_profile', args=["123"])
         self.assertEquals(resolve(url).func, user_profile)
 
+
 class TestUrl_Response(TestCase):
     def test_index_route_non_logged(self):
         response = self.client.get(reverse('index'))
         self.assertEqual(response.status_code, 200)
-    
+
     def test_index_route_non_logged_template(self):
         response = self.client.get(reverse('index'))
         self.assertTemplateUsed(response, 'home/home.html')
-    
+
     def test_logout_route_non_logged(self):
         response = self.client.get(reverse('logout'))
         self.assertEqual(response.status_code, 302)
@@ -46,16 +47,17 @@ class TestUrl_Response(TestCase):
     def test_login_route_non_logged(self):
         response = self.client.get(reverse('login'))
         self.assertEqual(response.status_code, 200)
-    
+
     def test_login_route_non_logged_template(self):
         response = self.client.get(reverse('login'))
         self.assertTemplateUsed(response, 'user/login.html')
-  
-    def test_profile_ride_non_logged(self):
-        response = self.client.get(reverse('user_profile', args=["67240ab0b84ec3a5aa1e5cc8"]))
-        self.assertEqual(response.status_code, 200)
-    
-    def test_profile_ride_non_logged_template(self):
-        response = self.client.get(reverse('user_profile', args=["67240ab0b84ec3a5aa1e5cc8"]))
-        self.assertTemplateUsed(response, 'user/404.html')
 
+    def test_profile_ride_non_logged(self):
+        response = self.client.get(
+            reverse('user_profile', args=["67240ab0b84ec3a5aa1e5cc8"]))
+        self.assertEqual(response.status_code, 200)
+
+    def test_profile_ride_non_logged_template(self):
+        response = self.client.get(
+            reverse('user_profile', args=["67240ab0b84ec3a5aa1e5cc8"]))
+        self.assertTemplateUsed(response, 'user/404.html')
