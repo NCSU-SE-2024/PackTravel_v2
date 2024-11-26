@@ -291,7 +291,6 @@ def delete_ride(request, ride_id):
 
 def edit_user(request):
     intializeDB() 
-    initializeCloud() 
     user = userDB.find_one({"username": request.session['username']}) 
 
     if request.method == 'POST':
@@ -300,6 +299,7 @@ def edit_user(request):
             image = form.cleaned_data.get("profile_picture") 
             public_url = user.get('pfp')
             if image: 
+                initializeCloud() 
                 image.name = f"{request.session['username']}.png" 
                 public_url = googleCloud.upload_file(image, image.name) 
 
