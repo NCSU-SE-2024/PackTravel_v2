@@ -39,7 +39,7 @@ missing badges:
 
 
 
-### Issues in Previous Phase
+### Issues in Previous Phase - TODO
 
 - Anonymous profiles create a lack of transparency among users.
 - Passwords are stored without hashing, posing security risks.
@@ -47,16 +47,6 @@ missing badges:
 - No location autocomplete, leading to potential inaccuracies in location tagging.
 - Search page UI is very basic, affecting user experience.
 - Lack of test cases and code coverage limits reliability and error detection.
-
-
-## Enhancement and Improvements in Phase 2:
-- Introduced a user profiles feature, enabling riders to view each other's profiles and fostering a more personalized connection among users.
-- Implemented location autocomplete with Google Maps integration to enhance location accuracy.
-- Integrated the Routes API to provide route distance details and estimated fuel consumption for cost calculations.
-- Upgraded the search page with a new, improved UI.
-- Added password hashing on the backend to enhance the security of user data.
-- Increased test coverage from 50% to 70%, improving reliability and error detection.
-
 
 ## Pre-requisites
 To run these scripts, you will require Python installed on your PC. Please visit [Python Installers](https://www.python.org/downloads/) to download the lastest python version. Apart from that, other requirements can be installed with the help of requirements.txt.
@@ -93,15 +83,96 @@ The rules listed below are to be followed by the ones who will be contributing t
 ![alt_text](https://github.com/NCSU-SE-2024/PackTravel_v2/blob/main/docs/DiscordScreenshot.png)
 
 ### Video demonstrating the old functionalities
-
+https://github.com/NCSU-SE-2024/PackTravel_v2/blob/main/docs/old%20Video.mp4
 
 ### Video demonstrating the new functionalities
+TODO
 
 
+# Quick look at the newly added features
 
-**So, let's go for Packtravel**
+* My Rides Section for Streamlined Ride Management:
+A dedicated space where users can easily track, view, and delete the rides they've created. This feature offers enhanced convenience for managing personal rides, ensuring users have full control over their travel plans at all times.
 
-https://user-images.githubusercontent.com/111834635/194171771-962a585e-5dc7-4ea3-af35-732ebd34e76c.mp4
+* Popular Rides Section for Quick Access:
+Users can now view the most frequently joined rides at a glance. This feature allows for quick discovery of popular travel options, helping users easily find and join well-frequented rides without hassle.
+
+* Interactive Discussion Forum for Community Engagement:
+The new discussion forum provides an interactive platform for users to share tips, exchange experiences, and discuss specific routes or trips. This fosters a vibrant community where users can collaborate and gain insights from fellow travelers.
+
+* Email Notifications to Keep Users Informed:
+Automated email alerts notify users when they successfully join a ride. This ensures users stay engaged and informed, with timely updates about their travel plans and any changes to the rides they are part of.
+
+* Critical Bug Fixes for Improved User Experience:
+Several key bugs have been resolved, including issues with login alerts, password confirmation mismatches, and background image loading problems. These fixes enhance the overall stability of the app, ensuring a smoother, more reliable user experience.
+
+
+# Use Cases: 
+1. Viewing My Rides
+    * Actor: PackTravel User (Student)
+    * Goal: View the rides they’ve created or joined.
+    * Steps:
+      - The user logs into the PackTravel platform.
+      - They navigate to the "My Rides" section.
+      - The system displays a list of their rides, including details such as ride time, destination, and participants.
+      - The user selects a ride to view more detailed information.
+
+    * Outcome: The user successfully tracks and views their rides, ensuring they are up to date with their travel plans.
+
+2. Viewing Top Ride Picks
+    * Actor: NCSU Student
+    * Goal: Discover top-rated or highly recommended rides.
+    * Steps:
+      - The user logs into the PackTravel platform.
+      - They navigate to the "Top Picks" section.
+      - The system displays a list of top-rated or popular rides based on user feedback or ride popularity.
+      - The user clicks on a ride for more information.
+    * Outcome: The user easily discovers the best rides available, saving time in selecting a ride that suits their preferences.
+
+3. Posting in the Discussion Forum
+    * Actor: NCSU Student
+    * Goal: Share travel experiences or discuss specific routes and trips with other users.
+    * Steps:
+      - The user logs into the PackTravel platform.
+      - They access the "Discussion Forum" section.
+      - The system displays a list of ongoing topics.
+      - The user creates a new discussion topic or comments on an existing one.
+      - The system updates the thread and notifies relevant users.
+    * Outcome: The user contributes to the community by sharing their experiences or gaining insights on travel routes.
+
+4. Viewing Latest Ride Options
+    * Actor: NCSU Student
+    * Goal: View the most recent ride options to different destinations.
+    * Steps:
+      - The user logs into the PackTravel platform.
+      - They navigate to the "Latest Ride Options" section.
+      - The system displays a list of new or upcoming rides to various locations.
+      - The user can scroll through the list and select a ride that fits their schedule and destination.
+    * Outcome: The user discovers fresh ride options and can quickly select a suitable ride for their trip.
+  
+5. Joining a Ride
+    * Actor: PackTravel User (Student)
+    * Goal: Join a ride that suits their destination and timing.
+    * Steps:
+      - The user logs into the PackTravel platform.
+      - They browse or search for available rides to their desired destination.
+      - The user selects a ride and clicks "Join."
+      - The system confirms the user’s participation and updates the ride's participant list.
+      - The user receives a confirmation notification about the ride.
+Outcome: The user successfully joins a ride, ensuring a smooth and collaborative travel experience with fellow students.
+
+6. Editing a Ride
+    * Actor: PackTravel User (Student)
+    * Goal: Edit an existing ride they created, such as adjusting the time or destination.
+    * Steps:
+      - The user logs into the PackTravel platform.
+      - They navigate to the "My Rides" section.
+      - The user selects a ride they have previously created.
+      - The system allows them to edit details like the ride's time, destination, or available seats.
+      - The user saves the changes, and the updated ride details are reflected in the system.
+Outcome: The user successfully updates the ride information, allowing for better coordination with other participants.
+
+
 
 **Built Using:**
 </br>
@@ -114,71 +185,20 @@ https://user-images.githubusercontent.com/111834635/194171771-962a585e-5dc7-4ea3
 <code><a href="https://getbootstrap.com/" target="_blank"><img height="50" src="https://www.vectorlogo.zone/logos/getbootstrap/getbootstrap-ar21.svg"></a></code>
 
 
-<h2>Features</h2>
 
-<ul>
-  <li>Create a PackTravel Ride</li>
-  <li>Create multiple routes to reach a ride's destination:  Bus, Cab, or Personal</li>
-  <li>Search and view other's rides</li>
-  <li>Join a PackTravel Ride's route</li>
-  <li>Check all your rides</li>
-  <li>Modify your Ride</li>
-  <li> Delete a Ride</li>
-  
-</ul>
-
-
-<h2> Who can use our app?</h2>
-
-  NC State students can sign up to explore available rides, create their own, or edit existing ones for a personalized experience.
-
-   ## Installation: 
-  - Refer to <a href="https://github.com/KoruptTinker/PackTravel/blob/main/INSTALL.md" target="_blank">INSTALL.MD</a> for setup instructions.
-       
 ## Tools
 - [Preetier Code Formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [JS-HTML-CSS Formatter](https://marketplace.visualstudio.com/items?itemName=lonefy.vscode-JS-CSS-HTML-formatter)
 - [PyLint](https://pylint.org/)
 
-## Functionalities in Action 
 
-- **Sign Up Page**
-<img src="/images/Register.gif" width="800" height="400"/>
-
-- **Login Page**
-<img src="/images/Login%20(1).gif" width="800" height="400"/>
-
-- **Creating a Ride**
-<img src="/images/Create1.gif" width="800" height="400"/>
-<img src="/images/Create2.gif" width="800" height="400"/>
-
-- **Adding New Route**
-<img src="/images/AddRoute11.gif" width="800" height="400"/>
-
-- **Search for a Ride**
-<img src="/images/Search.gif" width="800" height="400"/>
-
-- **My Rides**
-
-<img src="/images/myRides.gif" width="800" height="400"/>
-
-
-
-## Chat Channel
-
-<code><a href="https://join.slack.com/t/packtravelncsu/shared_invite/zt-2tnp9bktu-FImZbEPZL0V8nCWVqncSCA" target="_blank"><img height="50" width="100" src="https://user-images.githubusercontent.com/111834635/194175304-834d5663-b6bb-4e38-981d-98bc1bf028b8.png"></a></code>
-
-## Support
-[Support Email](mailto:packtravel.ncsu@gmail.com)
-
-## Contributors 
-
-<table>
-  <tr>
-    <td align="center"><a href="https://github.com/KoruptTinker"><img src="./images/Brijesh.png" width="100px;" alt=""/><br /><sub><b>Brijesh Kumar Bhayana</b></sub></a></td>
-    <td align="center"><a href="https://github.com/VidhishaKamat"><img src="https://avatars.githubusercontent.com/VidhishaKamat" width="100px;" alt=""/><br /><sub><b>Vidhisha Kamat</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/Abhi0010"><img src="./images/Abhishek.png" width="100px;" alt=""/><br /><sub><b>Abhishek Potdar</b></sub></a><br /></td>
-  </tr>
-</table>
+## Roadmap
+* [List of Roadmap and their corresponding open issues](https://github.com/NCSU-SE-2024/PackTravel_v2/issues)
+  
+## Team Members - Project 3
+* Anish Dhage
+* Gaurav Sheth
+* Soham Gundewar
+  
 
 
