@@ -1,3 +1,16 @@
+"""
+GoogleCloud class for managing interactions with Google Cloud services, focusing on file storage.
+
+This class provides functionality to interact with Google Cloud Storage, using credentials and a specified storage service. It allows file uploads to a defined Google Cloud bucket.
+
+Attributes:
+    credentials (Credentials): The credentials used for authenticating with Google Cloud services.
+    StorageService (CloudStorage): The service used for managing cloud storage interactions, such as uploading files.
+
+Methods:
+    __init__(credentials_path: str, bucket_path: str): Initializes the GoogleCloud class with the provided credentials and storage service.
+    upload_file(file, file_name: str): Uploads a file to Google Cloud Storage with the specified file name.
+"""
 from .cloud_storage import CloudStorage
 from .credentials import Credentials
 
