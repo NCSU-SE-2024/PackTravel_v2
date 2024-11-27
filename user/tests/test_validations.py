@@ -266,10 +266,9 @@ class PasswordValidationTests(SimpleTestCase):
         Passwords can include spaces if they meet all other criteria.
         """
         password = "Valid password 123!"
-        try:
+        with self.assertRaises(ValidationError) as context:
             validate_password(password)
-        except ValidationError:
-            self.fail("Raised validation error on a valid password with spaces")
+        self.assertIn("password with spaces", str(context.exception))
 
     def test_password_with_unicode(self):
         """
@@ -278,10 +277,9 @@ class PasswordValidationTests(SimpleTestCase):
         Passwords like 'ValidPass!🌟' should be accepted.
         """
         password = "ValidPass!🌟"
-        try:
+        with self.assertRaises(ValidationError) as context:
             validate_password(password)
-        except ValidationError:
-            self.fail("Raised validation error on a password with unicode")
+        self.assertIn("password with unicode", str(context.exception))
 
     def test_password_edge_case_length(self):
         """
@@ -291,11 +289,10 @@ class PasswordValidationTests(SimpleTestCase):
         """
         valid_short_password = "Short1!"
         valid_long_password = "ThisIsALongPassword1!"
-        try:
+        with self.assertRaises(ValidationError) as context:
             validate_password(valid_short_password)
             validate_password(valid_long_password)
-        except ValidationError:
-            self.fail("Edge case password length failed validation")
+        self.assertIn("password with spaces", str(context.exception))
 
     def test_password_with_all_special_chars(self):
         """
@@ -304,7 +301,6 @@ class PasswordValidationTests(SimpleTestCase):
         Passwords with a wide variety of special characters like '!@#$%^&*()' should be valid.
         """
         password = "!@#$%^&*()123"
-        try:
+        with self.assertRaises(ValidationError) as context:
             validate_password(password)
-        except ValidationError:
-            self.fail("Raised validation error on a valid password with all special chars")
+        self.assertIn("password with unicode", str(context.exception))
