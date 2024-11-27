@@ -19,7 +19,7 @@ missing badges:
 1. codecov passing/failing
    
 [![DOI](https://zenodo.org/badge/887482019.svg)](https://doi.org/10.5281/zenodo.14211208)
-[![codecov](https://codecov.io/gh/KoruptTinker/PackTravel/graph/badge.svg?token=VbruFqYa0G)](https://codecov.io/gh/KoruptTinker/PackTravel)
+[![codecov](https://codecov.io/gh/NCSU-SE-2024/PackTravel_v2/graph/badge.svg?token=RpYwpVkSmC)](https://codecov.io/gh/NCSU-SE-2024/PackTravel_v2)
 [![Python Style Checker](https://github.com/NCSU-SE-2024/PackTravel_v2/actions/workflows/python_style_checker.yml/badge.svg)](https://github.com/NCSU-SE-2024/PackTravel_v2/actions/workflows/python_style_checker.yml)
 [![Lint Python](https://github.com/NCSU-SE-2024/PackTravel_v2/actions/workflows/pylint.yml/badge.svg)](https://github.com/NCSU-SE-2024/PackTravel_v2/actions/workflows/pylint.yml)
 [![Test cases](https://github.com/NCSU-SE-2024/PackTravel_v2/actions/workflows/testcases.yml/badge.svg)](https://github.com/NCSU-SE-2024/PackTravel_v2/actions/workflows/testcases.yml)
