@@ -398,6 +398,80 @@ def create_route(request):
         },
     )
 
+def update_route(request, ride_id):
+    """
+    Handles the selection of a route for a specific ride and updates the database accordingly.
+
+    Args:
+        request (HttpRequest): The HTTP request object containing session data and form data.
+
+    Returns:
+        HttpResponse: A redirect to `display_ride()` if a route is selected, or a rendered
+                      response of 'publish/publish.html' if it's not a POST request.
+    """
+    intializeDB()
+    initializeService()
+    if request.method == "POST":
+        route = {
+            "_id": f"""{request.POST.get('purpose')}_{request.POST.get('s_point')}_{request.POST.get('destination')}_{request.POST.get("date")}_{request.POST.get("hour")}_{request.POST.get("minute")}_{request.POST.get("ampm")}""",
+            "purpose": request.POST.get("purpose"),
+            "s_point": request.POST.get("spoint"),
+            "destination": request.POST.get("destination"),
+            "type": request.POST.get("type"),
+            "date": request.POST.get("date"),
+            "hour": request.POST.get("hour"),
+            "minute": request.POST.get("minute"),
+            "ampm": request.POST.get("ampm"),
+            "details": request.POST.get("details"),
+            "users": [],
+        }
+        ride_id = request.POST.get("destination")
+        route["creator"] = attach_user_to_route(
+            request.session["username"], route["_id"]
+        )
+        if request.POST.get("slat"):
+            route["s_lat"] = request.POST.get("slat")
+            route["s_long"] = request.POST.get("slong")
+        if request.POST.get("dlat"):
+            route["d_lat"] = request.POST.get("dlat")
+            route["d_long"] = request.POST.get("dlong")
+
+        if request.POST.get("dlat") and request.POST.get("slat"):
+            res = mapsService.get_route_details(
+                route["s_lat"], route["s_long"], route["d_lat"], route["d_long"]
+            )
+            route["fuel"] = res.get("fuel", 0)
+            route["distance"] = res.get("distance", 0)
+
+        if routesDB.find_one({"_id": route["_id"]}) is None:
+            routesDB.insert_one(route)
+            print("Route added")
+            if ridesDB.find_one({"_id": ride_id}) is None:
+                ride = {
+                    "_id": request.POST.get("destination"),
+                    "destination": request.POST.get("destination"),
+                    "route_id": [route["_id"]],
+                }
+                ridesDB.insert_one(ride)
+                print("Ride Added")
+            else:
+                ride = ridesDB.find_one({"_id": ride_id})
+                ride["route_id"].append(route["_id"])
+                ridesDB.update_one(
+                    {"_id": ride_id}, {"$set": {"route_id": ride["route_id"]}}
+                )
+                print("Ride Updated")
+        return redirect(display_ride, ride_id=ride_id)
+    return render(
+        request,
+        "publish/update.html",
+        {
+            "username": request.session.get("username", None),
+            "gmap_api_key": secrets.GoogleMapsAPIKey,
+            "ride": ride_id
+        },
+    )
+
 
 def attach_user_to_route(username, route_id):
     """

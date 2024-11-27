@@ -1,0 +1,221 @@
+<!DOCTYPE html>{% load static %}
+<html lang="en">
+
+<head><meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Update PackTravel</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{gmap_api_key}}&libraries=places"></script>
+    <script>
+        function initAutocomplete() {
+        // Get the input element
+            const input = document.getElementById('acinput1');
+            const slat = document.getElementById("slat");
+            const slong = document.getElementById("slong");
+
+            const input2 = document.getElementById('acinput2');
+            const dlat = document.getElementById("dlat");
+            const dlong = document.getElementById("dlong");
+
+            // Initialize the autocomplete object
+            const autocomplete = new google.maps.places.Autocomplete(input);
+            const autocomplete2 = new google.maps.places.Autocomplete(input2);
+
+            // Add a listener for when a place is selected
+            autocomplete.addListener('place_changed', function() {
+                const place1 = autocomplete.getPlace();
+                slat.value = place1.geometry.location.lat();
+                slong.value = place1.geometry.location.lng();
+            });
+
+            autocomplete2.addListener('place_changed', function() {
+                const place2 = autocomplete2.getPlace();
+                dlat.value = place2.geometry.location.lat();
+                dlong.value = place2.geometry.location.lng();
+            });
+        }
+        
+        google.maps.event.addDomListener(window, 'load', initAutocomplete);
+    </script>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+</head>
+
+    <body  style="background-color: #3A3B3C;">
+
+    {% include 'nav.html' %}
+
+
+    
+    <div class="card mx-auto shadow-2-strong bg-white rounded" style="width: 60%; margin: 50px; padding: 50px;">
+        <h3>Edit Route</h3>
+        <hr>
+        <form action="/update_route/" method="POST" class="form-group">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <span class="form-label">Starting Point</span>
+                        <input id="acinput1" name="spoint" required class="form-control" type="text" placeholder="Enter your starting point for the ride">
+                        <input type="hidden" id="slat" name="slat" value="">
+                        <input type="hidden" id="slong" name="slong" value="">
+                    </div>
+                </div>
+                <br>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <span class="form-label">Destination</span>
+                        <input id="acinput2" name="destination" required class="form-control" type="text" placeholder="Enter your destination for the ride">
+                        <input type="hidden" id="dlat" name="dlat" value="">
+                        <input type="hidden" id="dlong" name="dlong" value="">
+                    </div>
+                </div>
+                <br>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <span class="form-label">Purpose</span>
+                        <input name="purpose" required class="form-control" type="text" placeholder="Enter your purpose">
+                    </div>
+                </div>
+                <br>
+            </div>
+            <br>
+            <div class="form-group">
+                <span class="form-label">Journey Date</span>
+                <input id="journeyDate" class="form-control" name="date" type="date" required placeholder="Enter journey date">
+            </div>
+            <br>
+            <div class="form-group">
+                <span class="form-label">Select a type of route:</span>
+                <select name="type" required class="form-control">
+                    <option>Bus</option>
+                    <option>Cab</option>
+                    <option>Personal</option>
+                </select>
+                <span class="select-arrow"></span>
+            </div>
+            <br>
+                <div class="form-group">
+            <br>
+            Enter the Start Time
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <span class="form-label">Hour</span>
+                                <select name="hour" required class="form-control">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                </select>
+                                <span class="select-arrow"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <span class="form-label">Min</span>
+                                <select name="minute" required class="form-control">
+                                    <option>00</option>
+                                    <option>05</option>
+                                    <option>10</option>
+                                    <option>15</option>
+                                    <option>20</option>
+                                    <option>25</option>
+                                    <option>30</option>
+                                    <option>35</option>
+                                    <option>40</option>
+                                    <option>45</option>
+                                    <option>50</option>
+                                    <option>55</option>
+                                </select>
+                                <span class="select-arrow"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <span class="form-label">AM/PM</span>
+                                <select name="ampm" class="form-control">
+                                    <option>AM</option>
+                                    <option>PM</option>
+                                </select>
+                                <span class="select-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+               <div class="form-group">
+               <span class="form-label">Route Details</span>
+               <textarea rows="2" name="details" required class="form-control" type="text" placeholder="Enter route details"></textarea>
+           </div>
+                <br><br>
+                <div class="form-btn">
+                    <button style="float: right; color: white; background-color: #D22B2B; border-color: #D22B2B;"  class="btn  btn-lg submit-btn">Add Route</button>
+                    <br>
+                </div>
+            </div>
+            <br><br>
+        </form>
+</div>
+
+<script>
+    // JavaScript to dynamically set the min and max attributes
+    const dateInput = document.getElementById('journeyDate');
+    const today = new Date();
+    
+    // Set minimum date to tomorrow
+    const minDate = new Date(today);
+    minDate.setDate(today.getDate() + 1);
+    
+    // Set maximum date to 30 days from today
+    const maxDate = new Date(today);
+    maxDate.setDate(today.getDate() + 30);
+
+    // Format dates as YYYY-MM-DD
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
+    dateInput.setAttribute('min', formatDate(minDate));
+    dateInput.setAttribute('max', formatDate(maxDate));
+    dateInput.oninvalid = function(event) {
+        if (this.value < this.min) {
+            this.setCustomValidity(`Please select a date no earlier than tomorrow.`);
+        } else if (this.value > this.max) {
+            this.setCustomValidity(`Please select a date no later than 30 days from today.`);
+        } else {
+            this.setCustomValidity(''); // Clear any other invalid states
+        }
+    };
+
+    // Clear custom validation message on input
+    dateInput.oninput = function(event) {
+        this.setCustomValidity('');
+    };
+</script>
+
+</body>
+
+</html>

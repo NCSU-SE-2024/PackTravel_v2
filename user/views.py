@@ -348,25 +348,6 @@ def delete_ride(request, ride_id):
     routesDB.delete_one({"_id": ride_id})
     return redirect("/myrides")
 
-def update_ride(request, ride_id):
-    """
-    Deletes a specified ride from the routes collection.
-
-    Args:
-        request (HttpRequest): The request object.
-        ride_id (str): The ID of the ride to delete.
-
-    Returns:
-        HttpResponse: Redirects to the user's rides page.
-    """
-    intializeDB()
-    user = userDB.find_one({"username": request.session["username"]})
-    if user is None:
-        pass
-    # routesDB.update_one({"_id": ride_id})
-    print("update clicked", routesDB.find_one({"_id": ride_id}))
-    return redirect("/myrides")
-
 def edit_user(request):
     """
     Allows users to edit their profile details, including profile picture, name, and phone number.

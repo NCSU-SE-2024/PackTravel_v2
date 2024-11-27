@@ -33,6 +33,7 @@ urlpatterns = [
     path("logout/", userView.logout, name="logout"),
     path("login/", userView.login, name="login"),
     path("create_route/", publishViews.create_route, name="create_route"),
+    path("update_route/<ride_id>", publishViews.update_route, name="update_route"),
     # path('add_route/', publishViews.add_route, name='add_route'),
     path("select_route/", publishViews.select_route, name="select_route"),
     path(
@@ -43,7 +44,7 @@ urlpatterns = [
     path("logout/", LogoutView.as_view()),
     path("myrides/", userView.my_rides, name="myrides"),
     path("delete_ride/<ride_id>", userView.delete_ride, name="delete_ride"),
-    path("update_ride/<ride_id>", userView.update_ride, name="update_ride"),
+    path("update_route/<ride_id>", publishViews.update_route, name="update_route"),
     path("u/<userid>", userView.user_profile, name="user_profile"),
     path("edit-profile/", userView.edit_user, name="user_user"),
     path("forum/create_topic/", forumViews.create_topic, name="create_topic"),
