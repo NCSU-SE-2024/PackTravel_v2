@@ -258,3 +258,58 @@ class PasswordValidationTests(SimpleTestCase):
         with self.assertRaises(ValidationError) as context:
             validate_password(password)
         self.assertIn("repeated characters", str(context.exception))
+
+    def test_password_with_spaces(self):
+        """
+        Test that passwords with spaces are allowed.
+
+        Passwords can include spaces if they meet all other criteria.
+        """
+        password = "Valid Pass 1!"
+        try:
+            validate_password(password)
+        except ValidationError:
+            self.fail("Raised ValidationError on a valid password with spaces")
+
+    def test_password_with_unicode(self):
+        """
+        Test that passwords with unicode characters are allowed.
+
+        Passwords like 'Válíd1Páss!' should be accepted.
+        """
+        password = "Válíd1Páss!"
+        try:
+            validate_password(password)
+        except ValidationError:
+            self.fail(
+                "Raised ValidationError on a valid password with Unicode characters")
+
+    def test_password_edge_case_length(self):
+        """
+        Test the edge cases for minimum and maximum password lengths.
+
+        Passwords on the edge of the valid length range should pass validation.
+        """
+        password = "Valid1P!"
+        try:
+            validate_password(password)
+        except ValidationError:
+            self.fail(
+                "Raised ValidationError on a valid password at minimum length")
+
+        password = "Valid1Pass1234!"
+        try:
+            validate_password(password)
+        except ValidationError:
+            self.fail(
+                "Raised ValidationError on a valid password at maximum length")
+
+    def test_password_with_all_special_chars(self):
+        """
+        Test a password with all special characters.
+
+        Passwords with a wide variety of special characters like '!@#$%^&*()' should be valid.
+        """
+        password = "!@#(),.?\":{}|<>"
+        with self.assertRaises(ValidationError) as context:
+            validate_password(password)
