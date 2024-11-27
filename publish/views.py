@@ -25,7 +25,7 @@ The module provides an interface for the front-end to interact with the backend 
 
 from http.client import HTTPResponse
 from django.shortcuts import render, redirect
-from numpy import True_, dtype
+# from numpy import True_, dtype
 import requests
 import json
 from datetime import datetime
