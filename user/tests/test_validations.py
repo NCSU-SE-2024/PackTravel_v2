@@ -269,7 +269,7 @@ class PasswordValidationTests(SimpleTestCase):
         try:
             validate_password(password)
         except ValidationError:
-            self.fail("Raised validation error on a valid password with spaces.")
+            self.fail("Raised validation error on a valid password with spaces")
 
     def test_password_with_unicode(self):
         """
@@ -281,7 +281,7 @@ class PasswordValidationTests(SimpleTestCase):
         try:
             validate_password(password)
         except ValidationError:
-            self.fail("Raised validation error on a password with unicode.")
+            self.fail("Raised validation error on a password with unicode")
 
     def test_password_edge_case_length(self):
         """
@@ -295,7 +295,7 @@ class PasswordValidationTests(SimpleTestCase):
             validate_password(valid_short_password)
             validate_password(valid_long_password)
         except ValidationError:
-            self.fail("Edge case password length failed validation.")
+            self.fail("Edge case password length failed validation")
 
     def test_password_with_all_special_chars(self):
         """
@@ -307,4 +307,4 @@ class PasswordValidationTests(SimpleTestCase):
         try:
             validate_password(password)
         except ValidationError:
-            self.fail("Raised validation error on a valid password with all special chars.")
+            self.fail("Raised validation error on a valid password with all special chars")
