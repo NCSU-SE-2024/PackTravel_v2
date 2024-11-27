@@ -102,15 +102,19 @@ def rides_with_topics(request):
     rides_with_topics = []
     visitedDest = set()
     for ride in rides:
-        if ride['destination'] not in visitedDest:
-            visitedDest.add(ride['destination'])
+        if ride["destination"] not in visitedDest:
+            visitedDest.add(ride["destination"])
             # Fetch topics related to the ride
-            topics = list(topicsDB.find({"ride_id": ride['destination']}))
+            topics = list(topicsDB.find({"ride_id": ride["destination"]}))
             for topic in topics:
-                topic['id'] = topic.pop('_id')
-            rides_with_topics.append({'ride': ride, 'topics': topics})
+                topic["id"] = topic.pop("_id")
+            rides_with_topics.append({"ride": ride, "topics": topics})
 
-    return render(request, 'forum/rides_with_topics.html', {'rides_with_topics': rides_with_topics})
+    return render(
+        request,
+        "forum/rides_with_topics.html",
+        {"rides_with_topics": rides_with_topics},
+    )
 
 
 def create_topic(request):
@@ -122,10 +126,10 @@ def create_topic(request):
     final_rides = []
     visitedDest = set()
     for ride in rides:
-        ride['id'] = ride.pop('_id')
-        if ride['destination'] not in visitedDest:
+        ride["id"] = ride.pop("_id")
+        if ride["destination"] not in visitedDest:
             final_rides.append(ride)
-            visitedDest.add(ride['destination'])
+            visitedDest.add(ride["destination"])
     if request.method == "POST":
         ride_id = request.POST.get("ride_id")
         title = request.POST.get("title")
@@ -133,7 +137,11 @@ def create_topic(request):
         user = request.session.get("username")
 
         if not (ride_id and title and content and user):
-            return render(request, "forum/create_topic.html", {"error": "All fields are required!"})
+            return render(
+                request,
+                "forum/create_topic.html",
+                {"error": "All fields are required!"},
+            )
 
         topic = {
             "ride_id": ride_id,
@@ -175,8 +183,9 @@ def forum_topics(request, ride_id):
     intializeDB()
     topics = list(topicsDB.find({"ride_id": ride_id}))
     for topic in topics:
-        topic['id'] = topic.pop('_id')
-    return render(request, "forum/topics.html", {"topics": topics, "ride_id": ride_id})
+        topic["id"] = topic.pop("_id")
+    return render(request, "forum/topics.html",
+                  {"topics": topics, "ride_id": ride_id})
 
 
 def forum_topic_details(request, topic_id):
@@ -185,6 +194,9 @@ def forum_topic_details(request, topic_id):
     """
     intializeDB()
     topic = topicsDB.find_one({"_id": ObjectId(topic_id)})
-    topic['id'] = topic.pop('_id')
+    topic["id"] = topic.pop("_id")
     comments = list(commentsDB.find({"topic_id": ObjectId(topic_id)}))
-    return render(request, "forum/topic_details.html", {"topic": topic, "comments": comments})
+    return render(
+        request, "forum/topic_details.html", {
+            "topic": topic, "comments": comments}
+    )

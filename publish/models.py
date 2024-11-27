@@ -26,6 +26,7 @@ class Ride(models.Model):
     Methods:
         __str__(self): Returns a string representation of the `Ride` instance, in this case, its destination.
     """
+
     # fields of the model
     destination = models.TextField()
     # rideDate = models.TextField()
@@ -39,7 +40,8 @@ class Ride(models.Model):
         Attributes:
             app_label (str): Specifies the app label to associate this model with the `PackTravel.publish` app.
         """
-        app_label = 'PackTravel.publish'
+
+        app_label = "PackTravel.publish"
 
     # renames the instances of the model
     # with their title name

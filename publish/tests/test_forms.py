@@ -15,7 +15,6 @@ Dependencies:
 This module is intended for use with Django's testing framework to ensure that the form behaves as expected under different conditions.
 """
 
-
 from django.test import TransactionTestCase
 from publish.forms import RideForm
 
@@ -24,7 +23,7 @@ class TestForms(TransactionTestCase):
     """
     Test suite for the RideForm form in the publish application.
 
-    This class contains various test cases that check if the RideForm correctly handles valid and invalid input data. Each test method provides different sets of data to the form and asserts whether the form behaves as expected. 
+    This class contains various test cases that check if the RideForm correctly handles valid and invalid input data. Each test method provides different sets of data to the form and asserts whether the form behaves as expected.
 
     Tests cover scenarios such as:
     - Valid data submission
@@ -35,7 +34,7 @@ class TestForms(TransactionTestCase):
 
     This class extends `TransactionTestCase`, which allows tests to interact with the database and ensure data integrity during tests.
     """
-    
+
     def test_rideform_validData(self):
         """
         Tests the form with valid ride data.
@@ -46,15 +45,16 @@ class TestForms(TransactionTestCase):
             - `form.is_valid()` is True, meaning the form passes all validation checks.
         """
 
-
-        form = RideForm(data={
-            'source': '1505,Avery Close',
-            'destination': 'Talley Union',
-            'purpose': 'Travel',
-            'rideDate': '2024-12-15',
-            'route': 'Bus',
-            'routeDetails': 'Home to College'
-        })
+        form = RideForm(
+            data={
+                "source": "1505,Avery Close",
+                "destination": "Talley Union",
+                "purpose": "Travel",
+                "rideDate": "2024-12-15",
+                "route": "Bus",
+                "routeDetails": "Home to College",
+            }
+        )
         self.assertTrue(form.is_valid())
 
     def test_rideform_invalidDate(self):
@@ -68,16 +68,18 @@ class TestForms(TransactionTestCase):
             - `rideDate` is included in the form errors.
         """
 
-        form = RideForm(data={
-            'source': '1505,Avery Close',
-            'destination': 'Talley Union',
-            'purpose': 'Travel',
-            'rideDate': '2024-04-12',
-            'route': 'Bus',
-            'routeDetails': 'Home to College'
-        })
+        form = RideForm(
+            data={
+                "source": "1505,Avery Close",
+                "destination": "Talley Union",
+                "purpose": "Travel",
+                "rideDate": "2024-04-12",
+                "route": "Bus",
+                "routeDetails": "Home to College",
+            }
+        )
         self.assertFalse(form.is_valid())
-        self.assertIn('rideDate', form.errors)
+        self.assertIn("rideDate", form.errors)
 
     def test_rideform_pastDate(self):
         """
@@ -90,16 +92,18 @@ class TestForms(TransactionTestCase):
             - `rideDate` is included in the form errors.
         """
 
-        form = RideForm(data={
-            'source': '1505,Avery Close',
-            'destination': 'Talley Union',
-            'purpose': 'Travel',
-            'rideDate': '2024-10-11',
-            'route': 'Bus',
-            'routeDetails': 'Home to College'
-        })
+        form = RideForm(
+            data={
+                "source": "1505,Avery Close",
+                "destination": "Talley Union",
+                "purpose": "Travel",
+                "rideDate": "2024-10-11",
+                "route": "Bus",
+                "routeDetails": "Home to College",
+            }
+        )
         self.assertFalse(form.is_valid())
-        self.assertIn('rideDate', form.errors)
+        self.assertIn("rideDate", form.errors)
 
     def test_rideform_futureDate(self):
         """
@@ -111,16 +115,18 @@ class TestForms(TransactionTestCase):
             - `form.is_valid()` is False, meaning the form fails validation.
             - `rideDate` is included in the form errors.
         """
-        form = RideForm(data={
-            'source': '1505,Avery Close',
-            'destination': 'Talley Union',
-            'purpose': 'Travel',
-            'rideDate': '2025-10-11',
-            'route': 'Bus',
-            'routeDetails': 'Home to College'
-        })
+        form = RideForm(
+            data={
+                "source": "1505,Avery Close",
+                "destination": "Talley Union",
+                "purpose": "Travel",
+                "rideDate": "2025-10-11",
+                "route": "Bus",
+                "routeDetails": "Home to College",
+            }
+        )
         self.assertFalse(form.is_valid())
-        self.assertIn('rideDate', form.errors)
+        self.assertIn("rideDate", form.errors)
 
     def test_rideform_invalidDestination(self):
         """
@@ -133,14 +139,17 @@ class TestForms(TransactionTestCase):
             - The error message `'Source and destination must be different.'` is included in the form's `__all__` errors.
         """
 
-        form = RideForm(data={
-            'source': '1505,Avery Close',
-            'destination': '1505,Avery Close',
-            'purpose': 'Travel',
-            'rideDate': '2024-11-15',
-            'route': 'Bike',
-            'routeDetails': 'Home to College'
-        })
+        form = RideForm(
+            data={
+                "source": "1505,Avery Close",
+                "destination": "1505,Avery Close",
+                "purpose": "Travel",
+                "rideDate": "2024-11-15",
+                "route": "Bike",
+                "routeDetails": "Home to College",
+            }
+        )
         self.assertFalse(form.is_valid())
-        self.assertIn('Source and destination must be different.',
-                      form.errors['__all__'])
+        self.assertIn(
+            "Source and destination must be different.", form.errors["__all__"]
+        )

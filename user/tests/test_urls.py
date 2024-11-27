@@ -24,35 +24,35 @@ class TestUrl(SimpleTestCase):
         """
         Test that the 'index' URL resolves to the `index` view.
         """
-        url = reverse('index')
+        url = reverse("index")
         self.assertEquals(resolve(url).func, index)
 
     def test_register_resolved(self):
         """
         Test that the 'register' URL resolves to the `register` view.
         """
-        url = reverse('register')
+        url = reverse("register")
         self.assertEquals(resolve(url).func, register)
 
     def test_login_resolved(self):
         """
         Test that the 'login' URL resolves to the `login` view.
         """
-        url = reverse('login')
+        url = reverse("login")
         self.assertEquals(resolve(url).func, login)
 
     def test_logout_resolved(self):
         """
         Test that the 'logout' URL resolves to the `logout` view.
         """
-        url = reverse('logout')
+        url = reverse("logout")
         self.assertEquals(resolve(url).func, logout)
 
     def test_profile_resolved(self):
         """
         Test that the 'user_profile' URL resolves to the `user_profile` view with a valid argument.
         """
-        url = reverse('user_profile', args=["123"])
+        url = reverse("user_profile", args=["123"])
         self.assertEquals(resolve(url).func, user_profile)
 
 
@@ -66,7 +66,7 @@ class TestUrl_Response(TestCase):
         Test the 'index' route for a non-logged-in user.
         Ensures that the HTTP response status code is 200 (OK).
         """
-        response = self.client.get(reverse('index'))
+        response = self.client.get(reverse("index"))
         self.assertEqual(response.status_code, 200)
 
     def test_index_route_non_logged_template(self):
@@ -74,15 +74,15 @@ class TestUrl_Response(TestCase):
         Test the 'index' route for a non-logged-in user.
         Ensures that the correct template ('home/home.html') is used.
         """
-        response = self.client.get(reverse('index'))
-        self.assertTemplateUsed(response, 'home/home.html')
+        response = self.client.get(reverse("index"))
+        self.assertTemplateUsed(response, "home/home.html")
 
     def test_logout_route_non_logged(self):
         """
         Test the 'logout' route for a non-logged-in user.
         Ensures that the HTTP response status code is 302 (redirect).
         """
-        response = self.client.get(reverse('logout'))
+        response = self.client.get(reverse("logout"))
         self.assertEqual(response.status_code, 302)
 
     def test_login_route_non_logged(self):
@@ -90,7 +90,7 @@ class TestUrl_Response(TestCase):
         Test the 'login' route for a non-logged-in user.
         Ensures that the HTTP response status code is 200 (OK).
         """
-        response = self.client.get(reverse('login'))
+        response = self.client.get(reverse("login"))
         self.assertEqual(response.status_code, 200)
 
     def test_login_route_non_logged_template(self):
@@ -98,15 +98,17 @@ class TestUrl_Response(TestCase):
         Test the 'login' route for a non-logged-in user.
         Ensures that the correct template ('user/login.html') is used.
         """
-        response = self.client.get(reverse('login'))
-        self.assertTemplateUsed(response, 'user/login.html')
+        response = self.client.get(reverse("login"))
+        self.assertTemplateUsed(response, "user/login.html")
 
     def test_profile_ride_non_logged(self):
         """
         Test the 'user_profile' route for a non-logged-in user with a valid ID.
         Ensures that the HTTP response status code is 200 (OK).
         """
-        response = self.client.get(reverse('user_profile', args=["67240ab0b84ec3a5aa1e5cc8"]))
+        response = self.client.get(
+            reverse("user_profile", args=["67240ab0b84ec3a5aa1e5cc8"])
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_profile_ride_non_logged_template(self):
@@ -114,5 +116,7 @@ class TestUrl_Response(TestCase):
         Test the 'user_profile' route for a non-logged-in user with a valid ID.
         Ensures that the correct template ('user/404.html') is used for this scenario.
         """
-        response = self.client.get(reverse('user_profile', args=["67240ab0b84ec3a5aa1e5cc8"]))
-        self.assertTemplateUsed(response, 'user/404.html')
+        response = self.client.get(
+            reverse("user_profile", args=["67240ab0b84ec3a5aa1e5cc8"])
+        )
+        self.assertTemplateUsed(response, "user/404.html")

@@ -1,5 +1,5 @@
 """
-This module provides classes for managing sensitive configuration settings 
+This module provides classes for managing sensitive configuration settings
 and URL-related configurations by loading them from environment variables.
 
 Classes:
@@ -10,6 +10,7 @@ Classes:
 
 from dotenv import load_dotenv
 import os
+
 
 class Secrets:
     """
@@ -36,8 +37,8 @@ class Secrets:
         load_dotenv()
         self.MongoConnectionURL = os.getenv("MONGO_CONNECTION_URL")
         self.GoogleMapsAPIKey = os.getenv("GOOGLE_MAPS_API_KEY")
-        self.CloudCredentials = os.getenv('GOOGLE_CLOUD_CREDENTIALS')
-        self.CloudStorageBucket = os.getenv('GOOGLE_CLOUD_STORAGE_BUCKET')
+        self.CloudCredentials = os.getenv("GOOGLE_CLOUD_CREDENTIALS")
+        self.CloudStorageBucket = os.getenv("GOOGLE_CLOUD_STORAGE_BUCKET")
 
 
 class URLConfig:

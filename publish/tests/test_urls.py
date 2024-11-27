@@ -29,7 +29,6 @@ class TestUrl(SimpleTestCase):
     This class extends `SimpleTestCase` to focus solely on URL resolution without interacting with a database.
     """
 
-
     def test_publish_index_resolved(self):
         """
         Tests the URL resolution for the 'publish' view.
@@ -40,7 +39,7 @@ class TestUrl(SimpleTestCase):
             - The URL resolves to the `publish_index` view function.
         """
 
-        url = reverse('publish')
+        url = reverse("publish")
         self.assertEquals(resolve(url).func, publish_index)
 
     def test_create_ride_resolved(self):
@@ -53,7 +52,7 @@ class TestUrl(SimpleTestCase):
             - The URL resolves to the `create_route` view function.
         """
 
-        url = reverse('create_route')
+        url = reverse("create_route")
         self.assertEquals(resolve(url).func, create_route)
 
     def test_login_resolved(self):
@@ -66,7 +65,7 @@ class TestUrl(SimpleTestCase):
             - The URL resolves to the `select_route` view function.
         """
 
-        url = reverse('select_route')
+        url = reverse("select_route")
         self.assertEquals(resolve(url).func, select_route)
 
     def test_display_ride_resolved(self):
@@ -79,10 +78,11 @@ class TestUrl(SimpleTestCase):
             - The URL resolves to the `display_ride` view function.
         """
 
-        url = reverse('display_ride', args=["Huntsville, AL, USA"])
+        url = reverse("display_ride", args=["Huntsville, AL, USA"])
         self.assertEquals(resolve(url).func, display_ride)
 
         # def test_add_route_resolved(self):
+
     #     url = reverse('add_route')
     #     self.assertEquals(resolve(url).func, add_)
 
@@ -111,7 +111,7 @@ class TestUrl_Response(TestCase):
             - Status code 200 for the response.
         """
 
-        response = self.client.get(reverse('create_route'))
+        response = self.client.get(reverse("create_route"))
         self.assertEqual(response.status_code, 200)
 
     def test_create_route_non_logged_template(self):
@@ -124,8 +124,8 @@ class TestUrl_Response(TestCase):
             - The 'publish/publish.html' template is used.
         """
 
-        response = self.client.get(reverse('create_route'))
-        self.assertTemplateUsed(response, 'publish/publish.html')
+        response = self.client.get(reverse("create_route"))
+        self.assertTemplateUsed(response, "publish/publish.html")
 
     def test_select_route_non_logged(self):
         """
@@ -137,7 +137,7 @@ class TestUrl_Response(TestCase):
             - Status code 200 for the response.
         """
 
-        response = self.client.get(reverse('select_route'))
+        response = self.client.get(reverse("select_route"))
         self.assertEqual(response.status_code, 200)
 
     def test_select_route_non_logged_template(self):
@@ -150,8 +150,8 @@ class TestUrl_Response(TestCase):
             - The 'publish/publish.html' template is used.
         """
 
-        response = self.client.get(reverse('select_route'))
-        self.assertTemplateUsed(response, 'publish/publish.html')
+        response = self.client.get(reverse("select_route"))
+        self.assertTemplateUsed(response, "publish/publish.html")
 
     def test_publish_non_logged(self):
         """
@@ -163,7 +163,7 @@ class TestUrl_Response(TestCase):
             - Status code 302 for the response (redirect).
         """
 
-        response = self.client.get(reverse('publish'))
+        response = self.client.get(reverse("publish"))
         self.assertEqual(response.status_code, 302)
 
     def test_display_ride_non_logged(self):
@@ -177,7 +177,9 @@ class TestUrl_Response(TestCase):
         """
 
         response = self.client.get(
-            reverse('display_ride', args=["Raleigh, NC, USA"]))
+            reverse(
+                "display_ride",
+                args=["Raleigh, NC, USA"]))
         self.assertEqual(response.status_code, 200)
 
     def test_display_ride_non_logged_template(self):
@@ -191,5 +193,7 @@ class TestUrl_Response(TestCase):
         """
 
         response = self.client.get(
-            reverse('display_ride', args=["Raleigh, NC, USA"]))
-        self.assertTemplateUsed(response, 'publish/route.html')
+            reverse(
+                "display_ride",
+                args=["Raleigh, NC, USA"]))
+        self.assertTemplateUsed(response, "publish/route.html")

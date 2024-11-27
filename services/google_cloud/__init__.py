@@ -11,6 +11,7 @@ Methods:
     __init__(credentials_path: str, bucket_path: str): Initializes the GoogleCloud class with the provided credentials and storage service.
     upload_file(file, file_name: str): Uploads a file to Google Cloud Storage with the specified file name.
 """
+
 from .cloud_storage import CloudStorage
 from .credentials import Credentials
 
@@ -20,16 +21,21 @@ class GoogleCloud:
     A class to manage interactions with Google Cloud services, specifically for file storage.
 
     """
+
     credentials: Credentials = None
     StorageService: CloudStorage = None
 
-    def __init__(self, credentials_path: str = "credentials.json", bucket_path: str = 'ptravelv2-pfp'):
+    def __init__(
+        self,
+        credentials_path: str = "credentials.json",
+        bucket_path: str = "ptravelv2-pfp",
+    ):
         """
         Initializes the GoogleCloud class with credentials and storage service.
 
         """
         self.credentials = Credentials(credentials_path)
-        self.StorageService = CloudStorage(self.credentials, '')
+        self.StorageService = CloudStorage(self.credentials, "")
 
     def upload_file(self, file, file_name: str = ""):
         """
@@ -42,4 +48,6 @@ class GoogleCloud:
         Returns:
             The result of the upload operation from CloudStorage.
         """
-        return self.StorageService.__upload_file__(file, destination_blob_name=file_name)
+        return self.StorageService.__upload_file__(
+            file, destination_blob_name=file_name
+        )

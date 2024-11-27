@@ -7,7 +7,6 @@ from config import Secrets
 
 def get_client():
     secret = Secrets()
-    client = MongoClient(secret.MongoConnectionURL,
-                         tlsCAFile=certifi.where())
+    client = MongoClient(secret.MongoConnectionURL, tlsCAFile=certifi.where())
 
     return client

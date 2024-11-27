@@ -17,7 +17,7 @@ def validate_date(value):
     This function checks if the given date is:
     1. Not in the past, i.e., earlier than today's date.
     2. Not more than 30 days into the future from the current date.
-    
+
     If the date is invalid, a `ValidationError` is raised with an appropriate message.
 
     Args:

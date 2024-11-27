@@ -11,6 +11,7 @@ Methods:
     __init__(credentials: Credentials, pfp_bucket: str): Initializes the CloudStorage class with provided credentials and bucket name.
     __upload_file__(file, destination_blob_name: str): Uploads the specified file to Google Cloud Storage and returns the public URL of the uploaded file.
 """
+
 from .credentials import Credentials
 from google.cloud import storage
 
@@ -19,6 +20,7 @@ class CloudStorage:
     """
     A class to handle file uploads to a Google Cloud Storage bucket.
     """
+
     credentials: Credentials = None
     PfpBucket: str = ""
 
@@ -45,7 +47,7 @@ class CloudStorage:
             str: The public URL of the uploaded file.
         """
         client = storage.Client(credentials=self.credentials.credentials)
-        bucket = client.bucket('ptravelv2-pfp')
+        bucket = client.bucket("ptravelv2-pfp")
         blob = bucket.blob(destination_blob_name)
         blob.upload_from_file(file)
         return blob.public_url

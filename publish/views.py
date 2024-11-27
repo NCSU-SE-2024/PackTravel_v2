@@ -1,5 +1,5 @@
 """
-This module contains view functions for managing ride routes, user interactions, and email notifications within the ride-sharing platform. 
+This module contains view functions for managing ride routes, user interactions, and email notifications within the ride-sharing platform.
 
 It interacts with the MongoDB database to manage users, rides, and routes, and uses Google Maps API for route details. The module includes the following key functionalities:
 
@@ -25,6 +25,7 @@ The module provides an interface for the front-end to interact with the backend 
 
 from http.client import HTTPResponse
 from django.shortcuts import render, redirect
+
 # from numpy import True_, dtype
 import requests
 import json
@@ -46,6 +47,7 @@ from publish.forms import RideForm
 from utils import get_client
 import traceback
 import urllib.parse
+
 # from django.http import HttpResponse
 
 # Create your views here.
@@ -56,8 +58,8 @@ ridesDB = None
 routesDB = None
 mapsService = None
 
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
 secrets = Secrets()
 urlConfig = URLConfig()
@@ -95,12 +97,12 @@ def initializeService():
     """
     Initializes the MapsService instance and sets it as a global variable.
 
-    This function creates an instance of the `MapsService` class using the 
-    provided `RoutesHostname` from `urlConfig` and the `GoogleMapsAPIKey` from 
+    This function creates an instance of the `MapsService` class using the
+    provided `RoutesHostname` from `urlConfig` and the `GoogleMapsAPIKey` from
     `secrets`. It then assigns this instance to the global variable `mapsService`.
 
     Globals:
-        mapsService (MapsService): An instance of the MapsService class that is 
+        mapsService (MapsService): An instance of the MapsService class that is
                                    initialized with routing and API key configurations.
 
     Dependencies:
@@ -111,8 +113,9 @@ def initializeService():
         None
     """
     global mapsService
-    mapsService = MapsService(urlConfig.RoutesHostname,
-                              secrets.GoogleMapsAPIKey)
+    mapsService = MapsService(
+        urlConfig.RoutesHostname,
+        secrets.GoogleMapsAPIKey)
 
 
 def publish_index(request):
@@ -122,20 +125,28 @@ def publish_index(request):
     This function performs the following steps:
 
     Args:
-        request (HttpRequest): The HTTP request object containing session data and other 
+        request (HttpRequest): The HTTP request object containing session data and other
                                request information.
 
     Returns:
-        HttpResponse: A redirect to the 'index' page if the user is not logged in, or a rendered 
-                      response of the 'publish/publish.html' template with context data if the 
+        HttpResponse: A redirect to the 'index' page if the user is not logged in, or a rendered
+                      response of the 'publish/publish.html' template with context data if the
                       user is authenticated.
     """
     intializeDB()
-    if not request.session.has_key('username'):
-        request.session['alert'] = "Please login to create a ride."
+    if not request.session.has_key("username"):
+        request.session["alert"] = "Please login to create a ride."
         messages.info(request, "Please login to create a ride!")
-        return redirect('index')
-    return render(request, 'publish/publish.html', {"username": request.session['username'], "alert": True, "gmap_api_key": secrets.GoogleMapsAPIKey})
+        return redirect("index")
+    return render(
+        request,
+        "publish/publish.html",
+        {
+            "username": request.session["username"],
+            "alert": True,
+            "gmap_api_key": secrets.GoogleMapsAPIKey,
+        },
+    )
 
 
 def display_ride(request, ride_id):
@@ -143,29 +154,29 @@ def display_ride(request, ride_id):
     Displays the ride details and associated routes for a given ride ID.
 
     Args:
-        request (HttpRequest): The HTTP request object containing session data and other 
+        request (HttpRequest): The HTTP request object containing session data and other
                                request information.
         ride_id (str): The unique identifier of the ride to be displayed.
 
     Returns:
-        HttpResponse: A rendered response of the 'publish/route.html' template with 
+        HttpResponse: A rendered response of the 'publish/route.html' template with
                       context data including ride details, routes, and selected route.
     """
     intializeDB()
     print("Ride id", ride_id)
-    ride = ridesDB.find_one({'_id': ride_id})
+    ride = ridesDB.find_one({"_id": ride_id})
     # print(f"Ride = {ride}")
     routes = get_routes(ride)
-    selected = routeSelect(request.session.get('username', None), routes)
+    selected = routeSelect(request.session.get("username", None), routes)
 
     # print(f"Routes = {selected}")
     context = {
-        "username": request.session.get('username', None),
+        "username": request.session.get("username", None),
         "ride": ride,
         "routes": routes,
-        "selectedRoute": selected
+        "selectedRoute": selected,
     }
-    return render(request, 'publish/route.html', context)
+    return render(request, "publish/route.html", context)
 
 
 def send_route_email(request, username, ride):
@@ -186,16 +197,22 @@ def send_route_email(request, username, ride):
         subject = f"Route Selected for today's Ride"
         message = f"Hello {username},\n\nYou have successfully joined the route for the ride to {ride.get('destination')}.\n\nThanks for using our service!\n\nbest wishes,\npacktravel team"
 
-        recipient_email = request.session.get('email', None)
+        recipient_email = request.session.get("email", None)
 
         if recipient_email is None:
             raise ValueError(
-                f'No email id attached to the user account {request.session.get("username", "")}')
+                f'No email id attached to the user account {request.session.get("username", "")}'
+            )
 
-        send_mail(subject, message, EMAIL_HOST_USER, [
-                  recipient_email], auth_password=EMAIL_HOST_PASSWORD)
+        send_mail(
+            subject,
+            message,
+            EMAIL_HOST_USER,
+            [recipient_email],
+            auth_password=EMAIL_HOST_PASSWORD,
+        )
     except Exception as e:
-        print(f'got error: {traceback.format_exc()}')
+        print(f"got error: {traceback.format_exc()}")
         raise e
 
 
@@ -215,33 +232,37 @@ def select_route(request):
 
     intializeDB()
 
-    if request.method == 'POST':
+    if request.method == "POST":
         try:
             route_id = request.POST.get("hiddenInput")
-            username = request.POST.get('hiddenUser')
-            ride_data = request.POST.get('hiddenRide')
+            username = request.POST.get("hiddenUser")
+            ride_data = request.POST.get("hiddenRide")
 
             if ride_data:
-                ride = json.loads(ride_data.replace("'", "\""))
-                ride_id = ride.get('_id')
+                ride = json.loads(ride_data.replace("'", '"'))
+                ride_id = ride.get("_id")
 
                 if username and route_id:
                     attach_user_to_route(username, route_id)
 
                     send_route_email(request, username, ride)
-                    print(f'\n\n email confirmation sent sucessfully!!\n\n')
+                    print(f"\n\n email confirmation sent sucessfully!!\n\n")
                     # Redirect back to display the ride
                     return redirect(display_ride, ride_id=ride_id)
 
-            return JsonResponse({'error': 'Invalid ride data'}, status=400)
+            return JsonResponse({"error": "Invalid ride data"}, status=400)
 
         except Exception as e:
             # Log the error (optional)
             print(f"Error in select_route: {e}")
-            return JsonResponse({'error': 'An error occurred'}, status=500)
+            return JsonResponse({"error": "An error occurred"}, status=500)
 
     # Render fallback page if not a POST request
-    return render(request, 'publish/publish.html', {"username": None, "gmap_api_key": secrets.GoogleMapsAPIKey})
+    return render(
+        request,
+        "publish/publish.html",
+        {"username": None, "gmap_api_key": secrets.GoogleMapsAPIKey},
+    )
 
 
 def routeSelect(username, routes):
@@ -260,16 +281,16 @@ def routeSelect(username, routes):
 
     intializeDB()
     user = userDB.find_one({"username": username})
-    if user == None or routes == None:
+    if user is None or routes is None:
         print("returning NONE")
         return None
 
-    user_routes = user['rides']
+    user_routes = user["rides"]
     print("User routes: ", user_routes)
     for route in routes:
-        if route['_id'] in user_routes:
+        if route["_id"] in user_routes:
             print("FOUND")
-            return route['_id']
+            return route["_id"]
     return None
 
 
@@ -287,18 +308,18 @@ def get_routes(ride):
     """
 
     routes = []
-    if 'route_id' not in ride:
+    if "route_id" not in ride:
         return None
-    route_ids = ride['route_id']
-    documents = routesDB.find({'_id': {'$in': route_ids}})
+    route_ids = ride["route_id"]
+    documents = routesDB.find({"_id": {"$in": route_ids}})
     docs = []
     for doc in documents:
-        doc['id'] = doc["_id"]
-        route_date = doc['id'].split("_")[3]
-        user = userDB.find_one({"_id": doc['creator']})
-        user['id'] = user['_id']
-        doc['creator'] = user
-        doc['distance'] = round(doc["distance"], 1)
+        doc["id"] = doc["_id"]
+        route_date = doc["id"].split("_")[3]
+        user = userDB.find_one({"_id": doc["creator"]})
+        user["id"] = user["_id"]
+        doc["creator"] = user
+        doc["distance"] = round(doc["distance"], 1)
         if not DateUtils.has_date_passed(route_date):
             docs.append(doc)
     return docs
@@ -312,62 +333,70 @@ def create_route(request):
         request (HttpRequest): The HTTP request object containing session data and form data.
 
     Returns:
-        HttpResponse: A redirect to `display_ride()` if a route is selected, or a rendered 
+        HttpResponse: A redirect to `display_ride()` if a route is selected, or a rendered
                       response of 'publish/publish.html' if it's not a POST request.
     """
     intializeDB()
     initializeService()
-    if request.method == 'POST':
+    if request.method == "POST":
         route = {
-            "_id":
-                f"""{request.POST.get('purpose')}_{request.POST.get('s_point')}_{request.POST.get('destination')}_{request.POST.get("date")}_{request.POST.get("hour")}_{request.POST.get("minute")}_{request.POST.get("ampm")}""",
-                "purpose": request.POST.get('purpose'),
-                "s_point": request.POST.get('spoint'),
-                "destination": request.POST.get('destination'),
-                "type": request.POST.get('type'),
-                "date": request.POST.get("date"),
-                "hour": request.POST.get("hour"),
-                "minute":  request.POST.get("minute"),
-                "ampm": request.POST.get("ampm"),
-                "details": request.POST.get("details"),
-                "users": [],
+            "_id": f"""{request.POST.get('purpose')}_{request.POST.get('s_point')}_{request.POST.get('destination')}_{request.POST.get("date")}_{request.POST.get("hour")}_{request.POST.get("minute")}_{request.POST.get("ampm")}""",
+            "purpose": request.POST.get("purpose"),
+            "s_point": request.POST.get("spoint"),
+            "destination": request.POST.get("destination"),
+            "type": request.POST.get("type"),
+            "date": request.POST.get("date"),
+            "hour": request.POST.get("hour"),
+            "minute": request.POST.get("minute"),
+            "ampm": request.POST.get("ampm"),
+            "details": request.POST.get("details"),
+            "users": [],
         }
-        ride_id = request.POST.get('destination')
-        route['creator'] = attach_user_to_route(
-            request.session['username'], route['_id'])
-        if (request.POST.get("slat")):
+        ride_id = request.POST.get("destination")
+        route["creator"] = attach_user_to_route(
+            request.session["username"], route["_id"]
+        )
+        if request.POST.get("slat"):
             route["s_lat"] = request.POST.get("slat")
             route["s_long"] = request.POST.get("slong")
-        if (request.POST.get("dlat")):
+        if request.POST.get("dlat"):
             route["d_lat"] = request.POST.get("dlat")
             route["d_long"] = request.POST.get("dlong")
 
-        if (request.POST.get("dlat") and request.POST.get("slat")):
+        if request.POST.get("dlat") and request.POST.get("slat"):
             res = mapsService.get_route_details(
-                route["s_lat"], route["s_long"], route["d_lat"], route["d_long"])
-            route['fuel'] = res.get("fuel", 0)
+                route["s_lat"], route["s_long"], route["d_lat"], route["d_long"]
+            )
+            route["fuel"] = res.get("fuel", 0)
             route["distance"] = res.get("distance", 0)
 
-        if routesDB.find_one({'_id': route['_id']}) == None:
+        if routesDB.find_one({"_id": route["_id"]}) is None:
             routesDB.insert_one(route)
             print("Route added")
-            if ridesDB.find_one({'_id': ride_id}) == None:
+            if ridesDB.find_one({"_id": ride_id}) is None:
                 ride = {
-                    "_id":
-                        request.POST.get('destination'),
-                    "destination": request.POST.get('destination'),
-                    "route_id": [route['_id']]
+                    "_id": request.POST.get("destination"),
+                    "destination": request.POST.get("destination"),
+                    "route_id": [route["_id"]],
                 }
                 ridesDB.insert_one(ride)
                 print("Ride Added")
             else:
-                ride = ridesDB.find_one({'_id': ride_id})
-                ride['route_id'].append(route['_id'])
-                ridesDB.update_one({'_id': ride_id}, {
-                                   "$set": {"route_id": ride['route_id']}})
+                ride = ridesDB.find_one({"_id": ride_id})
+                ride["route_id"].append(route["_id"])
+                ridesDB.update_one(
+                    {"_id": ride_id}, {"$set": {"route_id": ride["route_id"]}}
+                )
                 print("Ride Updated")
         return redirect(display_ride, ride_id=ride_id)
-    return render(request, 'publish/publish.html', {"username": request.session.get('username', None), "gmap_api_key": secrets.GoogleMapsAPIKey})
+    return render(
+        request,
+        "publish/publish.html",
+        {
+            "username": request.session.get("username", None),
+            "gmap_api_key": secrets.GoogleMapsAPIKey,
+        },
+    )
 
 
 def attach_user_to_route(username, route_id):
@@ -385,29 +414,29 @@ def attach_user_to_route(username, route_id):
     intializeDB()
     remove = False
     user = userDB.find_one({"username": username})
-    if user == None:
-        return redirect('home/home.html', {"username": None})
+    if user is None:
+        return redirect("home/home.html", {"username": None})
 
-    user['rides'].append(route_id)
+    user["rides"].append(route_id)
 
-    userDB.update_one({"username": username}, {
-                      "$set": {"rides": user['rides']}})
+    userDB.update_one({"username": username},
+                      {"$set": {"rides": user["rides"]}})
 
     route = routesDB.find_one({"_id": route_id})
-    if route == None:
-        return user['_id']
-    users = route.get('users', [])
+    if route is None:
+        return user["_id"]
+    users = route.get("users", [])
 
     for i in range(len(users)):
-        if (users[i] == user["_id"]):
+        if users[i] == user["_id"]:
             remove = True
             del users[i]
 
     if not remove:
-        users.append(user['_id'])
+        users.append(user["_id"])
 
     routesDB.update_one({"_id": route_id}, {"$set": {"users": users}})
-    return user['_id']
+    return user["_id"]
 
 
 def packs_favorite(request):
@@ -425,7 +454,8 @@ def packs_favorite(request):
             # Add ride _id, user count, and destination to reco_obj
             destination = ride["destination"]
             destination_slug = urllib.parse.quote(
-                destination)  # URL-encode the destination
+                destination
+            )  # URL-encode the destination
             user_count = len(ride["users"])
 
             # Check if this destination already exists in reco_obj
@@ -435,15 +465,17 @@ def packs_favorite(request):
                 reco_obj[destination_slug] = {
                     "user_count": user_count,
                     "destination": destination,
-                    "destination_slug": destination_slug
+                    "destination_slug": destination_slug,
                 }
 
         sorted_reco = sorted(
-            reco_obj.items(), key=lambda x: x[1]["user_count"], reverse=True)
+            reco_obj.items(), key=lambda x: x[1]["user_count"], reverse=True
+        )
 
         # show only top 20 picks at most
         top_picks = sorted_reco[:20]
 
-        return render(request, 'publish/packs_favorite.html', {"top_picks": top_picks})
+        return render(request, "publish/packs_favorite.html",
+                      {"top_picks": top_picks})
     except Exception as e:
-        print(f'error in fav : {traceback.format_exc()}')
+        print(f"error in fav : {traceback.format_exc()}")

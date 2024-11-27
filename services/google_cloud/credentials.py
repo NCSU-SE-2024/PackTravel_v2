@@ -9,6 +9,7 @@ Attributes:
 Methods:
     __init__(credentials_path: str): Initializes the Credentials class by loading the credentials from the specified service account file.
 """
+
 from google.oauth2 import service_account
 
 
@@ -16,6 +17,7 @@ class Credentials:
     """
     This class contains credentials logic
     """
+
     credentials = None
 
     def __init__(self, credentials_path: str):
@@ -27,4 +29,5 @@ class Credentials:
 
         """
         self.credentials = service_account.Credentials.from_service_account_file(
-            credentials_path)
+            credentials_path
+        )

@@ -39,8 +39,10 @@ class DateValidationTests(SimpleTestCase):
             - The result should be `True` for a past date.
         """
 
-        self.assertTrue(DateUtils.has_date_passed(
-            "2020-01-01"), "Should be False for past date")
+        self.assertTrue(
+            DateUtils.has_date_passed(
+                "2020-01-01"), "Should be False for past date"
+        )
 
     def test_current_date(self):
         """
@@ -53,8 +55,10 @@ class DateValidationTests(SimpleTestCase):
         """
 
         current_date = datetime.today().date().strftime("%Y-%m-%d")
-        self.assertFalse(DateUtils.has_date_passed(
-            current_date), "Should be True for current date")
+        self.assertFalse(
+            DateUtils.has_date_passed(
+                current_date), "Should be True for current date"
+        )
 
     def test_future_date(self):
         """
@@ -66,5 +70,7 @@ class DateValidationTests(SimpleTestCase):
             - The result should be `False` for a future date.
         """
 
-        self.assertFalse(DateUtils.has_date_passed(
-            "2025-01-01"), "Should be True for future date")
+        self.assertFalse(
+            DateUtils.has_date_passed(
+                "2025-01-01"), "Should be True for future date"
+        )

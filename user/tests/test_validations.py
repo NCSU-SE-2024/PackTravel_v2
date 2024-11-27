@@ -10,7 +10,12 @@ This module contains test cases for the following user data validators:
 Each validator is tested for both valid and invalid inputs to ensure proper error handling and compliance.
 """
 
-from ..validators import validate_email_domain, validate_unique_unity_id, validate_unique_username, validate_password
+from ..validators import (
+    validate_email_domain,
+    validate_unique_unity_id,
+    validate_unique_username,
+    validate_password,
+)
 from django.test import SimpleTestCase
 from django.core.exceptions import ValidationError
 
@@ -282,7 +287,8 @@ class PasswordValidationTests(SimpleTestCase):
             validate_password(password)
         except ValidationError:
             self.fail(
-                "Raised ValidationError on a valid password with Unicode characters")
+                "Raised ValidationError on a valid password with Unicode characters"
+            )
 
     def test_password_edge_case_length(self):
         """
@@ -310,6 +316,6 @@ class PasswordValidationTests(SimpleTestCase):
 
         Passwords with a wide variety of special characters like '!@#$%^&*()' should be valid.
         """
-        password = "!@#(),.?\":{}|<>"
+        password = '!@#(),.?":{}|<>'
         with self.assertRaises(ValidationError) as context:
             validate_password(password)

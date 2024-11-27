@@ -18,6 +18,7 @@ Dependencies:
 
 from http.client import HTTPResponse
 from django.shortcuts import render, redirect
+
 # from numpy import True_, dtype
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
@@ -79,20 +80,28 @@ def search_index(request):
         HttpResponse: The rendered response for the search page, including a list of rides and relevant data.
     """
     intializeDB()
-    if not request.session.has_key('username'):
-        request.session['alert'] = "Please login to create a ride."
+    if not request.session.has_key("username"):
+        request.session["alert"] = "Please login to create a ride."
         messages.info(request, "Please login to search a ride!")
-        return redirect('index')
+        return redirect("index")
     all_rides = list(ridesDB.find())
     processed, routes = list(), list()
     for ride in all_rides:
         route_count = 0
-        routes = ride['route_id']
+        routes = ride["route_id"]
         for route in routes:
             route_date = route.split("_")[3]
             if not DateUtils.has_date_passed(route_date):
                 route_count += 1
-        ride['id'] = ride.pop('_id')
-        ride['count'] = route_count
+        ride["id"] = ride.pop("_id")
+        ride["count"] = route_count
         processed.append(ride)
-    return render(request, 'search/search.html', {"username": request.session['username'], "rides": processed, "gmap_api_key": secrets.GoogleMapsAPIKey})
+    return render(
+        request,
+        "search/search.html",
+        {
+            "username": request.session["username"],
+            "rides": processed,
+            "gmap_api_key": secrets.GoogleMapsAPIKey,
+        },
+    )

@@ -2,13 +2,14 @@
 Module for date utility functions.
 
 This module contains the `DateUtils` class, which provides utility functions
-for working with dates. The primary function is to check whether a given date 
+for working with dates. The primary function is to check whether a given date
 has passed compared to the current date.
 
 Functions:
     DateUtils:
         - has_date_passed: Checks if a given date has passed compared to today's date.
 """
+
 from datetime import datetime
 
 
@@ -23,6 +24,7 @@ class DateUtils:
         has_date_passed(date: str) -> bool:
             Checks if the given date has passed compared to today's date.
     """
+
     @classmethod
     def has_date_passed(cls, date: str) -> bool:
         """

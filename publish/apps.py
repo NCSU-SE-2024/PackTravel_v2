@@ -21,12 +21,13 @@ class PublishConfig(AppConfig):
     This class is used to define the configuration for the 'publish' app, which is a part of the larger Django project. It inherits from `AppConfig` and is automatically used by Django to configure settings when the app is loaded.
 
     Attributes:
-        default_auto_field (str): Defines the default field type for auto-generated primary keys. 
+        default_auto_field (str): Defines the default field type for auto-generated primary keys.
                                    Set to 'django.db.models.BigAutoField' for 64-bit integer keys.
         name (str): The full Python path to the application, which is 'publish' in this case.
 
     Methods:
         ready(): Optionally used to run any application-specific startup code (not defined here).
     """
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'publish'
+
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "publish"

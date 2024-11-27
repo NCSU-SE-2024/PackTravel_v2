@@ -15,5 +15,6 @@ class SearchConfig(AppConfig):
     This class extends Django's AppConfig and is used to configure various settings for the 'search' app, such as
     defining the name of the app and setting the default field type for auto fields.
     """
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'search'
+
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "search"
