@@ -22,10 +22,7 @@ missing badges:
 [![codecov](https://codecov.io/gh/KoruptTinker/PackTravel/graph/badge.svg?token=VbruFqYa0G)](https://codecov.io/gh/KoruptTinker/PackTravel)
 [![Python Style Checker](https://github.com/NCSU-SE-2024/PackTravel_v2/actions/workflows/python_style_checker.yml/badge.svg)](https://github.com/NCSU-SE-2024/PackTravel_v2/actions/workflows/python_style_checker.yml)
 [![Lint Python](https://github.com/NCSU-SE-2024/PackTravel_v2/actions/workflows/pylint.yml/badge.svg)](https://github.com/NCSU-SE-2024/PackTravel_v2/actions/workflows/pylint.yml)
-
 [![Test cases](https://github.com/NCSU-SE-2024/PackTravel_v2/actions/workflows/testcases.yml/badge.svg)](https://github.com/NCSU-SE-2024/PackTravel_v2/actions/workflows/testcases.yml)
-
-
 <a href="https://github.com/NCSU-SE-2024/PackTravel_v2/graphs/contributors" alt="Contributors"><img src = "https://img.shields.io/github/contributors/NCSU-SE-2024/PackTravel_v2"/></a>
 <a href="https://github.com/NCSU-SE-2024/PackTravel_v2/blob/main/LICENSE" alt="License"><img src="https://img.shields.io/github/license/NCSU-SE-2024/PackTravel_v2" /></a>
 <a href="https://github.com/NCSU-SE-2024/PackTravel_v2/issues" alt="Open Issues"><img src="https://img.shields.io/github/issues-raw/NCSU-SE-2024/PackTravel_v2" /></a>
