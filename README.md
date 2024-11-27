@@ -69,7 +69,7 @@ The rules listed below are to be followed by the ones who will be contributing t
 [![IMAGE ALT TEXT HERE](https://github.com/KoruptTinker/PackTravel/blob/main/images/proposed_architecture.png)](https://www.youtube.com/watch?v=hzAUoPpBre8&ab_channel=SohamGundewar)
 
 ### Video demonstrating the new functionalities
-[![IMAGE ALT TEXT HERE](https://github.com/NCSU-SE-2024/PackTravel_v2/blob/main/docs/HomePage.png)](https://github.com/NCSU-SE-2024/PackTravel_v2/blob/main/docs/HomePage.png)
+[![IMAGE ALT TEXT HERE](https://github.com/NCSU-SE-2024/PackTravel_v2/blob/main/docs/HomePage.png)](https://www.youtube.com/watch?v=4Grh-ZH5izk&ab_channel=SohamGundewar)
 
 
 ### Issues in Previous Phase - 
