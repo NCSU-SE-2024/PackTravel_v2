@@ -66,10 +66,10 @@ The rules listed below are to be followed by the ones who will be contributing t
 ![alt_text](https://github.com/NCSU-SE-2024/PackTravel_v2/blob/main/docs/DiscordScreenshot.png)
 
 ### Video demonstrating the old functionalities
-[![IMAGE ALT TEXT HERE](https://github.com/NCSU-SE-2024/PackTravel_v2/blob/main/docs/HomePage.png)](https://www.youtube.com/watch?v=hzAUoPpBre8&ab_channel=SohamGundewar)
+[![IMAGE ALT TEXT HERE](https://github.com/KoruptTinker/PackTravel/blob/main/images/proposed_architecture.png)](https://www.youtube.com/watch?v=hzAUoPpBre8&ab_channel=SohamGundewar)
 
 ### Video demonstrating the new functionalities
-TODO
+[![IMAGE ALT TEXT HERE](https://github.com/NCSU-SE-2024/PackTravel_v2/blob/main/docs/HomePage.png)](https://github.com/NCSU-SE-2024/PackTravel_v2/blob/main/docs/HomePage.png)]
 
 
 ### Issues in Previous Phase - 
