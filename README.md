@@ -133,18 +133,8 @@ Several key bugs have been resolved, including issues with login alerts, passwor
       - The user creates a new discussion topic or comments on an existing one.
       - The system updates the thread and notifies relevant users.
     * Outcome: The user contributes to the community by sharing their experiences or gaining insights on travel routes.
-
-4. Viewing Latest Ride Options
-    * Actor: NCSU Student
-    * Goal: View the most recent ride options to different destinations.
-    * Steps:
-      - The user logs into the PackTravel platform.
-      - They navigate to the "Latest Ride Options" section.
-      - The system displays a list of new or upcoming rides to various locations.
-      - The user can scroll through the list and select a ride that fits their schedule and destination.
-    * Outcome: The user discovers fresh ride options and can quickly select a suitable ride for their trip.
   
-5. Joining a Ride
+4. Joining a Ride
     * Actor: PackTravel User (Student)
     * Goal: Join a ride that suits their destination and timing.
     * Steps:
@@ -155,7 +145,7 @@ Several key bugs have been resolved, including issues with login alerts, passwor
       - The user receives a confirmation notification about the ride.
 Outcome: The user successfully joins a ride, ensuring a smooth and collaborative travel experience with fellow students.
 
-6. Editing a Ride
+5. Editing a Ride
     * Actor: PackTravel User (Student)
     * Goal: Edit an existing ride they created, such as adjusting the time or destination.
     * Steps:
