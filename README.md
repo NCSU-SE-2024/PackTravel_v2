@@ -36,18 +36,6 @@ missing badges:
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/NCSU-SE-2024/PackTravel_v2)
 <a href="https://github.com/NCSU-SE-2024/PackTravel_v2" alt="Repo Size"><img src="https://img.shields.io/github/repo-size/NCSU-SE-2024/PackTravel_v2"/></a>
 
-
-
-
-### Issues in Previous Phase - TODO
-
-- Anonymous profiles create a lack of transparency among users.
-- Passwords are stored without hashing, posing security risks.
-- Missing route distance and fuel usage data prevents accurate cost estimation.
-- No location autocomplete, leading to potential inaccuracies in location tagging.
-- Search page UI is very basic, affecting user experience.
-- Lack of test cases and code coverage limits reliability and error detection.
-
 ## Pre-requisites
 To run these scripts, you will require Python installed on your PC. Please visit [Python Installers](https://www.python.org/downloads/) to download the lastest python version. Apart from that, other requirements can be installed with the help of requirements.txt.
 
@@ -87,6 +75,17 @@ https://github.com/NCSU-SE-2024/PackTravel_v2/blob/main/docs/old%20Video.mp4
 
 ### Video demonstrating the new functionalities
 TODO
+
+
+### Issues in Previous Phase - 
+
+- **Login and Logout Functionality**: The login and logout features were not functioning as expected; clicking on them did not trigger any action.
+- **Unauthenticated Access**: Users were able to access several features, such as creating or searching for rides, without being logged in.
+- **Homepage Background Image**: The background image on the homepage was not displaying correctly.
+- **Database Updates**: The Users and Routes databases were not being updated properly.
+- **Redirection After Login**: After logging in, users were not redirected to the correct homepage. Instead, they were directed to an index page.
+- **Test Cases and Code Coverage**: The application lacked sufficient test cases, and the code coverage was inadequate, which limits the ability to detect errors and ensure system reliability.
+- **Documentation Issues**: Several Python files lacked proper documentation, making it difficult to understand the code and its functionality.
 
 
 # Quick look at the newly added features
